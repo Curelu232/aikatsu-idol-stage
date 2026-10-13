@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Idol Stardust Coordinate</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"Trebuchet MS",Verdana,sans-serif;background:linear-gradient(135deg,#ffd6ec,#e3d4ff 50%,#cdf3ff);min-height:100vh;color:#5a2a6e;overflow-x:hidden}
+h1,h2{text-align:center;margin:10px 0;color:#ff4fa3;text-shadow:2px 2px 0 #fff,4px 4px 0 #ffb3dc}
+.screen{display:none;padding:12px;max-width:1100px;margin:auto}.screen.on{display:block}
+button{font:inherit;font-weight:bold;border:none;border-radius:30px;padding:10px 22px;margin:5px;cursor:pointer;color:#fff;background:linear-gradient(#ff8cc6,#ff4fa3);box-shadow:0 4px 0 #c22d78;transition:.1s}
+button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);box-shadow:0 1px 0 #c22d78}button:disabled{opacity:.4;cursor:default}
+.center{text-align:center}.row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.card{width:130px;height:190px;border-radius:12px;position:relative;padding:6px;cursor:pointer;border:4px solid #fff;box-shadow:0 4px 12px #a05aa055;overflow:hidden;font-size:11px;background:#fff;transition:.15s}
+.card:hover{transform:translateY(-4px) rotate(-1deg)}.card.sel{outline:4px solid #ffe14f;transform:scale(1.05)}.card.locked{filter:grayscale(1) brightness(.7)}
+.card .art{height:100px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.card .nm{font-weight:bold;font-size:12px;margin-top:3px;line-height:1.1}.card .rar{position:absolute;top:8px;right:8px;background:#fff;border-radius:8px;padding:1px 5px;font-weight:bold}
+.card .ap{position:absolute;bottom:6px;right:8px;font-weight:bold;font-size:13px}
+.R{border-color:#9fd8ff}.PR{border-color:#ffd24f}.CP{border-color:#ff7ad9}
+.PR::after,.CP::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,#fff9 45%,transparent 60%);background-size:300% 100%;animation:shine 2.2s infinite;pointer-events:none}
+.CP::after{background:linear-gradient(115deg,transparent 25%,#ff9de288 38%,#9fe8ff88 50%,#fff79a88 62%,transparent 75%);background-size:300% 100%}
+@keyframes shine{from{background-position:120% 0}to{background-position:-120% 0}}
+.panel{background:#fffc;border-radius:20px;padding:12px;margin:10px auto;box-shadow:0 4px 16px #c08ad055}
+.idol{width:150px;text-align:center;padding:8px;border-radius:16px;background:#fff;cursor:pointer;border:4px solid transparent}.idol.sel{border-color:#ff4fa3}
+#stage{display:block;margin:auto;border-radius:16px;max-width:100%;touch-action:none;background:#2a0a3a}
+.tabs button{background:linear-gradient(#c9a6ff,#9a6ae8);box-shadow:0 4px 0 #6a3ab8;padding:6px 14px}.tabs button.on{background:linear-gradient(#ff8cc6,#ff4fa3);box-shadow:0 4px 0 #c22d78}
+#flash{position:fixed;inset:0;pointer-events:none;opacity:0;background:radial-gradient(#fff,#ffb3e6 60%,transparent);transition:opacity .4s}
+.big{font-size:64px;font-weight:bold;color:#ff4fa3;text-shadow:3px 3px 0 #fff}
+.chap{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:10px 16px;margin:8px auto;max-width:700px}.chap.lock{opacity:.45}
+.dlg{display:flex;gap:14px;align-items:center;background:#fff;border-radius:20px;padding:14px;max-width:760px;margin:12px auto;min-height:140px;cursor:pointer;border:4px solid #ffb3dc}
+.dlg .who{font-weight:bold;font-size:18px}.dlg .txt{font-size:18px;line-height:1.4}
+.previewBox{background:radial-gradient(#fff,#ffe1f2 60%,#e8d4ff);border-radius:16px;height:440px;display:flex;align-items:center;justify-content:center}
+.thumb{width:116px;height:182px;font-size:10px}.thumb .art{height:84px}.thumb .nm{font-size:11px}
+.sw{display:inline-block;width:22px;height:22px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #ccc;cursor:pointer;vertical-align:middle;margin:2px}.sw.on{box-shadow:0 0 0 3px #ff4fa3}
+.mini{padding:4px 10px;font-size:12px}
+.scanner{display:flex;gap:10px;justify-content:center;margin:20px auto;padding:16px;max-width:680px;border-radius:20px;background:linear-gradient(#4b2a7a,#2a0a3a);box-shadow:inset 0 0 20px #000}
+.slot{width:120px;height:80px;border-radius:12px;border:3px dashed #ff9ad5;color:#ffd1f0;display:flex;align-items:center;justify-content:center;font-size:12px;text-align:center;transition:.3s;overflow:hidden}
+.slot.full{border-style:solid;border-color:#ffe14f;background:#ffffff22;box-shadow:0 0 18px #ffe14f}
+.card.scanned{transform:translateY(240px) scale(.4)!important;opacity:0;transition:.5s}
+.sparkle{position:fixed;pointer-events:none;font-size:26px;animation:spk .8s forwards}@keyframes spk{to{transform:translateY(-60px) scale(1.8) rotate(90deg);opacity:0}}
+.changeRoom{position:relative;height:600px;border-radius:24px;overflow:hidden;background:radial-gradient(circle at 50% 60%,#ff9ad5,#7a3ab8 55%,#1a0530)}
+.beam{position:absolute;left:50%;top:-50px;width:240px;height:800px;margin-left:-120px;background:linear-gradient(#fff8,transparent);transform-origin:top;animation:sway 3s infinite alternate}.beam.b2{animation-delay:-1.5s;background:linear-gradient(#9fe8ff88,transparent)}
+@keyframes sway{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
+.changeIdol{position:absolute;left:50%;top:30px;margin-left:-105px;transition:transform .5s}.changeIdol.pose{transform:scale(1.08) rotate(-3deg)}
+.changeLabel{position:absolute;left:0;right:0;bottom:90px;text-align:center;color:#fff;font-size:26px;font-weight:bold;text-shadow:0 0 12px #ff4fa3}
+.changeBanner{position:absolute;left:10%;right:10%;top:58%;background:#3a0f5acc;border-radius:20px;padding:10px;text-align:center;opacity:0;transform:scale(.3);transition:.5s;font-size:22px;color:#fff}.changeBanner.on{opacity:1;transform:scale(1)}
+.changeBanner b{display:block;font-size:54px;color:#ffe14f;text-shadow:3px 3px 0 #ff4fa3,0 0 20px #fff}
+.glow{animation:glow .6s}@keyframes glow{0%{filter:brightness(3) drop-shadow(0 0 30px #fff)}100%{filter:none}}
+</style></head><body>
+<div id="flash"></div>
+<div class="screen on" id="s-title"><h1 style="font-size:46px;margin-top:30px">✦ Idol Stardust Coordinate ✦</h1>
+<p class="center">Collect dress cards, build your coordinate, and shine on stage!</p>
+<div class="panel"><h2>Choose your idol</h2><div class="row" id="idols"></div></div>
+<div class="center"><button onclick="go('story')">📕 Story Mode</button><button onclick="go('scan')">💎 Card Scan</button><button onclick="free()">👗 Free Live</button><button onclick="go('album')">📖 Card Album</button></div>
+<p class="center" style="font-size:12px">Original fan-made game inspired by arcade idol card games. All brands, characters and art are original placeholders.</p></div>
+<div class="screen" id="s-story"><h2>📕 Story Mode</h2><div id="chapters"></div><div class="center"><button onclick="go('title')">Back</button></div></div>
+<div class="screen" id="s-dialog"><h2 id="dlgTitle"></h2><div class="dlg" id="dlg" onclick="nextLine()"></div><p class="center" style="font-size:12px">Click / press Enter to continue</p></div>
+<div class="screen" id="s-scan"><h2>💎 Card Scan</h2><p class="center">Stardust: <b id="dust"></b> ✦ (scan costs 10 — earn more on stage)</p>
+<div class="center"><button id="scan1" onclick="scan(1)">Scan ×1 (10✦)</button><button onclick="scan(5)" id="scan5">Scan ×5 (45✦)</button><button onclick="go('title')">Back</button></div>
+<div class="row" id="pulls" style="min-height:220px;margin-top:16px"></div></div>
+<div class="screen" id="s-album"><h2>📖 Card Album <span id="albumCount"></span></h2><div class="center"><button onclick="go('title')">Back</button></div><div id="album"></div></div>
+<div class="screen" id="s-coord"><h2>👗 Coordinate & Dress-up</h2><div class="panel center" id="stageGoal" style="display:none"></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+<div class="panel" style="width:330px;margin:0;text-align:center"><div id="preview" class="previewBox"></div><div id="coordInfo" style="font-size:13px"></div></div>
+<div class="panel" style="flex:1;min-width:330px;margin:0">
+<div class="center tabs" id="slotTabs"></div><div class="row" id="coordCards" style="margin:8px 0;max-height:430px;overflow:auto"></div>
+<div class="center"><b>Hair:</b> <span id="hairOpts"></span></div>
+<div class="center" style="margin-top:6px"><b>⭐ Favorite coords</b> (max 5): <input id="favName" maxlength="20" placeholder="Coord name" style="border-radius:12px;border:2px solid #ffb3dc;padding:6px"><button onclick="saveFav()" style="padding:6px 14px">Save</button><div id="favs"></div></div>
+</div></div>
+<div class="panel center"><b>Song:</b> <span id="songs"></span><br><button onclick="beginScan()">💳 Scan Cards & Go on Stage!</button><button onclick="go(STORYCH>=0?'story':'title')">Back</button>
+<div style="font-size:12px">Stage keys W A S D (one per lane), or click/tap the lanes. Fill the Appeal gauge and press SPACE (or tap the gauge) for a Special Appeal!</div></div></div>
+<div class="screen" id="s-scanin"><h2>💳 Card Scanner</h2><p class="center">Click each card or press its number key to scan it!</p>
+<div class="row" id="scanCards" style="min-height:210px"></div><div class="scanner" id="scanSlots"></div></div>
+<div class="screen" id="s-change"><div class="changeRoom"><div class="beam"></div><div class="beam b2"></div><div id="changeIdol" class="changeIdol"></div><div id="changeLabel" class="changeLabel"></div><div id="changeBanner" class="changeBanner"></div></div></div>
+<div class="screen" id="s-stage"><canvas id="stage" width="900" height="560"></canvas></div>
+<div class="screen" id="s-result"><h2>✨ Results ✨</h2><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
+<div class="center" id="resBtns"></div></div>
+<script>
