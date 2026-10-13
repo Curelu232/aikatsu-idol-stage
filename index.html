@@ -1686,6 +1686,18 @@ function unlockAll(){let n=0;CARDS.forEach(c=>{if(!S.own[c.id]){S.own[c.id]=1;n+
  for(let i=0;i<24;i++){const s=document.createElement("span");s.textContent=["✦","★","♥","✧"][i%4];s.style.cssText=`position:fixed;left:${50+Math.cos(i)*30}%;top:${38+Math.sin(i*1.7)*25}%;z-index:999;font-size:${16+i%3*8}px;color:#fff;text-shadow:0 0 8px #ff7ac4;transition:1.6s;pointer-events:none`;document.body.appendChild(s);setTimeout(()=>{s.style.opacity=0;s.style.transform="translateY(-60px) scale(1.6)"},50);setTimeout(()=>s.remove(),1800)}
  try{[0,4,7,12,16,19,24].forEach((k,i)=>tone(N(72+k),.35,"triangle",.1,ac().currentTime+i*.08));flash()}catch(e){}
  setTimeout(()=>{d.style.opacity=0},2600);setTimeout(()=>d.remove(),3300);console.log("UNLOCK_ALL "+CARDS.length)}
+// ===== Secret Code button + modal (mobile & PC) =====
+(function(){const st=document.createElement("style");st.textContent=`#scBtn{position:absolute;top:calc(10px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));z-index:50;padding:10px 16px;border:0;border-radius:999px;background:linear-gradient(135deg,#ff9ad5,#b57bff);color:#fff;font:bold 16px sans-serif;box-shadow:0 3px 10px #b57bff88;cursor:pointer;touch-action:manipulation}
+#scModal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;background:#2a0b4a88;backdrop-filter:blur(4px)}#scModal.on{display:flex}
+#scBox{width:min(340px,86vw);padding:22px;border-radius:22px;background:linear-gradient(160deg,#fff,#fde8ff);box-shadow:0 0 30px #ff9ad5;text-align:center;font-family:sans-serif;color:#7a2fe8}
+#scBox h3{margin:0 0 12px;font-size:22px}#scIn{width:100%;box-sizing:border-box;font-size:18px;padding:12px;border-radius:14px;border:2px solid #d9b3ff;outline:none;text-align:center}
+#scBox button{margin:12px 6px 0;padding:10px 20px;font:bold 16px sans-serif;border:0;border-radius:999px;cursor:pointer;touch-action:manipulation}#scOk{background:linear-gradient(135deg,#ff7ac4,#b57bff);color:#fff}#scX{background:#eee;color:#888}#scMsg{min-height:22px;margin-top:10px;font-size:15px;color:#ff4fa0}`;document.head.appendChild(st);
+const t=$("s-title");t.style.position="relative";const b=document.createElement("button");b.id="scBtn";b.textContent="🔑 Secret Code";t.appendChild(b);
+const m=document.createElement("div");m.id="scModal";m.innerHTML=`<div id="scBox"><h3>🔑 Secret Code</h3><input id="scIn" type="text" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="done" placeholder="enter code ✧"><div><button id="scX">Cancel</button><button id="scOk">OK ✨</button></div><div id="scMsg"></div></div>`;document.body.appendChild(m);
+const inp=$("scIn"),msg=$("scMsg"),close=()=>m.classList.remove("on");
+b.onclick=()=>{msg.textContent="";inp.value="";m.classList.add("on");setTimeout(()=>inp.focus(),50)};
+const ok=()=>{if(inp.value.trim().toLowerCase()=="luna211"){close();unlockAll()}else{msg.textContent="(｡•́︿•̀｡) Invalid code… try again!";inp.select()}};
+$("scOk").onclick=ok;$("scX").onclick=close;m.onclick=e=>{if(e.target==m)close()};inp.addEventListener("keydown",e=>{e.stopPropagation();if(e.key=="Enter")ok();if(e.key=="Escape")close()});})();
 // ===== Lazy decoding for the 13 main songs (decode only the selected song; keep memory low) =====
 addUserSong=(o=>function(meta,ab){if(!meta.main)return o(meta,ab);let s=SONGS.find(x=>x.main&&x.title==meta.title);
  if(!s){s={name:meta.title,title:meta.title,theme:meta.theme||"brand",idol:meta.idol!=null?+meta.idol:-1,size:meta.size||"solo",bpm:120,diff:2,diff0:2,key:60,wave:"triangle",seed:5,user:true,main:true,ready:0};SONGS.push(s)}
