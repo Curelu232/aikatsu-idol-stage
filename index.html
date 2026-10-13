@@ -2037,6 +2037,81 @@ let lastT=0;document.addEventListener("touchend",e=>{const n=Date.now();if(n-las
 if(MOBILE){addOutlines=function(){};setTimeout(()=>{try{R3&&R3.r&&R3.r.setPixelRatio(1)}catch(e){}},0);setInterval(()=>{try{if(R3&&R3.r&&R3.r.getPixelRatio()>1)R3.r.setPixelRatio(1)}catch(e){}},2000)}
 (function(){var st=document.createElement("style");st.textContent="@media (orientation:portrait){body.touch #s-stage.on{display:flex!important;flex-direction:column;justify-content:center;min-height:calc(100vh - 30vh - env(safe-area-inset-bottom));padding-top:env(safe-area-inset-top)}body.touch #stageWrap{transform:scale(1.0);margin:auto}body.touch #tpad{height:calc(26vh + env(safe-area-inset-bottom))}body.touch #tpAp{bottom:calc(26vh + 10px)}}";document.head.appendChild(st)})();
 (function(){function fit(){var w=document.getElementById("stageWrap");if(!w||!window.TOUCH)return;if(innerHeight>innerWidth){var p=document.getElementById("tpad"),ph=p?p.offsetHeight:innerHeight*.28;var free=innerHeight-ph-80;w.style.marginTop=Math.max(0,(free-w.offsetHeight)/2)+"px"}else w.style.marginTop="0px"}addEventListener("resize",fit);addEventListener("orientationchange",fit);setInterval(fit,1000)})();
+// ===== Yukio Idol School uniforms (user's own art) =====
+(function(){
+BRANDS.push({id:"yk",name:"Yukio Idol School",tag:"Idol School Uniforms",type:"Cute",c1:"#f3eaff",c2:"#9a6ad8",icon:"🏫",motif:"star"});
+PAL.yk=["#ffffff","#ffffff","#ffffff","#ffffff","#ffffff"];
+const P="assets/user/yk/";
+// [key,label,type,boy,[top col],[bottom col],[shoe col],[acc col],kinds{}, names[]]
+const U=[
+ ["cute","Cute","Cute",0,{m:"#fff7fb",a:"#ffb6d2",t:"#ff8ab8"},{m:"#ffbcd8",a:"#ffffff",t:"#e6c35c"},{m:"#ffffff",a:"#ff8ab8",t:"#e6c35c"},{m:"#ff8ab8",a:"#ffffff",t:"#e6c35c"},{b:"frill",s:"socks"},["Cute Ribbon Tailcoat","Cute Frill Tier Skirt","Cute Bow Mary Janes & Knee Socks","Cute Pink Ribbon"]],
+ ["cool","Cool","Cool",0,{m:"#f4f6ff",a:"#1f3a8a",t:"#3a62c8"},{m:"#3a62c8",a:"#ffffff",t:"#c9d6ff"},{m:"#f4f6ff",a:"#f4f6ff",t:"#7fa6ff"},{m:"#3a62c8",a:"#ffffff",t:"#c9d6ff"},{b:"pleat",s:"boots"},["Cool Starry Tailcoat","Cool Blue Pleat Skirt","Cool White Lace-up Boots","Cool Star Hairpin"]],
+ ["pop","Pop","Pop",0,{m:"#ffd84a",a:"#fff7d0",t:"#ff9a1f"},{m:"#ffcf2e",a:"#ffffff",t:"#ff9a1f"},{m:"#ffd84a",a:"#ffd84a",t:"#ffffff"},{m:"#ffb020",a:"#ffffff",t:"#ffd84a"},{b:"ruffle",s:"stripe"},["Pop Sunny Tailcoat","Pop Ruffle Skirt","Pop Striped Socks & Sneakers","Pop Big Bow"]],
+ ["sexy","Sexy","Sexy",0,{m:"#b0182c",a:"#1a1a1a",t:"#1a1a1a"},{m:"#9a1024",a:"#e6c35c",t:"#e6c35c"},{m:"#1a1a1a",a:"#b0182c",t:"#e6c35c"},{m:"#b0182c",a:"#e6c35c",t:"#e6c35c"},{b:"long",s:"tights"},["Sexy Crimson Tailcoat","Sexy Gold-Trim Long Skirt","Sexy Black Tights & Red Heels","Sexy Ruby Hair Jewel"]],
+ ["divine","Divine","Cool",1,{m:"#fbf8ef",a:"#e8d9a8",t:"#d4af37"},{m:"#fbf8ef",a:"#d4af37",t:"#d4af37"},{m:"#fbf8ef",a:"#fbf8ef",t:"#d4af37"},{m:"#ffffff",a:"#e8d9a8",t:"#d4af37"},{s:"boots",acc:"cape"},["Divine White-Gold Tailcoat","Divine White Trousers","Divine Gold Boots","Divine Sheer Cape"]],
+ ["energetic","Energetic","Pop",1,{m:"#ff7a1f",a:"#ffffff",t:"#ffd23f"},{m:"#ffffff",a:"#ff7a1f",t:"#ff7a1f"},{m:"#ff7a1f",a:"#ff7a1f",t:"#ffffff"},{m:"#ff7a1f",a:"#ffd23f",t:"#ffd23f"},{s:"sneak",acc:"bow"},["Energetic Starry Tailcoat","Energetic White Trousers","Energetic Orange Sneakers","Energetic Orange Tie-Bow"]],
+ ["cheerful","Cheerful","Cute",1,{m:"#ffffff",a:"#2a9a4a",t:"#d4af37"},{m:"#ffffff",a:"#2a9a4a",t:"#2a9a4a"},{m:"#2a9a4a",a:"#2a9a4a",t:"#ffffff"},{m:"#2a9a4a",a:"#ffffff",t:"#d4af37"},{s:"sneak",acc:"bow"},["Cheerful Green Tailcoat","Cheerful Striped Trousers","Cheerful Green Sneakers","Cheerful Green Bow"]]];
+let n=0;const im=["top","bottom","shoes","acc"],SL=["Tops","Bottoms","Shoes","Accessory"],AP=[880,820,760,800];
+U.forEach(([k,lab,type,boy,ct,cb,cs,ca,K,names])=>SL.forEach((sl,i)=>{const kind=sl=="Tops"?(boy?"tailcoat":"top"):sl=="Bottoms"?(boy?"slacks":"skirt"):sl=="Shoes"?(K.s=="boots"?"boots":"shoes"):(boy?K.acc:"acc");
+ CARDS.push({id:"yk_"+k+i,brand:"yk",slot:sl,name:names[i],rarity:"PR",type,ap:AP[i],kind,boy:!!boy,col:[ct,cb,cs,ca][i],fab:null,yk:k,ykK:K,school:lab,set:"YK_"+k,img:P+k+"-"+im[i]+".jpg",fullArt:P+k+"-full.jpg",code:"IS4-"+String(++n).padStart(2,"0")})}));
+const isY=c=>c&&c.yk;
+// ---- labels
+const st=document.createElement("style");st.textContent=`.ykb{position:absolute;left:4px;right:4px;top:4px;z-index:5;font:bold 10px sans-serif;text-align:center;color:#fff;background:linear-gradient(90deg,#9a6ad8cc,#ff8ab8cc);border-radius:5px;padding:1px 0;pointer-events:none}`;document.head.appendChild(st);
+cardHTML=(o=>function(c,opts={}){const h=o(c,opts);if(!isY(c)||opts.locked)return h;const i=h.lastIndexOf("</div>");return h.slice(0,i)+`<div class="ykb">🏫 Idol School · ${c.school}</div>`+h.slice(i)})(cardHTML);
+coordScore=(o=>function(){const r=o();const ys=coordCards().filter(isY);if(ys.length){const sc=[...new Set(ys.map(c=>c.school))];r.notes.push("🏫 Yukio Idol School · "+sc.join(" / ")+" uniform"+(ys.length>=4&&sc.length==1?" (full uniform!)":""))}return r})(coordScore);
+// ---- fabrics
+fabric=(o=>function(c,piece){if(!isY(c))return o(c,piece);const key=c.id+":"+piece;if(CTEX[key])return CTEX[key];const{m,a,t}=c.col,K=c.yk,cv=document.createElement("canvas");cv.width=cv.height=256;const x=cv.getContext("2d");
+ const st=(px,py,r,f)=>{x.fillStyle=f;x.beginPath();for(let i=0;i<10;i++){const an=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.42:r;x.lineTo(px+rr*Math.cos(an),py+rr*Math.sin(an))}x.fill()};
+ const dot=(px,py,r,f)=>{x.fillStyle=f;x.beginPath();x.arc(px,py,r,0,7);x.fill()};
+ const spark=(cols,nn=36)=>{for(let i=0;i<nn;i++)st((i*67)%256,(i*41+13)%256,i%5?2.5:5.5,cols[i%cols.length])};
+ x.fillStyle=m;x.fillRect(0,0,256,256);
+ if(piece=="tail"){const tc={cute:["#ffffff","#ffc4dc"],cool:["#3a62c8","#0f1f5a"],pop:["#ffe680","#ffb020"],sexy:["#b0182c","#4a0610"],divine:["#ffffff","#efe4c0"],energetic:["#ff9a3f","#d9500f"],cheerful:["#3fbf5f","#14602a"]}[K];
+  const gr=x.createLinearGradient(0,0,0,256);gr.addColorStop(0,tc[0]);gr.addColorStop(1,tc[1]);x.fillStyle=gr;x.fillRect(0,0,256,256);spark(K=="cute"||K=="divine"?["#e6c35c","#ffffff"]:["#ffffff","#fff3a0"],46);x.fillStyle=c.col.t;x.fillRect(0,0,10,256);x.fillRect(246,0,10,256)}
+ else if(piece=="top"||piece=="jacket"||piece=="sleeve"){spark(["rgba(230,195,92,.55)","rgba(255,255,255,.6)"],14);if(piece!="sleeve"){x.fillStyle=c.boy?(c.col.a):"#ffffff";x.fillRect(110,0,36,256);x.fillStyle="#e6c35c";x.fillRect(106,0,4,256);x.fillRect(146,0,4,256);for(let k=0;k<4;k++){dot(120,50+k*45,4,"#e6c35c");dot(136,50+k*45,4,"#e6c35c")}x.fillRect(0,0,256,7)}}
+ else if(piece=="skirt"){if(K=="cool"){x.fillStyle="rgba(0,0,0,.12)";for(let i=0;i<256;i+=21)x.fillRect(i,0,7,256);x.fillStyle="#fff";x.fillRect(0,236,256,8)}
+  else if(K=="pop"){x.fillStyle="rgba(255,255,255,.55)";for(let j=40;j<256;j+=64)x.fillRect(0,j,256,10);spark(["#fff7d0"],20)}
+  else if(K=="sexy"){x.fillStyle=t;x.fillRect(0,232,256,10);for(let i=0;i<256;i+=32)st(i+16,215,5,t);spark(["rgba(230,195,92,.6)"],18)}
+  else{x.fillStyle="#fff";for(let i=0;i<256;i+=32)dot(i+16,236,9,"#fff");spark(["#ffffff","#e6c35c"],30)}}
+ else if(piece=="socks"){if(K=="pop"){x.fillStyle="#fff";x.fillRect(0,0,256,256);x.fillStyle="#ffcf2e";for(let j=0;j<256;j+=32)x.fillRect(0,j,256,16)}else if(K=="sexy"){x.fillStyle="#141016";x.fillRect(0,0,256,256)}else{x.fillStyle=K=="cute"?"#ffffff":m;x.fillRect(0,0,256,256);if(K=="cute")for(let i=0;i<8;i++)dot(i*32+16,24,6,"#ffb6d2");if(c.boy){x.fillStyle="#fff";x.fillRect(0,0,256,30)}}}
+ else if(piece=="boots"){if(K=="cool"){x.fillStyle="#7fa6ff";for(let j=20;j<256;j+=26){x.fillRect(100,j,56,3);x.save();x.translate(128,j);x.rotate(.5);x.fillRect(-30,-1.5,60,3);x.restore()}}x.fillStyle=t;x.fillRect(0,0,256,18);st(128,60,14,t)}
+ else if(piece=="slacks"||piece=="trousers"){if(K=="cheerful"){x.fillStyle=a;for(let i=0;i<256;i+=32)x.fillRect(i,0,12,256)}else{x.fillStyle=a;x.fillRect(58,0,10,256);x.fillRect(188,0,10,256)}}
+ else if(piece=="cape"){x.clearRect(0,0,256,256);x.fillStyle="rgba(255,255,255,.55)";x.fillRect(0,0,256,256);spark(["#e6c35c","#ffffff"],40);x.fillStyle="#d4af37";x.fillRect(0,240,256,16)}
+ else if(piece=="shirt"){x.fillStyle=c.yk=="cheerful"?"#5fc47a":c.yk=="energetic"?"#ffffff":"#fbf3dc";x.fillRect(0,0,256,256)}
+ else if(piece=="lace"){x.fillStyle="#fff";x.fillRect(0,0,256,256)}
+ const tx=new T3.CanvasTexture(cv);tx.wrapS=tx.wrapT=T3.RepeatWrapping;const rp={sleeve:[2,1],top:[3,1.4],skirt:[4,1.2],cape:[2,1.5],tail:[1,1],socks:[2,2.5],shirt:[2,1]}[piece];if(rp)tx.repeat.set(rp[0],rp[1]);tx.encoding=T3.sRGBEncoding;return CTEX[key]=tx})(fabric);
+// ---- geometry
+buildPiece=(o=>function(e,c,key){if(!isY(c))return o(e,c,key);const cp=e.cp,K=c.ykK,out=[],add=(gb,mat,mode)=>{if(gb.nv)out.push(makeSkinned(cp,gb,mat,mode))},hip=cp.bi("hips"),yW=cp.hipsY+.06;
+ if(!c.boy&&c.slot=="Bottoms"){const st={frill:{flare:.55,tiers:3,ruf:.025},pleat:{flare:.45,pleat:.014},ruffle:{flare:.6,tiers:3,ruf:.03},long:{flare:.07}}[K.b];const yH=K.b=="long"?cp.ftY+.1:cp.crY-.16;
+  const sk=GB();pcSkirt(cp,sk,yW,yH,st);add(sk,cmat(fabric(c,"skirt")),hip);if(K.b=="frill"||K.b=="ruffle"){const hm=GB();pcSkirt(cp,hm,yH+.02,yH-.015,{flare:.2,ruf:.025});add(hm,cmat(null,"#ffffff"),hip)}
+  if(K.b=="frill"){const pe=GB();pcSkirt(cp,pe,yW-.01,yH-.025,{flare:.7,ruf:.02});add(pe,cmat(null,"#ffe6f0"),hip)}return out}
+ if(!c.boy&&c.slot=="Shoes"&&K.s=="tights"){const ti=GB();pcLeg(cp,ti,cp.ftY+.03,cp.crY+.01,()=>.0035);add(ti,cmat(null,"#1c1620"));return out}
+ const r=o(e,c,key);if(c.kind=="cape")r.forEach(ms=>{const mm=ms.material;if(mm){mm.transparent=true;mm.opacity=.72;mm.depthWrite=false}});return r})(buildPiece);
+// ---- rigid add-ons with spring sway: girls' tailcoat tails, hair bows
+function tailMesh(c,L,w){const g=new T3.BufferGeometry(),p=[],uv=[],ix=[],N=6;for(let i=0;i<=N;i++){const tt=i/N,hw=w*(1-.35*tt)*(i==N?.4:1),y=-L*tt,z=-.03*tt*tt;p.push(-hw,y,z,hw,y,z);uv.push(0,1-tt,1,1-tt)}for(let i=0;i<N;i++){const a=i*2;ix.push(a,a+1,a+2,a+1,a+3,a+2)}g.setAttribute("position",new T3.Float32BufferAttribute(p,3));g.setAttribute("uv",new T3.Float32BufferAttribute(uv,2));g.setIndex(ix);g.computeVertexNormals();
+ return new T3.Mesh(g,toon("#ffffff",{map:fabric(c,"tail"),side:T3.DoubleSide}))}
+decorate=(o=>function(e,coord,parts,idx){const acc=o(e,coord,parts,idx)||[];e.ykSway=[];const cp=e.cp;if(!cp)return acc;const has=s=>coord&&coord[s]&&card(coord[s])&&(!parts||parts.includes(s));
+ const N=n=>e.H(n),hipB=N("hips"),hipP=cp.BP("hips"),put=(par,bp,g,y,z,x=0)=>{const w=decoWrap(e,par,g,x,y-bp.y,z);if(w)acc.push(w);return w};
+ const backAt=y=>{const R=fitTorso(cp,y,cp.uaX*.9);return R?-(R.cv-ringR(R,Math.PI)):-.1};
+ const tp=has("Tops")?card(coord.Tops):null;
+ if(isY(tp)&&!tp.boy&&hipB&&hipP){const L=(cp.hipsY-cp.knY)*(tp.yk=="sexy"?1.9:1.7);[-1,1].forEach(s=>{const piv=new T3.Group(),ms=tailMesh(tp,L,.08);piv.add(ms);piv.rotation.set(-.12,0,s*.12);piv.userData={rx:-.12,rz:s*.12,s,ph:s};e.ykSway.push(piv);
+   put(hipB,hipP,piv,cp.hipsY+.04,backAt(cp.hipsY)-.012,s*.055)})}
+ if(isY(tp)&&tp.boy){e.ykBoyTail=1}
+ return acc})(decorate);
+vrmHeadAcc=(o=>function(b,k,idx){if(b!="yk")return o(b,k,idx);const g=new T3.Group(),{m,a,t}=k;const ac=(S.coord&&card(S.coord.Accessory))||{};
+ const kk=(CARDS.find(c=>c.brand=="yk"&&c.slot=="Accessory"&&c.col.m==m)||{}).yk;
+ if(kk=="cute"){g.add(at(bow3(m,2.1),0,.88,-.08,-.3));g.add(at(bow3("#ffffff",.9),.36,.7,.1,0,0,.3))}
+ else if(kk=="cool"){g.add(at(mk(G3.star,"#e8f0ff",false),.34,.76,.12,0,0,.3,.09));g.add(at(mk(G3.star,m,false),.26,.86,.1,0,0,-.2,.06))}
+ else if(kk=="pop"){g.add(at(bow3(m,2.4),.18,.9,-.02,-.2,0,.25))}
+ else if(kk=="sexy"){g.add(at(sphM(.05,m),.34,.74,.1));[0,1,2,3,4].forEach(i=>g.add(at(sphM(.022,t),.34+.07*Math.cos(i*1.256),.74+.07*Math.sin(i*1.256),.1)))}
+ return g})(vrmHeadAcc);
+// spring sway (driven by hip motion + beat)
+window.DANCE_HOOK=(o=>function(e,M,root,t,mode,beat,phase,arm,r){o&&o(e,M,root,t,mode,beat,phase,arm,r);const sw=e.ykSway;if(!sw||!sw.length)return;
+ const hb=e.H("hips");const px=hb?hb.position.x:0,py=hb?hb.position.y:0;e.ykV=e.ykV||{x:px,y:py,vx:0,vy:0};const V=e.ykV,dx=px-V.x,dy=py-V.y;V.x=px;V.y=py;V.vx=V.vx*.85+dx*6;V.vy=V.vy*.85+dy*6;
+ sw.forEach(p=>{const u=p.userData;p.rotation.x=u.rx-.05-.08*Math.abs(Math.sin(t*2.1+u.ph))-Math.max(-.4,Math.min(.4,V.vy*3));p.rotation.z=u.rz+.06*Math.sin(t*1.7+u.ph)-Math.max(-.3,Math.min(.3,V.vx*3))})})(window.DANCE_HOOK);
+// ---- global style push toward the Yukio art: softer cel shading, pastel rim light
+initInst=(o=>function(e){o(e);try{e.vrm.scene.traverse(ob=>{if(!ob.isMesh)return;(Array.isArray(ob.material)?ob.material:[ob.material]).forEach(m=>{if(m.parametricRimColorFactor){m.parametricRimColorFactor.setRGB(.55,.42,.52);m.parametricRimFresnelPowerFactor=4.5;m.parametricRimLiftFactor=0;if("rimLightingMixFactor" in m)m.rimLightingMixFactor=.35}
+  if("shadingToonyFactor" in m)m.shadingToonyFactor=Math.min(m.shadingToonyFactor,.72);if(/eye|iris|highlight/i.test(m.name||"")&&m.emissive){m.emissive.setRGB(.08,.08,.1)}m.needsUpdate=true})})}catch(err){console.log("style push "+err.message)}})(initInst);
+})();
 var CK=0;
 const SHOTS={wide:(u,t)=>[V3(.6*Math.sin(t*.2),1.7,7.6-u*.8),V3(0,1.3,0)],close:(u)=>[V3(.35-u*.3,1.95,2.7-u*.25),V3(0,1.8,0)],side:(u)=>[V3(-3.4+u*.8,1.5,3.6),V3(0,1.3,0)],
  low:(u)=>[V3(.4,.45,4.3-u*.4),V3(0,1.6,0)],orbit:(u)=>{const a=u*1.4-.7;return[V3(Math.sin(a)*4.6,1.7,Math.cos(a)*4.6),V3(0,1.3,0)]},high:(u)=>[V3(0,4.6,6.2-u*.6),V3(0,1,0)]};
