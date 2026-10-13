@@ -2150,4 +2150,124 @@ function frame3D(){requestAnimationFrame(frame3D);if(!R3)return;const t=performa
  if(sc){R3.cam.updateProjectionMatrix();R3.r.render(sc,R3.cam)}}catch(e){console.log("3D frame error: "+e.message+" "+(e.stack||"").split("\n")[1]);R3=null}}
 init3D();
 renderTitle();
+// ===== Animated 2D art stage (Live2D-style strip/mesh warp of the user's art). 3D kept as a toggle =====
+var STAGE2D=!/[?&]3d/.test(location.search)&&localStorage.getItem("stage2d")!=="0";
+(function(){
+const A2D="assets/user/2d/",IMG={};
+const img=k=>{if(IMG[k])return IMG[k];const i=new Image();i.src=A2D+k+".webp";IMG[k]=i;return i};
+// default art per idol (the user's character art) + tint for idols without own art
+const DEF={0:"yk_cute",1:"yk_cool",2:"yk_sexy",3:"yk_pop",5:"luna_star",6:"yk_energetic",7:"yk_divine",8:"yk_cheerful"};
+const DEF_TINT={7:["#3a2030",.55]};// Ren has no art yet: darkened Divine art as placeholder
+window.ART_MISSING=["Hinode Taiyo / Amamiya Kanata: using Yukio Energetic / Cheerful art as their look (confirm these are them)","Kurogane Ren: NO art - darkened Yukio Divine art as placeholder","Girls (Lulu/Rinne/Sera/Pochi): only their Yukio uniform art; every other girls' brand coord is a tinted Yukio image","Boys' brands Starlit Knights / Solar Parade / Rebel Thorn / Cocoa Sugar Waltz: no art (tinted default)","Luna: Jeweling (Amethyst Moon) and Star Premium accessory-only mixes use nearest Luna art"];
+function artFor(idx,coord){const cs=Object.values(coord||{}).map(card).filter(Boolean);
+ const yk=cs.find(c=>c.yk&&(c.slot=="Tops"))||cs.find(c=>c.yk);if(yk)return{k:"yk_"+yk.yk,own:true};
+ if(idx==5){const ids=cs.map(c=>c.id).join(" ");
+  if(/SP5_/.test(ids))return{k:"luna_neptune",own:true};if(/ns[789]|CON5/.test(ids))return{k:"luna_aqua",own:true};if(/ns[45]/.test(ids))return{k:"luna_royal",own:true};if(/ns6/.test(ids))return{k:"luna_short",own:true};
+  if(/ns[0-3]/.test(ids))return{k:"luna_star",own:true}}
+ const tp=cs.find(c=>c.slot=="One-piece")||cs.find(c=>c.slot=="Tops");const t=DEF_TINT[idx];
+ return{k:DEF[idx]||"yk_cute",tint:t?t[0]:(tp?cols(tp).m:null),ta:t?t[1]:.38}}
+const TC={};function tinted(k,col,a){const im=img(k);if(!col||!im.complete||!im.naturalWidth)return im;const key=k+col+a;if(TC[key])return TC[key];
+ const c=document.createElement("canvas");c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext("2d");g.drawImage(im,0,0);g.globalCompositeOperation="multiply";g.globalAlpha=a;g.fillStyle=col;g.fillRect(0,0,c.width,c.height);
+ g.globalAlpha=1;g.globalCompositeOperation="destination-in";g.drawImage(im,0,0);return TC[key]=c}
+// personalities: move sets + style
+const PERS={0:{m:["bounce","twirl","heart","step"],b:1.2,s:.8},1:{m:["sway","pose","step","twirl"],b:.6,s:1},2:{m:["sway","pose","twirl","step"],b:.5,s:1.3},3:{m:["jump","bounce","twirl","wave"],b:1.5,s:.9},
+ 5:{m:["step","pose","twirl","jump"],b:1,s:1},6:{m:["jump","step","wave","bounce"],b:1.4,s:.8},7:{m:["sway","pose","step","jump"],b:.7,s:1.1},8:{m:["bounce","sway","twirl","wave"],b:1.1,s:.9}};
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+function motion(mv,beat,P){const b=((beat%1)+1)%1,q=((beat%4)+4)%4/4,o={x:0,y:0,r:0,sx:1,sy:1,head:0,skirt:0,lift:0};const B=P.b,S=P.s;
+ o.y=-Math.abs(Math.sin(Math.PI*beat))*6*B;o.head=Math.sin(Math.PI*beat)*.6;o.skirt=Math.sin(Math.PI*beat-1)*.5;o.sy=1+.015*Math.cos(2*Math.PI*beat);
+ if(mv=="bounce"){o.y=-Math.abs(Math.sin(Math.PI*beat))*16*B;o.sy=1-.05*Math.cos(2*Math.PI*b)*B*.6;o.sx=2-o.sy;o.skirt=Math.cos(Math.PI*beat)*1.2}
+ if(mv=="sway"){o.x=Math.sin(Math.PI*beat/2)*16*S;o.r=Math.sin(Math.PI*beat/2)*.07*S;o.head=-Math.sin(Math.PI*beat/2)*1.2;o.skirt=-Math.sin(Math.PI*beat/2-.8)*1.6}
+ if(mv=="step"){o.x=Math.sin(Math.PI*beat/2)*34*S;o.y=-Math.abs(Math.sin(Math.PI*beat))*9;o.r=Math.cos(Math.PI*beat/2)*.04;o.skirt=-Math.cos(Math.PI*beat/2)*1.5}
+ if(mv=="twirl"){if(q<.5){const u=ease(q*2);o.sx=Math.cos(u*Math.PI*2);o.y=-Math.sin(u*Math.PI)*22;o.skirt=Math.sin(u*Math.PI)*3*Math.sign(o.sx||1)}}
+ if(mv=="jump"){if(q>.25&&q<.6){const u=(q-.25)/.35;o.y=-Math.sin(u*Math.PI)*90*B;o.sy=1.06;o.sx=.95;o.skirt=-2*Math.sin(u*Math.PI)}else if(q>.6&&q<.7){o.sy=.9;o.sx=1.08}else if(q>.18&&q<.25){o.sy=.92;o.sx=1.06}}
+ if(mv=="pose"){const u=Math.min(1,q*4);o.r=.11*ease(u)*(Math.floor(beat/4)%2?1:-1);o.sx=o.sy=1+.04*ease(u);o.head=o.r*-6;o.skirt=o.r*10}
+ if(mv=="heart"){o.r=Math.sin(Math.PI*beat)*.06;o.y=-Math.abs(Math.sin(Math.PI*beat))*10;o.sx=o.sy=1+.03*Math.abs(Math.sin(Math.PI*beat))}
+ if(mv=="wave"){o.r=Math.sin(Math.PI*beat)*.08;o.x=Math.sin(Math.PI*beat/2)*10;o.head=Math.sin(Math.PI*beat)*1.4;o.skirt=-Math.sin(Math.PI*beat-.6)*1.8}
+ return o}
+// draw one idol: strip mesh warp (head tilt, breathing, skirt/tails/cape sway with lag), squash/stretch, flip-spin
+function drawIdol2D(g,im,fx,fy,H,o,t,ph,glow){const w0=im.naturalWidth||im.width,h0=im.naturalHeight||im.height;if(!w0)return;if(w0/h0>.75)H*=Math.max(.62,.75/(w0/h0));const sc=H/h0,W=w0*sc,N=Math.max(18,Math.min(44,Math.round(H/9)));
+ g.save();g.translate(fx+o.x,fy+o.y);g.rotate(o.r);g.scale(o.sx*(Math.abs(o.sx)<.08?.08*Math.sign(o.sx||1)/o.sx:1),o.sy);
+ // floor glow
+ if(glow){g.save();g.globalAlpha=.55;const rg=g.createRadialGradient(0,0,2,0,0,W*.6);rg.addColorStop(0,glow);rg.addColorStop(1,"transparent");g.fillStyle=rg;g.scale(1,.25);g.beginPath();g.arc(0,0,W*.6,0,7);g.fill();g.restore()}
+ const br=1+.012*Math.sin(t*2.6+ph);let y=-H;
+ for(let i=0;i<N;i++){const u0=i/N,u1=(i+1)/N,um=(u0+u1)/2;let hh=(H/N)*(um>.14&&um<.45?br:1);
+  const head=um<.3?Math.pow((.3-um)/.3,1.4):0,low=um>.42?Math.pow(Math.min(1,(um-.42)/.5),1.6):0;
+  const dx=(o.head+Math.sin(t*1.4+ph)*.5)*head*H*.012+(o.skirt+Math.sin(t*2.1+ph+um*3)*.6)*low*H*.012;
+  g.drawImage(im,0,u0*h0,w0,(u1-u0)*h0+.6,-W/2+dx,y,W,hh+.6);y+=hh}
+ g.restore()}
+// stage layout
+const FORM={1:[[150,0]],2:[[135,0],[770,0]],3:[[130,0],[770,0],[450,1]],4:[[105,0],[795,0],[300,1],[600,1]],5:[[95,0],[805,0],[260,1],[450,1],[640,1]],6:[[90,0],[250,0],[650,0],[810,0],[360,1],[540,1]],7:[[90,0],[250,0],[650,0],[810,0],[270,1],[450,1],[630,1]],8:[[85,0],[240,0],[660,0],[815,0],[195,1],[365,1],[535,1],[705,1]]};
+let cv2=null,g2=null,K=1,SPK=[],A2=null,last=0,fpsA=[];
+function ensure(){const wrap=$("stageWrap");if(!wrap)return false;if(!cv2){cv2=document.createElement("canvas");cv2.id="stage2d";cv2.style.cssText="position:absolute;inset:0;width:100%;height:100%;border-radius:16px";wrap.insertBefore(cv2,$("stage"));g2=cv2.getContext("2d")}
+ K=window.MOBILE?1.3:Math.min(2,devicePixelRatio||1);if(cv2.width!=Math.round(900*K)){cv2.width=Math.round(900*K);cv2.height=Math.round(560*K)}return true}
+function team(){const L=[S.idol];if(G&&G.ui>=0&&G.ui!=null)L.push(G.ui);((G&&G.members)||[]).forEach(m=>{if(!L.includes(m))L.push(m)});return L.filter(i=>!IDOLS[i]||!IDOLS[i].gone).slice(0,8)}
+function coordOf(m){if(m==S.idol)return S.coord;try{const c=S.coords&&S.coords[m];const v=c&&validCoord(m,c);return v&&Object.keys(v).length?v:sigOwned(m)}catch(e){return{}}}
+function themeCols(){const b=BRANDS.find(x=>x.id==((coordCards()[0]||{}).brand))||{c1:"#ffd6ea",c2:"#7a2fe8"};return[b.c1,b.c2]}
+function bg(g,t,beat,pulse,sec,sp){const[c1,c2]=themeCols();const gr=g.createLinearGradient(0,0,0,560);gr.addColorStop(0,"#1a0632");gr.addColorStop(.55,c2);gr.addColorStop(1,"#2a0a40");g.fillStyle=gr;g.fillRect(-50,-50,1000,660);
+ // LED panels
+ for(let i=0;i<7;i++){const h=((beat/8)+i*.12)%1;g.fillStyle=`hsla(${h*360},80%,${45+20*pulse*((i+Math.floor(beat))%2)}%,.55)`;g.fillRect(20+i*125,70,95,140)}
+ // beams
+ g.save();g.globalCompositeOperation="lighter";for(let i=0;i<5;i++){const sx=100+i*175,a=Math.sin(t*.7+i*1.7)*.35;g.save();g.translate(sx,-10);g.rotate(a);const bg2=g.createLinearGradient(0,0,0,560);bg2.addColorStop(0,`hsla(${(i*70+t*30)%360},100%,80%,${.16+.12*pulse})`);bg2.addColorStop(1,"transparent");g.fillStyle=bg2;g.beginPath();g.moveTo(-8,0);g.lineTo(8,0);g.lineTo(90,600);g.lineTo(-90,600);g.fill();g.restore()}g.restore();
+ // floor
+ const fl=g.createLinearGradient(0,330,0,560);fl.addColorStop(0,"#3a1258");fl.addColorStop(1,"#12041e");g.fillStyle=fl;g.beginPath();g.moveTo(-50,330);g.lineTo(950,330);g.lineTo(950,600);g.lineTo(-50,600);g.fill();
+ g.strokeStyle=`hsla(${(t*40)%360},90%,75%,.8)`;g.lineWidth=4;g.beginPath();g.ellipse(450,450,430,95,0,0,7);g.stroke();g.strokeStyle=c1+"88";g.lineWidth=2;g.beginPath();g.ellipse(450,450,300,60,0,0,7);g.stroke();
+ // sparkles
+ if(SPK.length<70)SPK.push({x:Math.random()*900,y:Math.random()*560,v:10+Math.random()*30,s:1+Math.random()*2.5,p:Math.random()*6});
+ g.fillStyle="#fff";SPK.forEach(s=>{s.y-=s.v/60;if(s.y<-5){s.y=565;s.x=Math.random()*900}g.globalAlpha=.4+.6*Math.abs(Math.sin(t*3+s.p));star(g,s.x,s.y,s.s*2,s.s*.8)});g.globalAlpha=1}
+function star(g,x,y,R,r){g.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;g.lineTo(x+rr*Math.cos(a),y+rr*Math.sin(a))}g.fill()}
+const POS={};
+function frame2D(){requestAnimationFrame(frame2D);const on=$("s-stage")&&$("s-stage").classList.contains("on");if(!STAGE2D||!on||!G){if(cv2)cv2.style.display=STAGE2D&&on?"":"none";return}
+ if(!ensure())return;cv2.style.display="";const s3=$("stage3d");if(s3)s3.style.visibility="hidden";
+ const t=performance.now()/1000,now=ac().currentTime,beat=G.B?(now-G.t0)/G.B.spb:t*2,bp=((beat%1)+1)%1,pulse=Math.exp(-bp*4);
+ fpsA.push(t);while(fpsA.length&&fpsA[0]<t-2)fpsA.shift();window.FPS2D=fpsA.length/2;
+ const bt=now-G.t0,sec=G.B&&G.B.secs?((G.B.secs.find(s=>bt>=s.start&&bt<s.end)||{}).name||"intro"):"verse";
+ const g=g2;g.setTransform(K,0,0,K,0,0);
+ const ap=A2&&t-A2.t0<A2.len?A2:null,ae=ap?t-ap.t0:0;
+ // camera
+ let cz=1+.012*pulse,cx0=450,cy0=330,shake=0;if(sec=="chorus")cz+=.03+.02*Math.sin(beat*Math.PI/8);
+ const L=team(),n=L.length,F=FORM[n]||FORM[1],phrase=Math.floor(beat/16),focus=L[((phrase%n)+n)%n];
+ if(ap){const z=ae<2?1:Math.min(1.22,1+(ae-2)*.25);cz=z;const P=POS[S.idol];if(P&&ae>2){const f=Math.min(1,(ae-2)/1.2);cx0=450+(P.x-450)*f;cy0=330+(205-330)*f}shake=ae>2&&ae<2.35?(2.35-ae)*18:0}
+ g.save();g.translate(450+(Math.random()-.5)*shake,330+(Math.random()-.5)*shake);g.scale(cz,cz);g.translate(-cx0,-cy0);
+ if(ap)apBg(g,t,ae,beat,pulse);else bg(g,t,beat,pulse,sec,false);
+ // formation: rotate slots each phrase for 3+ (curved glide)
+ const rot=n>=3?phrase%n:0;const items=L.map((m,i)=>{const slot=F[(i+rot)%n],tgt={x:slot[0],z:slot[1]};const P=POS[m]||(POS[m]={x:tgt.x,z:tgt.z});const k=.04;P.x+=(tgt.x-P.x)*k;P.z+=(tgt.z-P.z)*k;return{m,i,P,arc:Math.abs(tgt.x-P.x)}});
+ items.sort((a,b)=>b.P.z-a.P.z);
+ const baseH=n==1?400:n==2?370:n<=4?330:290;
+ items.forEach(({m,i,P,arc})=>{const per=PERS[m]||PERS[0],mvs=per.m,bar=Math.floor(beat/4),mv=bt<0?"idle":mvs[(bar+i*(n>1?1:0))%mvs.length];let o=motion(mv,beat+(i%2)*0,per);
+  if(n>1&&i%2)o.x=-o.x;const depth=1-P.z*.22,fy=440-P.z*70-arc*.15,H=baseH*depth*(m==focus&&n>2?1.07:1);
+  const a=artFor(m,coordOf(m)),im=a.tint?tinted(a.k,a.tint,a.ta):img(a.k);if(a.k=="luna_neptune")o.y+=0;
+  const col=IDOLS[m].h;if(m==focus&&n>2&&!ap){g.save();g.globalCompositeOperation="lighter";const sg=g.createLinearGradient(0,0,0,fy);sg.addColorStop(0,"rgba(255,255,255,0)");sg.addColorStop(1,"rgba(255,240,255,.25)");g.fillStyle=sg;g.beginPath();g.moveTo(P.x-20,0);g.lineTo(P.x+20,0);g.lineTo(P.x+90,fy);g.lineTo(P.x-90,fy);g.fill();g.restore()}
+  drawIdol2D(g,im,P.x,fy,H,o,t,i*1.3+m,col);
+  if(!ap){g.fillStyle="#fff";g.font="bold "+Math.round(12*depth+2)+"px sans-serif";g.textAlign="center";g.globalAlpha=.85;g.fillText(IDOLS[m].n,P.x,fy+18);g.globalAlpha=1}});
+ if(ap)apFg(g,t,ae,L);
+ g.restore();
+ // HUD-free 2D overlay flash
+ if(ap&&(ae<.25||ae>ap.len-.3)){g.setTransform(K,0,0,K,0,0);g.fillStyle=`rgba(255,255,255,${ae<.25?1-ae/.25:(ae-(ap.len-.3))/.3})`;g.fillRect(0,0,900,560)}}
+function apBg(g,t,ae,beat,pulse){const c=IDOLS[S.idol].h,c2=TYPES[IDOLS[S.idol].t]||"#ff6fae";const rg=g.createRadialGradient(450,300,20,450,300,700);rg.addColorStop(0,"#ffffff");rg.addColorStop(.25,c);rg.addColorStop(1,"#1a0632");g.fillStyle=rg;g.fillRect(-300,-300,1500,1200);
+ g.save();g.translate(450,300);g.rotate(t*.3);g.globalCompositeOperation="lighter";for(let i=0;i<16;i++){g.rotate(Math.PI/8);g.fillStyle=i%2?`rgba(255,255,255,.10)`:c2+"22";g.beginPath();g.moveTo(0,0);g.lineTo(900,-70);g.lineTo(900,70);g.fill()}g.restore();
+ for(let i=0;i<40;i++){const a=i*2.4+t*.5,r=((t*120+i*37)%600);g.fillStyle=i%3?"#fff":"#fff6a8";g.globalAlpha=Math.max(0,1-r/600);star(g,450+Math.cos(a)*r,300+Math.sin(a)*r*.7,6,2.4)}g.globalAlpha=1}
+function apFg(g,t,ae,L){if(ae>.3&&ae<2.1){const u=ae-.3,k=u<.35?ease(u/.35):u>1.45?1-ease((u-1.45)/.35):1;g.save();g.setTransform(K,0,0,K,0,0);
+  g.fillStyle="rgba(20,4,40,.55)";g.save();g.translate(450,280);g.rotate(-.18);g.fillRect(-700,-120*k,1400,240*k);g.restore();
+  const lead=artFor(S.idol,S.coord),im=lead.tint?tinted(lead.k,lead.tint,lead.ta):img(lead.k);const iw=(im.naturalWidth||im.width),ih=(im.naturalHeight||im.height);
+  if(iw){const H=760,W=iw*H/ih,x=1000-(1-k)*-200-k*520-W/2+Math.sin(u*2)*10;g.save();g.beginPath();g.translate(450,280);g.rotate(-.18);g.rect(-700,-120*k,1400,240*k);g.rotate(.18);g.translate(-450,-280);g.clip();g.drawImage(im,x,120-u*60,W,H);g.restore()}
+  (L.length>1?L.slice(1,5):[]).forEach((m,j)=>{const a=artFor(m,coordOf(m)),i2=a.tint?tinted(a.k,a.tint,a.ta):img(a.k),w=i2.naturalWidth||i2.width,h=i2.naturalHeight||i2.height;if(!w)return;const H=300,W=w*H/h;g.globalAlpha=k*.9;g.drawImage(i2,40+j*120-(1-k)*300,250,W,H)});g.globalAlpha=1;
+  const info=A2.info||{};g.fillStyle="#fff";g.textAlign="center";g.shadowColor=IDOLS[S.idol].h;g.shadowBlur=18;g.font="italic bold 22px sans-serif";g.fillText("✦ SPECIAL APPEAL ✦",450-(1-k)*400,215);g.font="bold 34px sans-serif";g.fillText(info.name||"Starlight Appeal",450+(1-k)*400,365);g.shadowBlur=0;g.restore()}
+ // beams + burst around leader
+ if(ae>2){const P=POS[S.idol]||{x:450};g.save();g.globalCompositeOperation="lighter";for(let i=0;i<6;i++){const a=-Math.PI/2+(i-2.5)*.28+Math.sin(t*2+i)*.1;g.fillStyle=`hsla(${(i*60+t*90)%360},100%,80%,.18)`;g.save();g.translate(P.x,440);g.rotate(a+Math.PI/2);g.beginPath();g.moveTo(0,0);g.lineTo(-30,-700);g.lineTo(30,-700);g.fill();g.restore()}g.restore()}}
+startCut=(o=>function(){if(!STAGE2D)return o();let info={};try{info=appealInfo()||{}}catch(e){}A2={t0:performance.now()/1000,len:CUT_LEN,info};
+ 
+ $("stage").style.visibility="hidden";const my=A2;setTimeout(()=>{if(A2===my){A2=null;$("stage").style.visibility=""}},CUT_LEN*1000+100);
+ try{[0,4,7,12,16,19].forEach((n,i)=>tone(N(76+n),.5,"triangle",.1,ac().currentTime+i*.09))}catch(e){}})(startCut);
+endCut=(o=>function(){if(STAGE2D&&!(R3&&R3.cut)){A2=null;$("stage").style.visibility="";return}return o()})(endCut);
+// skip the heavy 3D stage while 2D is active (models stay available for title/dress-up/result)
+frame3D=(o=>function(){const st=$("s-stage");if(STAGE2D&&st&&st.classList.contains("on")){requestAnimationFrame(frame3D);return}return o()})(frame3D);
+setupStage3D=(o=>function(r){const st=$("s-stage");if(STAGE2D&&!r&&st&&st.classList.contains("on"))return null;return o(r)})(setupStage3D);
+startStage=(o=>function(){for(const k in POS)delete POS[k];A2=null;const r=o();const s3=$("stage3d");if(s3)s3.style.visibility=STAGE2D?"hidden":"";if(STAGE2D)ensure();Object.values(DEF).forEach(img);return r})(startStage);
+// toggle UI on the dress-up screen
+function tog(){const host=$("s-coord");if(!host||$("st2dTog"))return;const b=document.createElement("button");b.id="st2dTog";b.className="btn";b.style.cssText="position:fixed;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;padding:10px 16px;border:0;border-radius:999px;background:linear-gradient(135deg,#ff9ad5,#9a6ad8);color:#fff;font:bold 14px sans-serif;box-shadow:0 3px 10px #9a6ad888";
+ const lab=()=>b.textContent=STAGE2D?"🎨 Stage: 2D art (tap → 3D)":"🧊 Stage: 3D (tap → 2D art)";lab();b.onclick=()=>{STAGE2D=!STAGE2D;localStorage.setItem("stage2d",STAGE2D?"1":"0");lab()};host.appendChild(b);
+ const obs=()=>{b.style.display=host.classList.contains("on")?"":"none"};setInterval(obs,500);obs()}
+setTimeout(tog,0);requestAnimationFrame(frame2D);
+window.STAGE2D_API={artFor,team,POS};
+})();
 </script></body></html>
