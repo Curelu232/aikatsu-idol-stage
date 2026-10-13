@@ -2112,6 +2112,27 @@ window.DANCE_HOOK=(o=>function(e,M,root,t,mode,beat,phase,arm,r){o&&o(e,M,root,t
 initInst=(o=>function(e){o(e);try{e.vrm.scene.traverse(ob=>{if(!ob.isMesh)return;(Array.isArray(ob.material)?ob.material:[ob.material]).forEach(m=>{if(m.parametricRimColorFactor){m.parametricRimColorFactor.setRGB(.55,.42,.52);m.parametricRimFresnelPowerFactor=4.5;m.parametricRimLiftFactor=0;if("rimLightingMixFactor" in m)m.rimLightingMixFactor=.35}
   if("shadingToonyFactor" in m)m.shadingToonyFactor=Math.min(m.shadingToonyFactor,.72);if(/eye|iris|highlight/i.test(m.name||"")&&m.emissive){m.emissive.setRGB(.08,.08,.1)}m.needsUpdate=true})})}catch(err){console.log("style push "+err.message)}})(initInst);
 })();
+// ===== Meganee San brands: Lunar Revel (Luna, boy) + Sugarpetal (girls' brand, any girl) =====
+(function(){
+BRANDS.push({id:"sg",name:"Sugarpetal",tag:"Sweet Confection Couture",type:"Cute",c1:"#ffe0ec",c2:"#ff7aa8",icon:"🌸",motif:"frills"});
+PAL.sg=["#ffb6d2","#fff0f6","#ff7aa8","#ffd6e8","#e8487f"];
+const D=[["lunar_revel","amethyst_cat_prince","Amethyst Cat Prince","Cat Crown","#5b2d9e","crown"],["lunar_revel","amethyst_midnight","Amethyst Midnight","Crescent Mic","#3a1a6e","bow"],
+ ["lunar_revel","crystal_eclipse","Crystal Eclipse","Amethyst Earrings","#2a1450","bow"],["lunar_revel","galaxy_serenade","Galaxy Serenade","Planet Mic","#2a2a7a","bow"],
+ ["lunar_revel","starlit_masquerade","Starlit Masquerade","Crescent Mask","#4a2a8a","crown"],["lunar_revel","violet_moonlit_waltz","Violet Moonlit Waltz","Crescent Cane","#c8b0ff","cape"],
+ ["sugarpetal","strawberry_parfait","Strawberry Parfait","Strawberry Tiara","#ff9ab8"],["sugarpetal","cherry_blossom_mochi","Cherry Blossom Mochi","Dango Hairpin","#ffc4dc"],
+ ["sugarpetal","lavender_macaron","Lavender Macaron","Macaron Bag","#c9b3ff"],["sugarpetal","rose_candy_waltz","Rose Candy Waltz","Lollipop Wand","#ff7aa8"],
+ ["sugarpetal","lemon_meringue_picnic","Lemon Meringue Picnic","Picnic Basket","#fff08a"],["sugarpetal","peony_cream_puff","Peony Cream Puff","Cream Headband","#ffd0e0"]];
+const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]],AP=[1200,900,700,500];let n=0;
+D.forEach(([b,k,name,accN,m,acc])=>{const boy=b=="lunar_revel";SL.forEach(([slot,f,lab],i)=>{
+ const kind=boy?["tailcoat","slacks","boots",acc][i]:["top","skirt","shoes","acc"][i];
+ CARDS.push({id:"mg_"+k+"_"+i,brand:boy?"ns":"sg",slot,name:name+" "+(lab||accN),rarity:"PR",type:boy?"Sexy":"Cute",typeLabel:boy?"Passionate":"Cute",ap:AP[i],kind,boy,
+  col:{m,a:boy?"#e6c35c":"#ffffff",t:boy?"#d4af37":"#ff7aa8"},fab:boy?"night":null,mg:1,set:"MG_"+k,img:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",fullArt:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",mgArt:"mg_"+b+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})})});
+const st=document.createElement("style");st.textContent=`.card.mgcard{width:130px;height:190px;padding:0;border:0;border-radius:9px;overflow:hidden;position:relative;background:#2a1450;box-shadow:0 3px 10px #7a4a9a55}
+.card.mgcard img{width:100%;height:100%;object-fit:cover;display:block}.card.mgcard.sel{outline:4px solid #ffd34d;outline-offset:-2px}.card.mgcard .q{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff;background:linear-gradient(160deg,#c9b3ff,#ff9ab8)}
+.card.mgcard .cnt{position:absolute;right:6px;top:6px;background:#0008;color:#fff;border-radius:8px;padding:0 6px;font:bold 12px sans-serif}`;document.head.appendChild(st);
+cardHTML=(o=>function(c,opts={}){if(!c.mg)return o(c,opts);const k=S.own[c.id]||0;
+ return `<div class="card dc mgcard ${opts.locked?"locked":""} ${opts.sel?"sel":""}" data-id="${c.id}" title="${opts.locked?"???":c.name}">${opts.locked?`<div class="q">?</div>`:`<img src="${c.img}" alt="${c.name}" loading="lazy">${k>1?`<div class="cnt">×${k}</div>`:""}`}</div>`})(cardHTML);
+})();
 var CK=0;
 const SHOTS={wide:(u,t)=>[V3(.6*Math.sin(t*.2),1.7,7.6-u*.8),V3(0,1.3,0)],close:(u)=>[V3(.35-u*.3,1.95,2.7-u*.25),V3(0,1.8,0)],side:(u)=>[V3(-3.4+u*.8,1.5,3.6),V3(0,1.3,0)],
  low:(u)=>[V3(.4,.45,4.3-u*.4),V3(0,1.6,0)],orbit:(u)=>{const a=u*1.4-.7;return[V3(Math.sin(a)*4.6,1.7,Math.cos(a)*4.6),V3(0,1.3,0)]},high:(u)=>[V3(0,4.6,6.2-u*.6),V3(0,1,0)]};
@@ -2159,7 +2180,7 @@ const img=k=>{if(IMG[k])return IMG[k];const i=new Image();i.src=A2D+k+".webp";IM
 const DEF={0:"yk_cute",1:"yk_cool",2:"yk_sexy",3:"yk_pop",5:"luna_star",6:"yk_energetic",7:"yk_divine",8:"yk_cheerful"};
 const DEF_TINT={7:["#3a2030",.55]};// Ren has no art yet: darkened Divine art as placeholder
 window.ART_MISSING=["Hinode Taiyo / Amamiya Kanata: using Yukio Energetic / Cheerful art as their look (confirm these are them)","Kurogane Ren: NO art - darkened Yukio Divine art as placeholder","Girls (Lulu/Rinne/Sera/Pochi): only their Yukio uniform art; every other girls' brand coord is a tinted Yukio image","Boys' brands Starlit Knights / Solar Parade / Rebel Thorn / Cocoa Sugar Waltz: no art (tinted default)","Luna: Jeweling (Amethyst Moon) and Star Premium accessory-only mixes use nearest Luna art"];
-function artFor(idx,coord){const cs=Object.values(coord||{}).map(card).filter(Boolean);
+function artFor(idx,coord){const cs=Object.values(coord||{}).map(card).filter(Boolean);const mg=cs.find(c=>c.mgArt&&c.slot=="Tops")||cs.find(c=>c.mgArt);if(mg)return{k:mg.mgArt,own:true};
  const yk=cs.find(c=>c.yk&&(c.slot=="Tops"))||cs.find(c=>c.yk);if(yk)return{k:"yk_"+yk.yk,own:true};
  if(idx==5){const ids=cs.map(c=>c.id).join(" ");
   if(/SP5_/.test(ids))return{k:"luna_neptune",own:true};if(/ns[789]|CON5/.test(ids))return{k:"luna_aqua",own:true};if(/ns[45]/.test(ids))return{k:"luna_royal",own:true};if(/ns6/.test(ids))return{k:"luna_short",own:true};
@@ -2230,7 +2251,7 @@ function frame2D(){requestAnimationFrame(frame2D);const on=$("s-stage")&&$("s-st
  g.save();g.translate(450+(Math.random()-.5)*shake,330+(Math.random()-.5)*shake);g.scale(cz,cz);g.translate(-cx0,-cy0);
  if(ap)apBg(g,t,ae,beat,pulse);else bg(g,t,beat,pulse,sec,false);
  // formation: rotate slots each phrase for 3+ (curved glide)
- const rot=n>=3?phrase%n:0;const items=L.map((m,i)=>{const slot=F[(i+rot)%n],tgt={x:slot[0],z:slot[1]};const P=POS[m]||(POS[m]={x:tgt.x,z:tgt.z});const k=.04;P.x+=(tgt.x-P.x)*k;P.z+=(tgt.z-P.z)*k;return{m,i,P,arc:Math.abs(tgt.x-P.x)}});
+ const rot=n>=3?((phrase%n)+n)%n:0;const items=L.map((m,i)=>{const slot=F[(i+rot)%n],tgt={x:slot[0],z:slot[1]};const P=POS[m]||(POS[m]={x:tgt.x,z:tgt.z});const k=.04;P.x+=(tgt.x-P.x)*k;P.z+=(tgt.z-P.z)*k;return{m,i,P,arc:Math.abs(tgt.x-P.x)}});
  items.sort((a,b)=>b.P.z-a.P.z);
  const baseH=n==1?400:n==2?370:n<=4?330:290;
  items.forEach(({m,i,P,arc})=>{const per=PERS[m]||PERS[0],mvs=per.m,bar=Math.floor(beat/4),mv=bt<0?"idle":mvs[(bar+i*(n>1?1:0))%mvs.length];let o=motion(mv,beat+(i%2)*0,per);
