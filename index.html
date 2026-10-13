@@ -2133,6 +2133,19 @@ const st=document.createElement("style");st.textContent=`.card.mgcard{width:130p
 cardHTML=(o=>function(c,opts={}){if(!c.mg)return o(c,opts);const k=S.own[c.id]||0;
  return `<div class="card dc mgcard ${opts.locked?"locked":""} ${opts.sel?"sel":""}" data-id="${c.id}" title="${opts.locked?"???":c.name}">${opts.locked?`<div class="q">?</div>`:`<img src="${c.img}" alt="${c.name}" loading="lazy">${k>1?`<div class="cnt">×${k}</div>`:""}`}</div>`})(cardHTML);
 })();
+// ===== Meganee San girls' rare coords: Nocturne Edge (Cool), Pop Circuit (Pop), Velvet Temptation (Sexy) — unassigned: any girl =====
+(function(){
+BRANDS.push({id:"ne",name:"Nocturne Edge",tag:"Gothic Starlight Couture",type:"Cool",c1:"#d8d4f0",c2:"#2a1f5e",icon:"🖤",motif:"star"},
+ {id:"pc",name:"Pop Circuit",tag:"Neon Street Pop",type:"Pop",c1:"#ffe0f4",c2:"#ff3fa8",icon:"🎧",motif:"rainbow"},
+ {id:"vt",name:"Velvet Temptation",tag:"Midnight Velvet Glamour",type:"Sexy",c1:"#ffd8d8",c2:"#8a1028",icon:"🥀",motif:"leaf"});
+PAL.ne=["#2a1f5e","#d8d4f0","#5b4fa8","#9f9fd0","#e6e6f0"];PAL.pc=["#ff6fc8","#fff0fa","#ffd23f","#7fe0ff","#b04fff"];PAL.vt=["#8a1028","#ffd8d8","#1a0a10","#e6c35c","#c8102e"];
+const D={ne:["nocturne_edge","Cool",[["frozen_stardust","Frozen Stardust","Ice Star Tiara","#bcd0f0"],["gothic_nebula_rose","Gothic Nebula Rose","Rose Veil Headpiece","#2a1f4e"],["midnight_constellation","Midnight Constellation","Crescent Moon Brooch","#1f1a4a"],["obsidian_starfall","Obsidian Starfall","Starfall Mic","#141020"],["raven_eclipse","Raven Eclipse","Raven Feather Choker","#18101e"],["silver_comet_knight","Silver Comet Knight","Comet Sword","#c8c8d4"]]],
+ pc:["pop_circuit","Pop",[["bubblegum_graffiti","Bubblegum Graffiti","Star Headphones","#ff8ad0"],["cyber_lemonade","Cyber Lemonade","Holo Visor","#e8ff6a"],["electric_candy","Electric Candy","Lightning Clip","#c8a0ff"],["heart_arcade","Heart Arcade","Heart Crossbody Bag","#7ac84a"],["neon_pop_star","Neon Pop Star","Star Mic","#ffd23f"],["retro_boombox","Retro Boombox","Boombox Bag","#ff5fa8"]]],
+ vt:["velvet_temptation","Sexy",[["black_pearl_noir","Black Pearl Noir","Pearl Drop Earrings","#141014"],["crimson_velvet_rose","Crimson Velvet Rose","Rose Hair Comb","#9a1024"],["golden_champagne","Golden Champagne","Gold Feather Plume","#e8cf8a"],["ruby_diamond_diva","Ruby Diamond Diva","Ruby Tiara","#ff7a9a"],["scarlet_silk_peony","Scarlet Silk Peony","Peony Fan","#c8102e"],["wine_red_masquerade","Wine Red Masquerade","Masquerade Mask","#5a0a1e"]]]};
+const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]],AP=[1200,900,700,500];let n=CARDS.filter(c=>c.mg).length;
+for(const bid in D){const[pre,type,L]=D[bid];L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg2/"+pre+"-"+k+"-"+f+".webp";
+ CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:"PR",type,ap:AP[i],kind:["top","skirt","shoes","acc"][i],boy:false,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d2/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})}))}
+})();
 var CK=0;
 const SHOTS={wide:(u,t)=>[V3(.6*Math.sin(t*.2),1.7,7.6-u*.8),V3(0,1.3,0)],close:(u)=>[V3(.35-u*.3,1.95,2.7-u*.25),V3(0,1.8,0)],side:(u)=>[V3(-3.4+u*.8,1.5,3.6),V3(0,1.3,0)],
  low:(u)=>[V3(.4,.45,4.3-u*.4),V3(0,1.6,0)],orbit:(u)=>{const a=u*1.4-.7;return[V3(Math.sin(a)*4.6,1.7,Math.cos(a)*4.6),V3(0,1.3,0)]},high:(u)=>[V3(0,4.6,6.2-u*.6),V3(0,1,0)]};
