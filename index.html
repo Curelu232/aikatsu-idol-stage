@@ -2464,5 +2464,7 @@ for(const i in ADD)if(PERS[i])PERS[i].m=PERS[i].m.slice(0,3).concat(ADD[i]);
 // dress-up preview / change screen: show the coord's own art instead of the paper doll
 (function(){const _d=dressSVG;dressSVG=function(coord,hair,size){try{const a=artFor(S.idol,coord||S.coord);if(a&&a.k){const h=Math.round((size||160)*2.1);return `<img class="artprev" src="${A2D+a.k}.webp" alt="" style="height:${h}px;max-width:100%;object-fit:contain;filter:drop-shadow(0 6px 12px #c060a055);animation:artbob 2.4s ease-in-out infinite">`}}catch(e){}return _d.apply(this,arguments)};
  const st=document.createElement("style");st.textContent="@keyframes artbob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-6px) rotate(.6deg)}}";document.head.appendChild(st)})();
+// Strawberry Parfait variant looks by type (Meganee alt art): Rinne Cool, Pochi Pop, Sera Sexy; Lulu keeps the original Cute art
+(function(){const V={1:"cool",3:"pop",2:"sexy"};const _a=artFor;artFor=function(idx,coord){const a=_a(idx,coord);if(a&&a.k=="mg_sugarpetal-strawberry_parfait"&&V[idx])return Object.assign({},a,{k:a.k+"-"+V[idx]});return a};if(window.STAGE2D_API)STAGE2D_API.artFor=artFor})();
 })();
 </script></body></html>
