@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Stardust Coord"><meta name="theme-color" content="#b57bff"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="icon" href="icons/icon-192.png">
 <title>Idol Stardust Coordinate</title>
-<script src="lib/three.min.js"></script><script src="lib/three-vrm-bundle.js"></script>
+
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:"Trebuchet MS",Verdana,sans-serif;background:linear-gradient(135deg,#ffd6ec,#e3d4ff 50%,#cdf3ff);min-height:100vh;color:#5a2a6e;overflow-x:hidden}
 h1,h2{text-align:center;margin:10px 0;color:#ff4fa3;text-shadow:2px 2px 0 #fff,4px 4px 0 #ffb3dc}
@@ -74,7 +74,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script>
+<script async src="assets/user/rig.js"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -114,7 +114,7 @@ const BOY_CARDS={ns:[["Starlight Tailcoat","Tops","PR","tailcoat",880,{m:W.w,a:W
  rk:[["Thorn Rider Jacket","Tops","PR","jacket",850],["Chain Rebel Trousers","Bottoms","R","slacks",570],["Spiked Stage Boots","Shoes","R","boots",550],["Black Rose Choker","Accessory","R","choker",560],["Crimson Night Tailcoat","Tops","CP","tailcoat",1120],["Torn Rebel Cape","Accessory","PR","cape",790]],
  cw:[["Macaron Waltz Jacket","Tops","PR","jacket",830],["Sugar Ribbon Trousers","Bottoms","R","slacks",550],["Cocoa Loafer Boots","Shoes","R","boots",530],["Strawberry Beret","Accessory","R","beret",560],["Cream Puff Vest","Tops","N","vest",420],["Sweet Frosting Cape","Accessory","PR","cape",770]]};
 for(const b in BOY_CARDS)BOY_CARDS[b].forEach(([name,slot,rarity,kind,ap,col,fab],i)=>CARDS.push({id:b+i,brand:b,slot,name,rarity,type:BRANDS.find(x=>x.id==b).type,ap,kind,boy:true,col,fab,img:b=="ns"?"assets/user/web/"+b+i+".jpg":null}));
-const isBoy=i=>!!(IDOLS[i]&&IDOLS[i].male);const fitsIdol=(c,i=S.idol)=>!!c.boy==isBoy(i);
+const isBoy=i=>!!(IDOLS[i]&&IDOLS[i].male);const fitsIdol=(c,i=S.idol)=>!!c.boy==isBoy(i)&&(c.only==null||c.only==i);
 const IDOLS=[{n:"Hoshimi Lulu",t:"Cute",h:"#ff9ccc",e:"🌸",q:"Let's sparkle together!"},{n:"Aoba Rinne",t:"Cool",h:"#5b7bd9",e:"💎",q:"Elegance is my stage."},
  {n:"Kurenai Sera",t:"Sexy",h:"#a2322f",e:"🌹",q:"Fall for my autumn charm."},{n:"Hinata Pochi",t:"Pop",h:"#ffb02e",e:"🌻",q:"Yay~ full power fun!"},{n:"Shirayuki Mai",t:"Cute",h:"#e9e4ff",e:"❄️",q:"A sweet melody for you."},
  {n:"Amane Luna",t:"Cool",h:"#7a4fd0",e:"🌙",q:"Leader of Starlit Knights! C'mon, let's revel under the moon~",male:true,img:"assets/user/web/luna-face.jpg"},
@@ -247,13 +247,13 @@ function curScore(){return G.score*(G.unit?1.2:1)}
 function loop(){if(!G)return;raf=requestAnimationFrame(loop);const now=ac().currentTime,idol=IDOLS[S.idol];
  for(const n of G.notes)if(!n.hit&&now-n.t>.15){n.hit=1;add("M",n.lane)}
  if(G.sp>0&&now-G.spT>6)G.sp=0;
- const sp=G.sp>0,el=now-G.spT;const g=cx.createLinearGradient(0,0,0,560);g.addColorStop(0,sp?`hsl(${now*120%360},80%,35%)`:"#3a0f5a");g.addColorStop(1,"#ff6fae");if(USE3D)cx.clearRect(0,0,900,560);else{cx.fillStyle=g;cx.fillRect(0,0,900,560);}
- if(!USE3D){cx.fillStyle="#fff";G.stars.forEach(s=>{cx.globalAlpha=.4+.6*Math.abs(Math.sin(now*2+s[0]));cx.beginPath();cx.arc(s[0],s[1],s[2],0,7);cx.fill()});cx.globalAlpha=1;
+ const sp=G.sp>0,el=now-G.spT;const g=cx.createLinearGradient(0,0,0,560);g.addColorStop(0,sp?`hsl(${now*120%360},80%,35%)`:"#3a0f5a");g.addColorStop(1,"#ff6fae");if((USE3D||window.STAGE2D))cx.clearRect(0,0,900,560);else{cx.fillStyle=g;cx.fillRect(0,0,900,560);}
+ if(!(USE3D||window.STAGE2D)){cx.fillStyle="#fff";G.stars.forEach(s=>{cx.globalAlpha=.4+.6*Math.abs(Math.sin(now*2+s[0]));cx.beginPath();cx.arc(s[0],s[1],s[2],0,7);cx.fill()});cx.globalAlpha=1;
  for(let i=0;i<3;i++){cx.fillStyle=`hsla(${(i*120+now*40)%360},100%,80%,.12)`;cx.beginPath();const sx=150+i*300+Math.sin(now+i)*80;cx.moveTo(sx,0);cx.lineTo(sx-90,560);cx.lineTo(sx+90,560);cx.fill()}}
  const b=BRANDS.find(x=>x.id==coordCards()[0].brand);
- if(!USE3D){drawIdol(idol,130,330+Math.sin(now*6)*4,b);cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(idol.n,130,430);
- if(G.unit){drawIdol(G.unit,60,400+Math.sin(now*6+1)*4,null,.7);cx.fillStyle="#fff";cx.fillText("Unit ×1.2",60,480);}}else{cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(idol.n+(G.unit?" & "+G.unit.n+" (Unit ×1.2)":""),120,520);}
- for(let l=0;l<4;l++){const x=LX+l*LW,pr=performance.now()-G.press[l]<120;cx.fillStyle=pr?"#fff6":(USE3D?"#1a063055":"#0003");cx.fillRect(x+3,0,LW-6,560);
+ if(!(USE3D||window.STAGE2D)){drawIdol(idol,130,330+Math.sin(now*6)*4,b);cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(idol.n,130,430);
+ if(G.unit){drawIdol(G.unit,60,400+Math.sin(now*6+1)*4,null,.7);cx.fillStyle="#fff";cx.fillText("Unit ×1.2",60,480);}}else{cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(window.STAGE2D?"":idol.n+(G.unit?" & "+G.unit.n+" (Unit ×1.2)":""),120,520);}
+ for(let l=0;l<4;l++){const x=LX+l*LW,pr=performance.now()-G.press[l]<120;cx.fillStyle=pr?"#fff6":((USE3D||window.STAGE2D)?"#1a063055":"#0003");cx.fillRect(x+3,0,LW-6,560);
   cx.fillStyle="#fff";cx.font="bold 22px sans-serif";cx.textAlign="center";cx.fillText(KEYS[l].toUpperCase(),x+LW/2,535);}
  cx.strokeStyle="#fff";cx.lineWidth=4;cx.shadowColor="#ff4fa3";cx.shadowBlur=15;cx.beginPath();cx.moveTo(LX,HITY);cx.lineTo(LX+4*LW,HITY);cx.stroke();cx.shadowBlur=0;
  const cols=["#ff6fae","#ffb02e","#4fa8ff","#b04fff"];
@@ -456,7 +456,8 @@ startStage=function(){const sc=coordScore();if(!sc.full){alert("Complete your co
  clearInterval(SCHED);SCHED=setInterval(()=>{if(!G||!G.B){clearInterval(SCHED);return}const now=ac().currentTime;while(G.ei<G.B.ev.length&&G.t0+G.B.ev[G.ei][0]<now+.3){const e=G.B.ev[G.ei++];const at=G.t0+e[0];if(at>=now-.05)playEv(e,Math.max(at,now));}},40);
  if(typeof onStage3D=="function")onStage3D();cancelAnimationFrame(raf);loop();};
 // ===================== 3D LAYER (three.js r149) =====================
-const T3=USE3D?THREE:null;let R3=null;
+function NULL3(){const f=function(){};const P=new Proxy(f,{get:(t,k)=>k===Symbol.toPrimitive?(()=>0):k==="then"?undefined:P,apply:()=>P,construct:()=>P,set:()=>true});return P}
+const T3=USE3D?THREE:NULL3();let R3=null;
 function cnv(w,h,f){const c=document.createElement("canvas");c.width=w;c.height=h;f(c.getContext("2d"),w,h);const t=new T3.CanvasTexture(c);t.encoding=T3.sRGBEncoding;return t}
 let GRAD=null,OUTM=null;
 function toon(color,o={}){const m=new T3.MeshToonMaterial(Object.assign({color,gradientMap:GRAD},o));return m}
@@ -607,7 +608,7 @@ function animIdol(root,t,mode,beat=0,phase=0){const M=root.userData.M;if(!M)retu
  if(M.face.material.map!==M.FT[f]){M.face.material.map=M.FT[f];M.face.material.needsUpdate=true}
  return mv;}
 // ---------- scenes ----------
-const SIG=["pw","rt","mb","pp","cc","ns","sp","rk","cw"];const sigCoord=i=>({Tops:SIG[i]+"0",Bottoms:SIG[i]+"1",Shoes:SIG[i]+"2",Accessory:SIG[i]+"3"});
+const SIG=["pw","rt","mb","pp","cc","ns","sp","rk","cw"];var sigCoord=i=>({Tops:SIG[i]+"0",Bottoms:SIG[i]+"1",Shoes:SIG[i]+"2",Accessory:SIG[i]+"3"});
 let SPARK=null;
 function sparkles(n,box,colors,size=.12){const g=new T3.BufferGeometry(),p=new Float32Array(n*3),c=new Float32Array(n*3),col=new T3.Color();
  for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*box[0];p[i*3+1]=Math.random()*box[1];p[i*3+2]=(Math.random()-.5)*box[2]+(box[3]||0);col.set(colors[i%colors.length]);c.set([col.r,col.g,col.b],i*3)}
@@ -1489,7 +1490,7 @@ function renderUnit(){const all=unitAll();$("unitIdols").innerHTML=IDOLS.map((d,
 function unitToggle(i){const all=unitAll();if(UNIT.lead==null){UNIT.lead=i}else if(i==UNIT.lead){if(UNIT.mem.length){UNIT.lead=UNIT.mem.shift()}}else if(UNIT.mem.includes(i))UNIT.mem=UNIT.mem.filter(x=>x!=i);else if(all.length<8)UNIT.mem.push(i);renderUnit()}
 function unitGo(){if(UNIT.lead==null)return;S.idol=UNIT.lead;S.coord=S.coords[S.idol]||S.coord;UNIT.cur=UNIT.lead;song=song||0;go("coord")}
 go=(o=>function(s){if(s=="unit"){document.querySelectorAll(".screen").forEach(e=>e.classList.remove("on"));$("s-unit").classList.add("on");stopStage();renderUnit();return}return o(s)})(go);
-function validCoord(i,c){const x={};for(const k in c||{}){const cd=card(c[k]);if(cd&&S.own[c[k]]&&(!cd.boy==!IDOLS[i].male))x[k]=c[k]}return x}
+function validCoord(i,c){const x={};for(const k in c||{}){const cd=card(c[k]);if(cd&&S.own[c[k]]&&(!cd.boy==!IDOLS[i].male)&&(cd.only==null||cd.only==i))x[k]=c[k]}return x}
 function memberSwitch(i){if(UNIT.cur==null||UNIT.lead==null)return;S.coords[UNIT.cur]=S.coord;UNIT.cur=i;S.idol=i;S.coord=S.coords[i]||sigOwned(i);renderCoord();if(typeof onCoord3D=="function")onCoord3D()}
 function sigOwned(i){const c=sigCoord(i),o={};for(const k in c)if(S.own[c[k]])o[k]=c[k];return Object.keys(o).length?o:c}
 renderCoord=(o=>function(){o();const ch=STORY[STORYCH];
@@ -2126,7 +2127,7 @@ const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes",
 D.forEach(([b,k,name,accN,m,acc])=>{const boy=b=="lunar_revel";SL.forEach(([slot,f,lab],i)=>{
  const kind=boy?["tailcoat","slacks","boots",acc][i]:["top","skirt","shoes","acc"][i];
  CARDS.push({id:"mg_"+k+"_"+i,brand:boy?"ns":"sg",slot,name:name+" "+(lab||accN),rarity:"PR",type:boy?"Sexy":"Cute",typeLabel:boy?"Passionate":"Cute",ap:AP[i],kind,boy,
-  col:{m,a:boy?"#e6c35c":"#ffffff",t:boy?"#d4af37":"#ff7aa8"},fab:boy?"night":null,mg:1,set:"MG_"+k,img:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",fullArt:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",mgArt:"mg_"+b+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})})});
+  col:{m,a:boy?"#e6c35c":"#ffffff",t:boy?"#d4af37":"#ff7aa8"},fab:boy?"night":null,mg:1,set:"MG_"+k,img:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",fullArt:"assets/user/mg/"+b+"-"+k+"-"+f+".webp",mgArt:"mg_"+b+"-"+k,only:boy?5:null,code:"MG-"+String(++n).padStart(2,"0")})})});
 const st=document.createElement("style");st.textContent=`.card.mgcard{width:130px;height:190px;padding:0;border:0;border-radius:9px;overflow:hidden;position:relative;background:#2a1450;box-shadow:0 3px 10px #7a4a9a55}
 .card.mgcard img{width:100%;height:100%;object-fit:cover;display:block}.card.mgcard.sel{outline:4px solid #ffd34d;outline-offset:-2px}.card.mgcard .q{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff;background:linear-gradient(160deg,#c9b3ff,#ff9ab8)}
 .card.mgcard .cnt{position:absolute;right:6px;top:6px;background:#0008;color:#fff;border-radius:8px;padding:0 6px;font:bold 12px sans-serif}`;document.head.appendChild(st);
@@ -2145,6 +2146,44 @@ const D={ne:["nocturne_edge","Cool",[["frozen_stardust","Frozen Stardust","Ice S
 const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]],AP=[1200,900,700,500];let n=CARDS.filter(c=>c.mg).length;
 for(const bid in D){const[pre,type,L]=D[bid];L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg2/"+pre+"-"+k+"-"+f+".webp";
  CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:"PR",type,ap:AP[i],kind:["top","skirt","shoes","acc"][i],boy:false,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d2/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})}))}
+})();
+// ===== Meganee San: Solstice Prince (boys' brand, Cheerful -> Pop; unassigned: any boy) =====
+(function(){
+BRANDS.push({id:"so",name:"Solstice Prince",tag:"Sunshine Royal Couture",type:"Pop",c1:"#fff0c8",c2:"#ff8a1f",icon:"🌞",motif:"sun",g:"b"});
+PAL.so=["#ff9a1f","#fff6e0","#ffd23f","#ffe9a8","#c8561a"];
+const L=[["amber_sunset_waltz","Amber Sunset Waltz","Amber Sun Pendant","#c8761a","bow"],["citrus_summer_royal","Citrus Summer Royal","Citrus Scepter","#ffa83a","bow"],["golden_sunrise_prince","Golden Sunrise Prince","Sun Crown","#fff6e0","crown"],
+ ["radiant_noon_parade","Radiant Noon Parade","Sun Baton","#c8202e","bow"],["sky_festival_prince","Sky Festival Prince","Sun Mic","#a8d8ff","bow"],["sunflower_knight","Sunflower Knight","Sunflower Brooch","#5a8a2a","cape"]];
+const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]],AP=[1200,900,700,500];let n=CARDS.filter(c=>c.mg).length;
+L.forEach(([k,name,accN,m,acc])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg3/solstice_prince-"+k+"-"+f+".webp";
+ CARDS.push({id:"mg_"+k+"_"+i,brand:"so",slot,name:name+" "+(lab||accN),rarity:"PR",type:"Pop",typeLabel:"Cheerful",ap:AP[i],kind:["tailcoat","slacks","boots",acc][i],boy:true,col:{m,a:"#ffd23f",t:"#d4af37"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d3/mg_solstice_prince-"+k,code:"MG-"+String(++n).padStart(2,"0")})}));
+})();
+// ===== Meganee-only catalogue: remove every non-Meganee coord/card (backup in /workspace/backup-old-coords) + save migration =====
+(function(){
+const removed=CARDS.filter(c=>!c.mg);window.REMOVED_CARDS=removed.map(c=>({id:c.id,name:c.name,brand:c.brand,slot:c.slot,rarity:c.rarity,tier:c.tier||null}));
+const keep=CARDS.filter(c=>c.mg);CARDS.length=0;keep.forEach(c=>CARDS.push(c));
+const used=new Set(CARDS.map(c=>c.brand));for(let i=BRANDS.length-1;i>=0;i--)if(!used.has(BRANDS[i].id))BRANDS.splice(i,1);
+const lr=BRANDS.find(b=>b.id=="ns");if(lr){lr.type="Sexy";lr.tag="Moonlit Dream Fashion · Meganee San"}
+for(const k in RAR)if(k!="PR")RAR[k].w=0;// every Meganee card is Premium Rare
+// signature (starter) coord per idol
+const SIGSET={0:"strawberry_parfait",1:"frozen_stardust",2:"crimson_velvet_rose",3:"neon_pop_star",5:"galaxy_serenade",6:"golden_sunrise_prince",7:"amber_sunset_waltz",8:"sunflower_knight"};
+window.SIGSET=SIGSET;
+sigCoord=i=>{const k=SIGSET[i]||(IDOLS[i]&&IDOLS[i].male?"golden_sunrise_prince":"strawberry_parfait"),o={};CARDS.filter(c=>c.set=="MG_"+k).forEach(c=>o[c.slot]=c.id);return o};
+// brand appeals for the new brands
+Object.assign(AP_BRAND,{sg:["Sugarpetal Sweet Bloom","halo","rise",["heart","spin","reach","pose"],["#fff0f6","#ff9ac4"]],ne:["Nocturne Edge Starfall Requiem","crown","crane",["step","reach","spin","pose"],["#1a1440","#9f9fd0"]],
+ pc:["Pop Circuit Neon Rush","sundae","dolly",["jump","clap","spin","heart"],["#2a0a40","#ff3fa8"]],vt:["Velvet Temptation Crimson Encore","generic","orbit",["step","pose","spin","reach"],["#2a0610","#c8102e"]],
+ so:["Solstice Prince Sunrise Fanfare","generic","rise",["jump","clap","reach","pose"],["#fff0c8","#ff8a1f"]],ns:["Lunar Revel Moonlit Revel","generic","orbit",["step","reach","spin","pose"],["#1c1450","#b9a6ff"]]});
+// story rewards -> Meganee cards
+const RW=["mg_cherry_blossom_mochi_0","mg_heart_arcade_0","mg_black_pearl_noir_2","mg_rose_candy_waltz_3","mg_midnight_constellation_3","mg_golden_champagne_3","mg_sunflower_knight_0","mg_raven_eclipse_0"];
+STORY.forEach((ch,i)=>{if(!card(ch.reward))ch.reward=RW[i%RW.length]});
+// save migration
+const ok=id=>!!card(id);let lost=0;for(const id in S.own)if(!ok(id)){lost+=S.own[id];delete S.own[id]}
+if(lost&&!S.mgMigrated){S.dust=(S.dust||0)+lost*5;S.mgMigrated=1;S.mgLost=lost}
+const fix=(c,i)=>{const o={};for(const k in c||{})if(ok(c[k]))o[k]=c[k];return Object.keys(o).length?o:sigCoord(i)};
+Object.keys(SIGSET).forEach(i=>Object.values(sigCoord(+i)).forEach(id=>S.own[id]=S.own[id]||1));
+S.coord=fix(S.coord,S.idol);if(S.coords)for(const k in S.coords)S.coords[k]=fix(S.coords[k],+k);
+if(Array.isArray(S.favs))S.favs=S.favs.filter(f=>f&&f.coord&&Object.values(f.coord).every(ok));
+try{save()}catch(e){}
+console.log("MEGANEE_ONLY cards="+CARDS.length+" removed="+removed.length+" brands="+BRANDS.map(b=>b.id).join(","));
 })();
 var CK=0;
 const SHOTS={wide:(u,t)=>[V3(.6*Math.sin(t*.2),1.7,7.6-u*.8),V3(0,1.3,0)],close:(u)=>[V3(.35-u*.3,1.95,2.7-u*.25),V3(0,1.8,0)],side:(u)=>[V3(-3.4+u*.8,1.5,3.6),V3(0,1.3,0)],
@@ -2185,21 +2224,16 @@ function frame3D(){requestAnimationFrame(frame3D);if(!R3)return;const t=performa
 init3D();
 renderTitle();
 // ===== Animated 2D art stage (Live2D-style strip/mesh warp of the user's art). 3D kept as a toggle =====
-var STAGE2D=!/[?&]3d/.test(location.search)&&localStorage.getItem("stage2d")!=="0";
+var STAGE2D=true;
 (function(){
 const A2D="assets/user/2d/",IMG={};
 const img=k=>{if(IMG[k])return IMG[k];const i=new Image();i.src=A2D+k+".webp";IMG[k]=i;return i};
 // default art per idol (the user's character art) + tint for idols without own art
 const DEF={0:"yk_cute",1:"yk_cool",2:"yk_sexy",3:"yk_pop",5:"luna_star",6:"yk_energetic",7:"yk_divine",8:"yk_cheerful"};
 const DEF_TINT={7:["#3a2030",.55]};// Ren has no art yet: darkened Divine art as placeholder
-window.ART_MISSING=["Hinode Taiyo / Amamiya Kanata: using Yukio Energetic / Cheerful art as their look (confirm these are them)","Kurogane Ren: NO art - darkened Yukio Divine art as placeholder","Girls (Lulu/Rinne/Sera/Pochi): only their Yukio uniform art; every other girls' brand coord is a tinted Yukio image","Boys' brands Starlit Knights / Solar Parade / Rebel Thorn / Cocoa Sugar Waltz: no art (tinted default)","Luna: Jeweling (Amethyst Moon) and Star Premium accessory-only mixes use nearest Luna art"];
+window.ART_MISSING=["All girls share Meganee's brand characters (Sugarpetal/Nocturne/Pop Circuit/Velvet are unassigned)","Taiyo, Ren, Kanata: only Solstice Prince (unassigned boys' brand, one brown-haired character) - no personal coords"];
 function artFor(idx,coord){const cs=Object.values(coord||{}).map(card).filter(Boolean);const mg=cs.find(c=>c.mgArt&&c.slot=="Tops")||cs.find(c=>c.mgArt);if(mg)return{k:mg.mgArt,own:true};
- const yk=cs.find(c=>c.yk&&(c.slot=="Tops"))||cs.find(c=>c.yk);if(yk)return{k:"yk_"+yk.yk,own:true};
- if(idx==5){const ids=cs.map(c=>c.id).join(" ");
-  if(/SP5_/.test(ids))return{k:"luna_neptune",own:true};if(/ns[789]|CON5/.test(ids))return{k:"luna_aqua",own:true};if(/ns[45]/.test(ids))return{k:"luna_royal",own:true};if(/ns6/.test(ids))return{k:"luna_short",own:true};
-  if(/ns[0-3]/.test(ids))return{k:"luna_star",own:true}}
- const tp=cs.find(c=>c.slot=="One-piece")||cs.find(c=>c.slot=="Tops");const t=DEF_TINT[idx];
- return{k:DEF[idx]||"yk_cute",tint:t?t[0]:(tp?cols(tp).m:null),ta:t?t[1]:.38}}
+ const sc=Object.values(sigCoord(idx)).map(card).filter(Boolean);const d=sc.find(c=>c.mgArt);return{k:d?d.mgArt:"mg_sugarpetal-strawberry_parfait"}}
 const TC={};function tinted(k,col,a){const im=img(k);if(!col||!im.complete||!im.naturalWidth)return im;const key=k+col+a;if(TC[key])return TC[key];
  const c=document.createElement("canvas");c.width=im.naturalWidth;c.height=im.naturalHeight;const g=c.getContext("2d");g.drawImage(im,0,0);g.globalCompositeOperation="multiply";g.globalAlpha=a;g.fillStyle=col;g.fillRect(0,0,c.width,c.height);
  g.globalAlpha=1;g.globalCompositeOperation="destination-in";g.drawImage(im,0,0);return TC[key]=c}
@@ -2296,12 +2330,108 @@ endCut=(o=>function(){if(STAGE2D&&!(R3&&R3.cut)){A2=null;$("stage").style.visibi
 // skip the heavy 3D stage while 2D is active (models stay available for title/dress-up/result)
 frame3D=(o=>function(){const st=$("s-stage");if(STAGE2D&&st&&st.classList.contains("on")){requestAnimationFrame(frame3D);return}return o()})(frame3D);
 setupStage3D=(o=>function(r){const st=$("s-stage");if(STAGE2D&&!r&&st&&st.classList.contains("on"))return null;return o(r)})(setupStage3D);
-startStage=(o=>function(){for(const k in POS)delete POS[k];A2=null;const r=o();const s3=$("stage3d");if(s3)s3.style.visibility=STAGE2D?"hidden":"";if(STAGE2D)ensure();Object.values(DEF).forEach(img);return r})(startStage);
+startStage=(o=>function(){for(const k in POS)delete POS[k];A2=null;const r=o();const s3=$("stage3d");if(s3)s3.style.visibility=STAGE2D?"hidden":"";if(STAGE2D)ensure();team().forEach(m=>img(artFor(m,coordOf(m)).k));return r})(startStage);
 // toggle UI on the dress-up screen
 function tog(){const host=$("s-coord");if(!host||$("st2dTog"))return;const b=document.createElement("button");b.id="st2dTog";b.className="btn";b.style.cssText="position:fixed;right:calc(12px + env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;padding:10px 16px;border:0;border-radius:999px;background:linear-gradient(135deg,#ff9ad5,#9a6ad8);color:#fff;font:bold 14px sans-serif;box-shadow:0 3px 10px #9a6ad888";
  const lab=()=>b.textContent=STAGE2D?"🎨 Stage: 2D art (tap → 3D)":"🧊 Stage: 3D (tap → 2D art)";lab();b.onclick=()=>{STAGE2D=!STAGE2D;localStorage.setItem("stage2d",STAGE2D?"1":"0");lab()};host.appendChild(b);
  const obs=()=>{b.style.display=host.classList.contains("on")?"":"none"};setInterval(obs,500);obs()}
-setTimeout(tog,0);requestAnimationFrame(frame2D);
+requestAnimationFrame(frame2D);
 window.STAGE2D_API={artFor,team,POS};
+
+// ===== Live2D-style puppet on flat art: auto-rig weights (tools/rig.py: alpha shape + anime face detector) + CPU mesh warp + WebGL texturing =====
+// regions: head (tilt/turn parallax), hair & skirt (spring physics), arms (shoulder pivots), torso (breathing/lean); eye-blink/wink overlay at detected eyes
+(function(){
+const RB={};let GLBAD=false;function rigFor(src){if(!window.RIG)return null;if(!Object.keys(RB).length)for(const k in RIG)RB[k.split("/").pop()]=RIG[k];const m=/([^\/]+)\.webp/.exec(src||"");return m?RB[decodeURIComponent(m[1])]:null}
+let gl=null,cvG=null,prog,buf,ibuf,uvbuf,locP,locU,locR,TEX=new Map(),NIDX=0,curGrid="";
+function initGL(){if(gl!==null)return gl;cvG=document.createElement("canvas");cvG.width=cvG.height=8;
+ try{gl=cvG.getContext("webgl",{premultipliedAlpha:true,alpha:true,antialias:false,preserveDrawingBuffer:false})}catch(e){gl=null}if(!gl){gl=false;return gl}
+ const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};prog=gl.createProgram();
+ gl.attachShader(prog,sh(gl.VERTEX_SHADER,"attribute vec2 p;attribute vec2 u;uniform vec2 R;varying vec2 v;void main(){v=u;gl_Position=vec4(p.x/R.x*2.-1.,1.-p.y/R.y*2.,0.,1.);}"));
+ gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,"precision mediump float;varying vec2 v;uniform sampler2D T;void main(){gl_FragColor=texture2D(T,v);}"));
+ gl.linkProgram(prog);gl.useProgram(prog);locP=gl.getAttribLocation(prog,"p");locU=gl.getAttribLocation(prog,"u");locR=gl.getUniformLocation(prog,"R");
+ buf=gl.createBuffer();uvbuf=gl.createBuffer();ibuf=gl.createBuffer();gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);return gl}
+function tex(im){let t=TEX.get(im);if(t)return t;t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
+ gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);[gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(p=>gl.texParameteri(gl.TEXTURE_2D,p,gl.LINEAR));
+ gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);TEX.set(im,t);if(TEX.size>24){const k=TEX.keys().next().value;gl.deleteTexture(TEX.get(k));TEX.delete(k)}return t}
+function grid(R){const key=R.gc+"x"+R.gr;if(curGrid==key)return;curGrid=key;const uv=[],ix=[];for(let j=0;j<=R.gr;j++)for(let i=0;i<=R.gc;i++)uv.push(i/R.gc,j/R.gr);
+ for(let j=0;j<R.gr;j++)for(let i=0;i<R.gc;i++){const a=j*(R.gc+1)+i,b=a+1,c=a+R.gc+1,d=c+1;ix.push(a,b,c,b,d,c)}NIDX=ix.length;
+ gl.bindBuffer(gl.ARRAY_BUFFER,uvbuf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(uv),gl.STATIC_DRAW);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibuf);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(ix),gl.STATIC_DRAW)}
+// ---- per-idol physics/blend state ----
+const ST={};function st(ph){return ST[ph]||(ST[ph]={t:0,o:null,hx:0,hv:0,sx:0,sv:0,fl:0,fv:0,px:0,py:0,pr:0,blink:0,nb:1.5+Math.random()*2,turn:0})}
+const lerp=(a,b,k)=>a+(b-a)*k;
+function deform(R,P,x,y,n,out){const fw=R.face[2],fh=R.face[3],nx=R.neck[0],ny=R.neck[1],cx=nx,wy=R.waist;
+ const hd=R.head[n],ha=R.hair[n],sk=R.skirt[n],aL=R.armL[n],aR=R.armR[n];let X=x,Y=y;
+ // hair: spring sway, grows toward the tips
+ if(ha>0){const tip=Math.max(0,Math.min(1,(y-(R.face[1]+fh*.5))/(fh*2.2)));X+=P.hx*ha*tip*fh*.35}
+ // skirt / coat tails: sway + flare
+ if(sk>0){X+=P.sx*sk*fh*.32;X=cx+(X-cx)*(1+P.fl*sk*.1);Y+=Math.abs(P.fl)*sk*fh*.02}
+ // arms around shoulders
+ const rot=(px,py,a,w)=>{if(!w||!a)return;const c=Math.cos(a*w),s=Math.sin(a*w),dx=X-px,dy=Y-py;X=px+dx*c-dy*s;Y=py+dx*s+dy*c};
+ rot(cx-R.tw,ny+fh*.3,P.aL,aL);rot(cx+R.tw,ny+fh*.3,P.aR,aR);
+ // head: turn parallax (face moves more than back hair) + squash + tilt about the neck
+ if(hd>0){const depth=1-ha*1.4;X+=P.turn*fw*.07*hd*depth;X=nx+(X-nx)*(1-Math.abs(P.turn)*.05*hd);rot(nx,ny,P.tilt,hd)}
+ // upper body: breathing (chest rises) + lean from the waist
+ const ub=Math.max(0,Math.min(1,(wy-y)/(wy-ny)));if(ub>0){Y-=P.br*ub*fh*.035;X=cx+(X-cx)*(1+P.br*ub*.012);rot(cx,wy,P.lean,ub)}
+ out[0]=X;out[1]=Y}
+const VBUF={};
+// draw one rigged idol: g has stage transform; fx,fy = feet position
+function drawRig(g,im,R,fx,fy,H,o,t,ph,glow){const w0=im.naturalWidth,h0=im.naturalHeight;let HH=H;if(w0/h0>.75)HH*=Math.max(.62,.75/(w0/h0));const sc=HH/h0,W=w0*sc;
+ const S=st(ph),dt=Math.min(.05,Math.max(.001,t-(S.t||t-.016)));S.t=t;
+ // smooth idle<->dance & move-change blending (critically damped follow of the pose)
+ const k=1-Math.exp(-dt*14);if(!S.o)S.o=Object.assign({},o);for(const key of["x","y","r","sx","sy","head","skirt","turn","aL","aR","lean"]){const v=o[key]==null?(key=="sx"||key=="sy"?1:0):o[key];if(key=="sx"&&Math.sign(v)!=Math.sign(S.o.sx||1)){S.o.sx=v;continue}S.o[key]=lerp(S.o[key]==null?v:S.o[key],v,k)}
+ const O=S.o;
+ // physics: body velocity drives hair/skirt springs
+ const vx=(O.x-S.px)/dt,vy=(O.y-S.py)/dt,vr=(O.r-S.pr)/dt;S.px=O.x;S.py=O.y;S.pr=O.r;
+ const dH=-vx*.004-vr*.5-O.r*2+(o.kick||0)+Math.sin(t*1.3+ph)*.08,dS=-vx*.005-vr*.7+O.skirt*.25+Math.sin(t*1.7+ph*2)*.06;
+ S.hv+=((dH-S.hx)*38-S.hv*5.5)*dt;S.hx+=S.hv*dt;S.sv+=((dS-S.sx)*55-S.sv*6.5)*dt;S.sx+=S.sv*dt;
+ S.fv+=((Math.max(-1,Math.min(1,-vy*.006))+Math.abs(dS)*.6-S.fl)*60-S.fv*7)*dt;S.fl+=S.fv*dt;
+ S.hx=Math.max(-1.5,Math.min(1.5,S.hx));S.sx=Math.max(-1.5,Math.min(1.5,S.sx));S.fl=Math.max(-.6,Math.min(1.5,S.fl));
+ // blink
+ S.nb-=dt;if(S.nb<0){S.blink=.16;S.nb=2+Math.random()*3.5;if(Math.random()<.2)S.nb=.25}const bl=S.blink>0?Math.sin(Math.PI*(1-S.blink/.16)):0;S.blink-=dt;
+ const P={hx:S.hx,sx:S.sx,fl:S.fl,aL:(O.aL||0)+Math.sin(t*1.1+ph)*.02,aR:(O.aR||0)-Math.sin(t*1.2+ph)*.02,turn:Math.max(-1,Math.min(1,O.turn||0)),tilt:(O.head||0)*.055,br:Math.sin(t*2.4+ph),lean:(O.lean||0)};
+ // mesh
+ const M=Math.round(Math.max(w0,h0)*.18),CW=w0+2*M,CH=h0+2*M,N=(R.gc+1)*(R.gr+1);const V=VBUF[N]||(VBUF[N]=new Float32Array(N*2)),tmp=[0,0];
+ for(let j=0,n=0;j<=R.gr;j++)for(let i=0;i<=R.gc;i++,n++){deform(R,P,i/R.gc*w0,j/R.gr*h0,n,tmp);V[n*2]=tmp[0]+M;V[n*2+1]=tmp[1]+M}
+ if(cvG.width!=CW||cvG.height!=CH){cvG.width=CW;cvG.height=CH}gl.viewport(0,0,CW,CH);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+ grid(R);gl.useProgram(prog);gl.uniform2f(locR,CW,CH);gl.bindTexture(gl.TEXTURE_2D,tex(im));
+ gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,V,gl.DYNAMIC_DRAW);gl.enableVertexAttribArray(locP);gl.vertexAttribPointer(locP,2,gl.FLOAT,false,0,0);
+ gl.bindBuffer(gl.ARRAY_BUFFER,uvbuf);gl.enableVertexAttribArray(locU);gl.vertexAttribPointer(locU,2,gl.FLOAT,false,0,0);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ibuf);gl.drawElements(gl.TRIANGLES,NIDX,gl.UNSIGNED_SHORT,0);
+ // composite into the stage
+ g.save();g.translate(fx+O.x,fy+O.y);g.rotate(O.r);let sx=O.sx;if(Math.abs(sx)<.08)sx=.08*Math.sign(sx||1);g.scale(sx,O.sy);
+ if(glow){g.save();g.globalAlpha=.55;const rg=g.createRadialGradient(0,0,2,0,0,W*.6);rg.addColorStop(0,glow);rg.addColorStop(1,"transparent");g.fillStyle=rg;g.scale(1,.25);g.beginPath();g.arc(0,0,W*.6,0,7);g.fill();g.restore()}
+ const bx=-W/2,by=-HH;g.drawImage(cvG,0,0,CW,CH,bx-M*sc,by-M*sc,CW*sc,CH*sc);
+ // eyelids (blink / wink) drawn over the deformed eye positions
+ const back=sx<0;if(!back){const wink=o.wink||0;R.eyes.forEach((e,ei)=>{const c=Math.max(bl,ei==1?wink:0);if(c<.05)return;const n=Math.round(e[1]/h0*R.gr)*(R.gc+1)+Math.round(e[0]/w0*R.gc);deform(R,P,e[0],e[1],n,tmp);
+  const ex=bx+tmp[0]*sc,ey=by+tmp[1]*sc,rx=e[2]*sc*1.25,ry=e[3]*sc*1.45;g.save();g.translate(ex,ey);g.rotate(P.tilt*.9);g.beginPath();g.ellipse(0,0,rx,ry,0,0,7);g.clip();
+  const lid=-ry+2*ry*c;g.fillStyle=R.skin;g.fillRect(-rx,-ry,2*rx,lid+ry);g.strokeStyle="#3a2230";g.lineWidth=Math.max(1,ry*.28);g.beginPath();
+  if(c>.8){g.moveTo(-rx*.85,ry*.1);g.quadraticCurveTo(0,ry*(ei==1&&wink>.5?-.55:.55),rx*.85,ry*.1)}else{g.moveTo(-rx,lid);g.lineTo(rx,lid)}g.stroke();g.restore()})}
+ g.restore()}
+const _draw=drawIdol2D;
+drawIdol2D=function(g,im,fx,fy,H,o,t,ph,glow){const R=!GLBAD&&im&&im.naturalWidth&&rigFor(im.src);if(!R||!initGL())return _draw(g,im,fx,fy,H,o,t,ph,glow);try{drawRig(g,im,R,fx,fy,H,o,t,ph,glow)}catch(e){GLBAD=true;console.log("rig fallback: "+e.name);_draw(g,im,fx,fy,H,o,t,ph,glow)}};
+window.L2D={rigFor,ST,on:()=>!!initGL(),test:(g,k,fx,fy,H,o,t,ph)=>{const im=img(k);if(im.complete)drawIdol2D(g,im,fx,fy,H,Object.assign({x:0,y:0,r:0,sx:1,sy:1,head:0,skirt:0},o),t,ph,null)},img};
+// ---- personality moves + smooth idle->dance ramp ----
+const _motion=motion;
+motion=function(mv,beat,P){const o=_motion(mv,beat,P),b=((beat%1)+1)%1,q=((beat%4)+4)%4/4,sn=Math.sin(Math.PI*beat);
+ o.turn=Math.sin(Math.PI*beat/4)*.35;o.lean=o.r*.4;o.aL=0;o.aR=0;
+ if(mv=="wink"){o.r=Math.sin(Math.PI*beat/2)*.05;o.head=Math.sin(Math.PI*beat/2)*1.6;o.turn=.6;o.wink=q>.5&&q<.85?1:0;o.y=-Math.abs(sn)*8}
+ if(mv=="hairflip"){const u=q<.3?ease(q/.3):1-ease((q-.3)/.7);o.head=-u*2.6;o.r=-u*.06;o.kick=q<.3?2.2:0;o.turn=-u*.8;o.lean=-u*.12}
+ if(mv=="peek"){const s=Math.floor(beat/2)%2?1:-1;o.x=s*22;o.turn=s*.9;o.head=s*1.8;o.lean=s*.1;o.y=-Math.abs(sn)*10}
+ if(mv=="fist"){o.aR=-(.25+.2*Math.abs(sn));o.y=-Math.abs(sn)*20*P.b;o.lean=-.05;o.turn=.3}
+ if(mv=="headbang"){o.head=Math.sin(Math.PI*beat*2)*2.2;o.lean=Math.abs(sn)*.12;o.kick=Math.sin(Math.PI*beat*2)*.8;o.y=-Math.abs(sn)*6}
+ if(mv=="lean"){o.lean=Math.sin(Math.PI*beat/4)*.16;o.turn=Math.sin(Math.PI*beat/4)*.9;o.x=Math.sin(Math.PI*beat/4)*14;o.head=-Math.sin(Math.PI*beat/4)*1.2}
+ if(mv=="wave"){o.aL=.1+Math.sin(Math.PI*beat)*.18}
+ if(mv=="heart"){o.aL=.12*Math.abs(sn);o.aR=-.12*Math.abs(sn);o.wink=Math.floor(beat)%4==3&&b<.7?1:0}
+ if(mv=="idle"){o.turn=Math.sin(beat*.6)*.3;o.head=Math.sin(beat*.45)*.8}
+ // ramp: idle before the song / first 2 beats, then full dance
+ let ramp=1;try{if(G&&G.t0){const bt=ac().currentTime-G.t0;ramp=Math.max(0,Math.min(1,(bt+.5)/2.5));ramp=ramp*ramp*(3-2*ramp)}}catch(e){}
+ if(ramp<1){for(const k of["x","y","r","head","skirt","turn","aL","aR","lean"])o[k]=(o[k]||0)*ramp;o.sx=1+(o.sx-1)*ramp;o.sy=1+(o.sy-1)*ramp;if(ramp<.5)o.wink=0}
+ return o};
+// personality move sets (Lulu cute wink, Rinne cool hairflip, Sera sexy lean, Pochi peek, Luna moonlit wink/lean, Taiyo fist pump, Ren headbang, Kanata peek/wave)
+const ADD={0:["wink","heart"],1:["hairflip","pose"],2:["lean","hairflip"],3:["peek","jump"],5:["wink","lean"],6:["fist","jump"],7:["headbang","lean"],8:["peek","wave"]};
+for(const i in ADD)if(PERS[i])PERS[i].m=PERS[i].m.slice(0,3).concat(ADD[i]);
+})();
+// dress-up preview / change screen: show the coord's own art instead of the paper doll
+(function(){const _d=dressSVG;dressSVG=function(coord,hair,size){try{const a=artFor(S.idol,coord||S.coord);if(a&&a.k){const h=Math.round((size||160)*2.1);return `<img class="artprev" src="${A2D+a.k}.webp" alt="" style="height:${h}px;max-width:100%;object-fit:contain;filter:drop-shadow(0 6px 12px #c060a055);animation:artbob 2.4s ease-in-out infinite">`}}catch(e){}return _d.apply(this,arguments)};
+ const st=document.createElement("style");st.textContent="@keyframes artbob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-6px) rotate(.6deg)}}";document.head.appendChild(st)})();
 })();
 </script></body></html>
