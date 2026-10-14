@@ -1814,7 +1814,7 @@ renderTitle=(o=>function(){if(S.idol==GONE)S.idol=0;const r=o();hideGone($("idol
 renderUnit=(o=>function(){UNIT.mem=UNIT.mem.filter(i=>i!=GONE);o();hideGone($("unitIdols"))})(renderUnit);
 unitToggle=(o=>function(i){if(i!=GONE)o(i)})(unitToggle);
 // ===== portraits: assets/portraits/web/<given name>.webp (web copy of the 16:9 .jpg bust-ups; also tries .jpg, .png and Capitalized and full-name forms), falls back to the drawn avatar =====
-const PT_TRY=d=>{const g=d.n.split(" ").pop(),f=d.n.toLowerCase().replace(/ /g,"-");const x=encodeURIComponent(g.toLowerCase());return["assets/portraits/web/"+x+".webp","assets/portraits/"+x+".jpg","assets/portraits/"+x+".png","assets/portraits/"+encodeURIComponent(f)+".png"]};
+const PT_TRY=d=>{const g=d.n.split(" ").pop(),f=d.n.toLowerCase().replace(/ /g,"-");const x=encodeURIComponent(g.toLowerCase());return["assets/portraits/web/"+x+".webp?v=2","assets/portraits/"+x+".jpg","assets/portraits/"+x+".png","assets/portraits/"+encodeURIComponent(f)+".png"]};
 function ptErr(img){const L=JSON.parse(img.dataset.alt||"[]");if(L.length){img.dataset.alt=JSON.stringify(L.slice(1));img.src=L[0]}else img.parentNode.classList.add("nop")}
 avatar=(o=>function(d,w=90){const base=o(d,w);if(!d||d.gone)return base;const L=PT_TRY(d);
  return`<span class="ptw" style="display:inline-block;width:${w}px"><img class="pti" src="${L[0]}" data-alt='${JSON.stringify(L.slice(1))}' onerror="ptErr(this)" style="width:${w}px;height:${Math.round(w*1.1)}px;object-fit:cover;object-position:50% 25%;border-radius:12px"><span class="ptf">${base}</span></span>`})(avatar);
