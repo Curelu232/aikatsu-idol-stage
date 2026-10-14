@@ -2189,6 +2189,21 @@ let n=CARDS.filter(c=>c.mg).length;
 D.forEach(([bid,pre,type,tl,boy,L])=>L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg5/"+pre+"-"+k+"-"+f+".webp";
  CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:"PR",type,typeLabel:tl,ap:AP[i],kind:boy?["tailcoat","slacks","boots","bow"][i]:["top","skirt","shoes","acc"][i],boy,only:null,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d5/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})})));
 })();
+// ===== Meganee San: Constellation Premium Rare (32 coords, 13 signs incl. Ophiuchus, with wings) =====
+(function(){
+const B={"sugarpetal": ["sg", "Cute", "Cute", 0], "nocturne_edge": ["ne", "Cool", "Cool", 0], "pop_circuit": ["pc", "Pop", "Pop", 0], "velvet_temptation": ["vt", "Sexy", "Sexy", 0], "solstice_prince": ["so", "Pop", "Cheerful", 1], "celestia_regalia": ["cr", "Cute", "Divine", 1], "blitz_horizon": ["bh", "Pop", "Energetic", 1], "lunar_revel": ["ns", "Sexy", "Passionate", 1]};const R=[["blitz_horizon", "capricorn_summit_striker", "Capricorn Summit Striker", ["Summit Hoodie Jacket", "Suspender Cargo Pants", "Star Court Sneakers", "Sea-Goat Visor & Wings"]], ["blitz_horizon", "ophiuchus_thunder_serpent", "Ophiuchus Thunder Serpent", ["Lightning Serpent Hoodie", "Neon Track Pants", "Volt High-Tops", "Volt Wings & Serpent Staff"]], ["blitz_horizon", "taurus_golden_stampede", "Taurus Golden Stampede", ["Bull Horn Bomber", "Cargo Chain Pants", "Gold Leaf High-Tops", "Bull Horn Headphones & Wings"]], ["blitz_horizon", "virgo_harvest_dash", "Virgo Harvest Dash", ["Wheat Hooded Coat", "Ribbon Joggers", "Star High-Tops", "Wheat Wings & Flower Halo"]], ["celestia_regalia", "cancer_moonshell_oracle", "Cancer Moonshell Oracle", ["Crystal Claw Coat", "Pearl Chain Trousers", "Pearl Boots", "Shell Wings & Crescent Pearls"]], ["celestia_regalia", "ophiuchus_celestial_healer", "Ophiuchus Celestial Healer", ["Serpent Mantle Robe", "Diamond Quilt Trousers", "Silver Quilt Boots", "Seraph Wings & Serpent Staff"]], ["celestia_regalia", "pisces_tidal_seraph", "Pisces Tidal Seraph", ["Fin Veil Coat", "Pearl Chain Trousers", "Star Lace Boots", "Moon Pearl Wings"]], ["celestia_regalia", "scorpio_crystal_sting", "Scorpio Crystal Sting", ["Crystal Armor Coat", "Starlit Armor Trousers", "Crystal Lattice Boots", "Crystal Wings & Scorpion Tail"]], ["lunar_revel", "aquarius_galaxy_stream", "Aquarius Galaxy Stream", ["Aquarius Galaxy Coat", "Chain Trousers", "Starfield Combat Boots", "Aqua Wings & Crystal Pendant"]], ["lunar_revel", "gemini_starlight_duet", "Gemini Starlight Duet", ["Gemini Star Tailcoat", "Violet Stripe Trousers", "Two-Tone Oxfords", "Twin Wings & Star Tiara"]], ["lunar_revel", "libra_scales_sovereign", "Libra Scales Sovereign", ["Libra Scale Cape Coat", "Gilded Trousers", "Libra Star Boots", "Libra Wings & Crown"]], ["lunar_revel", "ophiuchus_serpent_sovereign", "Ophiuchus Serpent Sovereign", ["Serpent Star Tailcoat", "Violet Gilded Trousers", "Coiled Serpent Boots", "Serpent Wings & Caduceus"]], ["nocturne_edge", "cancer_moonlit_tide", "Cancer Moonlit Tide", ["Starlace Corset", "Starry Tulle Skirt", "Crystal Strap Heels", "Night Wings & Silver Tiara"]], ["nocturne_edge", "ophiuchus_shadow_charmer", "Ophiuchus Shadow Charmer", ["Lace Bat Sleeve Bodice", "Midnight Feather Skirt", "Starlit Boots & Stockings", "Bat Wings & Moon Staff"]], ["nocturne_edge", "pisces_midnight_mermaid", "Pisces Midnight Mermaid", ["Fin Sleeve Bodysuit", "Scale Train Skirt", "Glass Pumps", "Butterfly Wings & Koi Charm"]], ["nocturne_edge", "scorpio_venom_nebula", "Scorpio Venom Nebula", ["Armored Star Jacket", "Nebula Split Skirt", "Thigh-High Armor Boots", "Scorpion Tail & Shard Wings"]], ["pop_circuit", "capricorn_neon_peak", "Capricorn Neon Peak", ["Summit Crop Jacket", "Scale Belt Skirt", "Cyber Sneakers & Socks", "Sea-Goat Wings & Visor"]], ["pop_circuit", "ophiuchus_neon_viper", "Ophiuchus Neon Viper", ["Viper Varsity & Star Tee", "Scale Glitter Skirt", "Neon Sneakers & Socks", "Neon Wings & Serpent Mic Staff"]], ["pop_circuit", "taurus_candy_charge", "Taurus Candy Charge", ["Rose Varsity & Star Tank", "Pink Chain Pleat Skirt", "Platform Sneakers & Socks", "Horn Headphones & Wings"]], ["pop_circuit", "virgo_daisy_pop", "Virgo Daisy Pop", ["Wheat Crop Hoodie", "Ribbon Ruffle Skirt", "Sunny Sneakers & Socks", "Golden Wings & Daisy Crown"]], ["solstice_prince", "aries_flame_ram_king", "Aries Flame Ram King", ["Ram Fur Jacket", "Flame Trousers", "Fur-Trim Boots", "Ram Horn Wings"]], ["solstice_prince", "leo_golden_lionheart", "Leo Golden Lionheart", ["Lion Mane Coat", "Chain Trousers", "Lion Greaves", "Sun Crown & Lion Gauntlet"]], ["solstice_prince", "ophiuchus_golden_physician", "Ophiuchus Golden Physician", ["Serpent Sash Coat", "Diamond Crest Trousers", "Coiled Gold Boots", "Golden Wings & Caduceus"]], ["solstice_prince", "sagittarius_star_archer", "Sagittarius Star Archer", ["Archer Star Cape", "Leather Shorts", "Archer Boots", "Golden Bow & Quiver"]], ["sugarpetal", "aquarius_candy_wave", "Aquarius Candy Wave", ["Star Bow Dress Top", "Pastel Ribbon Skirt", "Star Lace Boots", "Pastel Wings & Star Bow"]], ["sugarpetal", "gemini_twin_star", "Gemini Twin Star", ["Ruffle Corset & Cuffs", "Star Bow Ruffle Skirt", "Lace-up Heart Boots", "Twin Wings & Star Bow"]], ["sugarpetal", "libra_sweet_balance", "Libra Sweet Balance", ["Bow Bodice & Gloves", "Ribbon Train Skirt", "Jewel Bow Boots", "Lavender Wings & Bow"]], ["sugarpetal", "ophiuchus_sweet_healer", "Ophiuchus Sweet Healer", ["Star Bow Ruffle Dress & Cuffs", "Ribbon Tier Skirt", "Bow Boots & Stockings", "Pastel Wings & Heart Staff"]], ["velvet_temptation", "aries_inferno_siren", "Aries Inferno Siren", ["Ram Horn Corset", "Flame Ruffle Skirt", "Fur Lace Boots", "Ram Horns & Flame Wings"]], ["velvet_temptation", "leo_crimson_lioness", "Leo Crimson Lioness", ["Golden Mane Corset", "Lion Cape Skirt", "Ruby Star Heels", "Gold Wings & Lion Gauntlet"]], ["velvet_temptation", "ophiuchus_scarlet_serpentress", "Ophiuchus Scarlet Serpentress", ["Ruby Corset & Lace Gloves", "Serpent Ruffle Skirt", "Golden Ankle-Strap Heels", "Crimson Wings & Serpent Staff"]], ["velvet_temptation", "sagittarius_phoenix_huntress", "Sagittarius Phoenix Huntress", ["Starburst Gown Top", "Flame Slit Skirt", "Star Lace Boots", "Phoenix Bow & Quiver"]]];
+const EL={Aries:"Fire",Leo:"Fire",Sagittarius:"Fire",Taurus:"Earth",Virgo:"Earth",Capricorn:"Earth",Gemini:"Air",Libra:"Air",Aquarius:"Air",Cancer:"Water",Scorpio:"Water",Pisces:"Water",Ophiuchus:"Cosmic"};
+Object.assign(ZOD,{Taurus:["\u2649",[[-.9,-.6],[-.4,-.2],[0,0],[.4,-.1],[.8,-.6],[.1,.4],[-.3,.7]],[[0,1],[1,2],[2,3],[3,4],[2,5],[5,6]]],
+ Libra:["\u264E",[[-.8,.5],[-.4,-.1],[0,-.6],[.4,-.1],[.8,.5],[0,.2]],[[0,1],[1,2],[2,3],[3,4],[1,5],[5,3]]],
+ Pisces:["\u2653",[[-.9,-.7],[-.6,-.3],[-.3,.1],[0,.5],[.3,.2],[.6,-.1],[.9,-.4],[.75,-.75]],[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]],
+ Ophiuchus:["\u26CE",[[-.9,.2],[-.5,-.4],[0,-.7],[.5,-.4],[.6,.3],[.1,.7],[-.4,.5],[.9,-.1]],[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,0],[3,7]]]});
+const SL=[["Tops","01_tops"],["Bottoms","02_bottoms"],["Shoes","03_shoes"],["Accessory","04_accessory"]];let n=CARDS.filter(c=>c.mg).length;
+R.forEach(([pre,k,name,P])=>{const [bid,type,tl,boy]=B[pre];const sign=name.split(" ")[0],oph=sign=="Ophiuchus";
+ SL.forEach(([slot,f],i)=>{const src="assets/user/mg6/"+pre+"-"+k+"-"+f+".webp";
+  CARDS.push({id:"mgc_"+k+"_"+i,brand:bid,slot,name:name+" "+P[i],rarity:"CON",tier:"CON",sign,element:EL[sign],series:"Constellation",wings:i==3,isNew:1,type,typeLabel:tl,ap:oph?1800:[1800,1400,1000,800][i],
+   kind:boy?["tailcoat","slacks","boots",i==3?"wings":"bow"][i]:["top","skirt","shoes","acc"][i],boy:!!boy,only:null,col:{m:"#1c1640",a:"#ffffff",t:"#e6c35c"},mg:1,set:"MGC_"+k,img:src,fullArt:src,mgArt:"../2d6/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})})});
+window.ZEL=EL;
+})();
 // ===== Meganee-only catalogue: remove every non-Meganee coord/card (backup in /workspace/backup-old-coords) + save migration =====
 (function(){
 const removed=CARDS.filter(c=>!c.mg);window.REMOVED_CARDS=removed.map(c=>({id:c.id,name:c.name,brand:c.brand,slot:c.slot,rarity:c.rarity,tier:c.tier||null}));
@@ -2603,4 +2618,126 @@ document.head.insertAdjacentHTML("beforeend","<style>#tpAp{display:none!importan
 // album: hide tier filters that no longer have cards (old Constellation/Jeweling/Star Premium tiers)
 const hideEmpty=()=>{const f=$("tierFlt");if(!f)return;f.querySelectorAll("button").forEach(b=>{if(/Constellation|Jeweling|Star Premium/.test(b.textContent))b.style.display="none"})};
 setInterval(hideEmpty,700);})();
+// ===== Outfit organizer: filters (brand/rarity/type/series/element/sign/status), search, sort, collapsible groups, NEW badges, full-coord sets =====
+(function(){
+const LS="orgF2",SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces","Ophiuchus"];
+const ELS=[["Fire","🔥"],["Earth","🌿"],["Air","🌬️"],["Water","💧"],["Cosmic","🐍"]];
+const RN={CON:"✨ Constellation",PR:"💗 Premium Rare",R:"⭐ Rare"},RO={CON:3,PR:2,R:1};
+let ST={};try{ST=JSON.parse(localStorage.getItem(LS)||"{}")}catch(e){}
+const F=ctx=>ST[ctx]||(ST[ctx]={q:"",sort:"new",grp:"brand",view:"pieces",f:{},col:{},open:0});
+const persist=()=>{try{localStorage.setItem(LS,JSON.stringify(ST))}catch(e){}};
+const typeOf=c=>c.typeLabel||c.type||"";
+const series=c=>c.series||(c.rarity=="R"?"Rare Collection":"Premium Rare Collection");
+const brandOf=c=>BRANDS.find(b=>b.id==c.brand)||{name:c.brand,icon:"",c2:"#a35"};
+const isNewC=c=>c.isNew&&!(S.seenNew&&S.seenNew[c.id]);
+const setName=c=>{const k=(c.set||"").replace(/^MGC?_/,"");return k.split("_").map(w=>w[0].toUpperCase()+w.slice(1)).join(" ")};
+const status=(c,ctx)=>{const r=[];if(S.own[c.id])r.push("own");else r.push("unowned");if(Object.values(S.coord||{}).includes(c.id))r.push("equipped");if(isNewC(c))r.push("new");return r};
+function dims(pool,ctx){const u=(f)=>[...new Set(pool.map(f).filter(Boolean))];
+ return [["brand","Brand",u(c=>c.brand).map(b=>{const B=brandOf({brand:b});return[b,B.icon+" "+B.name]})],
+  ["rarity","Rarity",u(c=>c.rarity).sort((a,b)=>RO[b]-RO[a]).map(r=>[r,RN[r]||r])],
+  ["type","Type",u(typeOf).map(t=>[t,t])],
+  ["series","Series",u(series).map(s=>[s,s])],
+  ["element","Element",ELS.filter(([e])=>pool.some(c=>c.element==e)).map(([e,i])=>[e,i+" "+e])],
+  ["sign","Sign",SIGNS.filter(s=>pool.some(c=>c.sign==s)).map(s=>[s,(ZOD[s]?ZOD[s][0]+" ":"")+s])],
+  ["status","Status",(ctx=="album"?[["own","Owned"],["unowned","Not owned"]]:[["equipped","Equipped"]]).concat([["new","🆕 New"]])]]}
+function pass(c,st,ctx){const f=st.f;
+ for(const k in f){const v=f[k];if(!v||!v.length)continue;const x=k=="brand"?c.brand:k=="rarity"?c.rarity:k=="type"?typeOf(c):k=="series"?series(c):k=="element"?c.element:k=="sign"?c.sign:null;
+  if(k=="status"){const s=status(c,ctx);if(!v.some(y=>s.includes(y)))return false}else if(!v.includes(x))return false}
+ if(st.q){const q=st.q.toLowerCase();const hay=[c.name,brandOf(c).name,typeOf(c),c.sign,c.element,series(c),c.rarity,RN[c.rarity],setName(c)].join(" ").toLowerCase();if(!q.split(/\s+/).every(w=>hay.includes(w)))return false}
+ return true}
+function sorter(st){const s=st.sort;return(a,b)=>s=="rarity"?RO[b.rarity]-RO[a.rarity]||b.ap-a.ap:s=="brand"?brandOf(a).name.localeCompare(brandOf(b).name)||a.name.localeCompare(b.name):s=="name"?a.name.localeCompare(b.name):s=="appeal"?b.ap-a.ap:
+ (isNewC(b)-isNewC(a))||((b.isNew?1:0)-(a.isNew?1:0))||(parseInt((b.code||"").slice(3))||0)-(parseInt((a.code||"").slice(3))||0)}
+const gkey=(c,g)=>g=="brand"?c.brand:g=="series"?series(c):g=="set"?c.set:g=="element"?(c.element||"—"):g=="rarity"?c.rarity:"all";
+function glabel(c,g){if(g=="brand"){const B=brandOf(c);return`<span style="color:${B.c2}">${B.icon} ${B.name}</span>`}if(g=="series")return(c.series=="Constellation"?"✨ ":"")+series(c);
+ if(g=="set")return`${brandOf(c).icon} ${setName(c)}${c.sign&&ZOD[c.sign]?" "+ZOD[c.sign][0]:""} <small>· ${brandOf(c).name}</small>`;if(g=="element"){const e=ELS.find(x=>x[0]==c.element);return e?e[1]+" "+e[0]:"Other"}if(g=="rarity")return RN[c.rarity]||c.rarity;return"All outfits"}
+// ---------- toolbar ----------
+function bar(ctx,pool,rer){const st=F(ctx),D=dims(pool,ctx),nf=Object.values(st.f).reduce((a,v)=>a+(v?v.length:0),0);
+ const chips=D.filter(d=>d[2].length>1||d[0]=="status").map(([k,lab,opts])=>`<div class="ogRow"><b>${lab}</b><div class="ogChips">${opts.map(([v,t])=>`<button class="ogC ${(st.f[k]||[]).includes(v)?'on':''}" data-k="${k}" data-v="${v}">${t}</button>`).join("")}</div></div>`).join("");
+ const sel=(id,cur,o)=>`<select id="${id}">${o.map(([v,t])=>`<option value="${v}" ${v==cur?'selected':''}>${t}</option>`).join("")}</select>`;
+ const h=`<div class="ogBar panel" id="og_${ctx}"><div class="ogTop"><input type="search" class="ogQ" placeholder="🔍 Search outfits, signs, brands…" value="${(st.q||"").replace(/"/g,"&quot;")}">
+ ${ctx=="coord"?`<div class="ogSeg"><button data-view="pieces" class="${st.view!="sets"?'on':''}">👗 Pieces</button><button data-view="sets" class="${st.view=="sets"?'on':''}">🎀 Full coords</button></div>`:""}
+ <label>Sort ${sel("ogS_"+ctx,st.sort,[["new","🆕 Newest"],["rarity","Rarity"],["brand","Brand"],["name","Name A–Z"],["appeal","Appeal (AP)"]])}</label>
+ <label>Group ${sel("ogG_"+ctx,st.grp,[["brand","Brand"],["series","Series"],["set","Coord set"],["element","Element"],["rarity","Rarity"],["none","None"]])}</label>
+ <button class="ogT ${st.open?'on':''}">⚙️ Filters${nf?` <span class="ogN">${nf}</span>`:""}</button>${nf||st.q?`<button class="ogClr">✖ Clear</button>`:""}</div>
+ <div class="ogFs" style="${st.open?'':'display:none'}">${chips}</div></div>`;
+ const w=document.createElement("div");w.innerHTML=h;const el=w.firstChild;
+ const q=el.querySelector(".ogQ");let tm;q.oninput=()=>{clearTimeout(tm);tm=setTimeout(()=>{st.q=q.value;persist();rer(true)},220)};
+ el.querySelector("#ogS_"+ctx).onchange=e=>{st.sort=e.target.value;persist();rer()};el.querySelector("#ogG_"+ctx).onchange=e=>{st.grp=e.target.value;persist();rer()};
+ el.querySelector(".ogT").onclick=()=>{st.open=st.open?0:1;persist();rer()};const cl=el.querySelector(".ogClr");if(cl)cl.onclick=()=>{st.f={};st.q="";persist();rer()};
+ el.querySelectorAll(".ogC").forEach(b=>b.onclick=()=>{const k=b.dataset.k,v=b.dataset.v,a=st.f[k]||(st.f[k]=[]);const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);persist();rer()});
+ el.querySelectorAll(".ogSeg button").forEach(b=>b.onclick=()=>{st.view=b.dataset.view;persist();rer()});
+ return el}
+let SEEN_PEND=new Set();window.ORG={set:o=>{ST=o;persist()},get:()=>ST};
+function badge(node,c){node.classList.add("ogCard");if(isNewC(c)){if(!node.querySelector(".ogNew"))node.insertAdjacentHTML("beforeend",'<span class="ogNew">NEW</span>');SEEN_PEND.add(c.id)}}
+function groups(ctx,box,nodes,rer){const st=F(ctx),srt=sorter(st);const list=nodes.map(n=>[n,card(n.dataset.id)]).filter(([n,c])=>c&&pass(c,st,ctx)).sort((a,b)=>srt(a[1],b[1]));
+ box.innerHTML="";if(!list.length){box.innerHTML='<p class="ogEmpty">No outfits match these filters. <button class="mini ogClr2">Clear filters</button></p>';box.querySelector(".ogClr2").onclick=()=>{st.f={};st.q="";persist();rer()};return 0}
+ const G=new Map();list.forEach(([n,c])=>{const k=gkey(c,st.grp);if(!G.has(k))G.set(k,{c,items:[]});G.get(k).items.push(n)});
+ if(st.grp=="brand"||st.grp=="series"||st.grp=="element"){}
+ G.forEach((g,k)=>{const key=st.grp+":"+k,closed=st.col[key];const d=document.createElement("details");d.className="ogGrp";if(!closed)d.open=true;
+  const nNew=g.items.filter(n=>isNewC(card(n.dataset.id))).length;
+  d.innerHTML=`<summary>${glabel(g.c,st.grp)} <span class="ogCnt">${g.items.length}</span>${nNew?`<span class="ogNewS">${nNew} NEW</span>`:""}</summary><div class="ogItems"></div>`;
+  d.ontoggle=()=>{if(d.open)delete st.col[key];else st.col[key]=1;persist()};const it=d.querySelector(".ogItems");g.items.forEach(n=>{badge(n,card(n.dataset.id));it.appendChild(n)});box.appendChild(d)});
+ return list.length}
+// ---------- full coord sets (dress-up) ----------
+function setsView(box,rer){const st=F("coord");const pool=CARDS.filter(c=>S.own[c.id]&&fitsIdol(c));const srt=sorter(st);
+ const sets=new Map();pool.forEach(c=>{if(!sets.has(c.set))sets.set(c.set,[]);sets.get(c.set).push(c)});
+ let arr=[...sets.values()].filter(cs=>cs.some(c=>pass(c,st,"coord"))).map(cs=>cs.sort((a,b)=>["One-piece","Tops","Bottoms","Shoes","Accessory"].indexOf(a.slot)-["One-piece","Tops","Bottoms","Shoes","Accessory"].indexOf(b.slot)));
+ arr.sort((a,b)=>srt(a[0],b[0]));box.innerHTML="";if(!arr.length){box.innerHTML='<p class="ogEmpty">No full coords match.</p>';return}
+ const G=new Map();arr.forEach(cs=>{const k=st.grp=="set"?"all":gkey(cs[0],st.grp);if(!G.has(k))G.set(k,{c:cs[0],sets:[]});G.get(k).sets.push(cs)});
+ G.forEach((g,k)=>{const key="S"+st.grp+":"+k;const d=document.createElement("details");d.className="ogGrp";if(!st.col[key])d.open=true;
+  d.innerHTML=`<summary>${st.grp=="set"?"All coords":glabel(g.c,st.grp)} <span class="ogCnt">${g.sets.length}</span></summary><div class="ogSets"></div>`;d.ontoggle=()=>{if(d.open)delete st.col[key];else st.col[key]=1;persist()};
+  const W=d.querySelector(".ogSets");g.sets.forEach(cs=>{const c=cs[0],full=cs.length>=4||(cs.some(x=>x.slot=="One-piece")&&cs.length>=3),on=cs.every(x=>Object.values(S.coord).includes(x.id)),nw=cs.some(isNewC);
+   const t=document.createElement("div");t.className="ogSet"+(on?" on":"");const B=brandOf(c);const art=c.fullArt||c.img;
+   t.innerHTML=`${nw?'<span class="ogNew">NEW</span>':""}<div class="ogSetArt" style="background-image:url('${art}')"></div><div class="ogSetTx"><b>${setName(c)}${c.sign&&ZOD[c.sign]?" "+ZOD[c.sign][0]:""}</b><small style="color:${B.c2}">${B.icon} ${B.name}</small><small>${RN[c.rarity]||c.rarity} · ${typeOf(c)}${c.element?" · "+c.element:""}</small><small>${cs.length}/4 pieces · AP ${cs.reduce((a,x)=>a+x.ap,0)}</small></div><button class="mini">${on?"✔ Wearing":"Wear set"}</button>`;
+   if(nw)cs.forEach(x=>SEEN_PEND.add(x.id));
+   t.querySelector("button").onclick=()=>{cs.forEach(x=>{S.coord[x.slot]=x.id;if(x.slot=="One-piece"){delete S.coord.Tops;delete S.coord.Bottoms}if(x.slot=="Tops"||x.slot=="Bottoms")delete S.coord["One-piece"]});try{tone(990,.05)}catch(e){}save();renderCoord()};
+   W.appendChild(t)});box.appendChild(d)})}
+// ---------- hook dress-up ----------
+renderCoord=(o=>function(){o();try{const box=$("coordCards");if(!box)return;const st=F("coord");
+  const rer=(keepFocus)=>{const a=document.activeElement,isQ=a&&a.classList.contains("ogQ");renderCoord();if(isQ||keepFocus){const q=document.querySelector("#og_coord .ogQ");if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}};
+  const old=$("og_coord");if(old)old.remove();const pool=CARDS.filter(c=>S.own[c.id]&&fitsIdol(c));
+  const tabs=$("slotTabs");tabs.parentNode.insertBefore(bar("coord",pool,rer),tabs);
+  tabs.style.display=st.view=="sets"?"none":"";
+  if(st.view=="sets"){setsView(box,rer);return}
+  const nodes=[...box.querySelectorAll(".card")];if(nodes.length)groups("coord",box,nodes,rer)}catch(e){console.error(e)}})(renderCoord);
+// ---------- hook album ----------
+renderAlbum=(o=>function(){o();try{const al=$("album");if(!al)return;const tf=$("tierFlt");if(tf)tf.style.display="none";
+  const rer=(kf)=>{const a=document.activeElement,isQ=a&&a.classList.contains("ogQ");renderAlbum();if(isQ||kf){const q=document.querySelector("#og_album .ogQ");if(q){q.focus();q.setSelectionRange(q.value.length,q.value.length)}}};
+  const nodes=[...al.querySelectorAll(".card[data-id]")];const old=$("og_album");if(old)old.remove();
+  al.parentNode.insertBefore(bar("album",CARDS,rer),al);al.innerHTML="";const box=document.createElement("div");box.className="ogAlbum";al.appendChild(box);groups("album",box,nodes,rer)}catch(e){console.error(e)}})(renderAlbum);
+// commit "viewed" NEW cards when leaving the screen
+go=(o=>function(s){if(SEEN_PEND.size){S.seenNew=S.seenNew||{};SEEN_PEND.forEach(id=>S.seenNew[id]=1);SEEN_PEND.clear();try{save()}catch(e){}}return o(s)})(go);
+const css=document.createElement("style");css.textContent=`
+.ogBar{position:sticky;top:0;z-index:5;padding:8px 10px;margin:6px 0;text-align:left;background:rgba(255,250,253,.96);backdrop-filter:blur(6px)}
+.ogTop{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ogTop .ogQ{flex:1 1 220px;min-width:160px;min-height:40px;border:2px solid #ffb6d5;border-radius:20px;padding:6px 14px;font-size:15px;outline:none}
+.ogTop label{font-size:13px;color:#7a3a66;display:flex;align-items:center;gap:4px}
+.ogTop select{min-height:38px;border-radius:14px;border:2px solid #e3c6ff;padding:2px 8px;font-size:14px;background:#fff}
+.ogTop button,.ogC{min-height:38px;border-radius:19px;border:2px solid #e3c6ff;background:#fff;color:#6a3a8a;padding:4px 12px;font-size:14px;cursor:pointer;font-weight:600;box-shadow:none;margin:0}
+.ogTop button.on,.ogC.on{background:linear-gradient(135deg,#ff7ab6,#b07aff);color:#fff;border-color:transparent}
+.ogSeg{display:flex;border-radius:20px;overflow:hidden;border:2px solid #e3c6ff}.ogSeg button{border:none;border-radius:0}
+.ogN{background:#fff;color:#ff4f9a;border-radius:10px;padding:0 6px;margin-left:2px}
+.ogFs{margin-top:8px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}
+.ogRow{display:flex;align-items:center;gap:8px}.ogRow>b{flex:0 0 64px;font-size:13px;color:#a0508a}
+.ogChips{display:flex;gap:6px;overflow-x:auto;flex-wrap:wrap;padding-bottom:2px}
+.ogGrp{margin:6px 0;border-radius:14px;background:rgba(255,255,255,.7);border:1px solid #f3d6ea;text-align:left}
+.ogGrp>summary{cursor:pointer;padding:10px 12px;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:8px;min-height:24px}
+.ogGrp>summary::before{content:"▸";transition:transform .2s;color:#c06aa0}.ogGrp[open]>summary::before{transform:rotate(90deg)}
+.ogCnt{background:#f3e6ff;color:#7a4ab0;border-radius:10px;padding:1px 8px;font-size:13px}
+.ogNewS{background:#ff3f8e;color:#fff;border-radius:10px;padding:1px 8px;font-size:12px}
+.ogItems{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:0 6px 8px}
+.ogCard{position:relative}.ogNew{position:absolute;top:4px;left:4px;z-index:3;background:linear-gradient(135deg,#ff3f8e,#ff9a3f);color:#fff;font:800 11px/1 sans-serif;padding:4px 7px;border-radius:9px;box-shadow:0 0 8px #ff6fae;animation:ogP 1.2s infinite alternate;pointer-events:none}
+@keyframes ogP{to{transform:scale(1.12)}}
+.ogSets{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;padding:0 8px 8px}
+.ogSet{position:relative;display:flex;gap:8px;align-items:center;background:#fff;border-radius:14px;padding:6px;border:2px solid #f3d6ea}.ogSet.on{border-color:#ff7ab6;box-shadow:0 0 10px #ffb6d5}
+.ogSetArt{flex:0 0 74px;height:104px;border-radius:10px;background:#f6eefc center/cover no-repeat}
+.ogSetTx{flex:1;display:flex;flex-direction:column;gap:2px;font-size:14px;min-width:0}.ogSetTx small{font-size:12px;color:#7a5a7a}
+.ogSet button{min-height:40px;white-space:nowrap}
+.ogEmpty{text-align:center;color:#a0508a}
+#s-album #album{max-width:1400px;margin:0 auto}
+#coordCards{max-height:min(70vh,640px)!important}
+@media (max-width:640px){.ogTop label{flex:1 1 45%}.ogTop select{flex:1}.ogRow{flex-direction:column;align-items:flex-start;gap:3px}.ogRow>b{flex:none}
+ .ogChips{flex-wrap:nowrap;width:100%;-webkit-overflow-scrolling:touch}.ogC{white-space:nowrap;flex:none}.ogSets{grid-template-columns:1fr}.ogGrp>summary{font-size:15px}}
+`;document.head.appendChild(css);
+})();
 </script></body></html>
