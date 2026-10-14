@@ -206,6 +206,7 @@ function nextLine(){if(++DI>=DL.length){go("coord");return}showLine();}
 addEventListener("keydown",e=>{if(e.key=="Enter"&&$("s-dialog").classList.contains("on"))nextLine();});
 // AUDIO
 let AC;function ac(){if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume();return AC}
+const LANE_COLS=["#ff6fae","#4fa8ff","#ffb02e","#b04fff"];// Q pink (Cute) · W blue (Cool) · E orange (Pop) · R purple (Sexy)
 function tone(f,d,type="sine",vol=.15,t0){try{const a=ac(),o=a.createOscillator(),g=a.createGain();const t=t0??a.currentTime;o.type=type;o.frequency.value=f;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g).connect(a.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
 function noise(t,d,vol){try{const a=ac(),b=a.createBuffer(1,Math.ceil(a.sampleRate*d),a.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=(Math.random()*2-1)*(1-i/x.length);const s=a.createBufferSource(),g=a.createGain();g.gain.value=vol;s.buffer=b;s.connect(g).connect(a.destination);s.start(t)}catch(e){}}
 const N=n=>440*Math.pow(2,(n-69)/12);
@@ -233,7 +234,7 @@ function judge(l){if(!G)return;G.press[l]=performance.now();const now=ac().curre
  if(!best||bd>.15)return;best.hit=1;add(bd<.06?"P":bd<.12?"G":"M",l);}
 function add(r,l){G.j[r]++;if(r=="M"){G.combo=0}else{G.combo++;G.max=Math.max(G.max,G.combo);G.score+=(r=="P"?100:60)*(1+Math.min(G.combo,50)/50)*(G.sp>0?2:1);
  G.gauge=Math.min(100,G.gauge+(r=="P"?4:2)*(G.unit?1.3:1));tone(r=="P"?1568:1175,.06,"sine",.08)}
- G.fx.push({txt:{P:"PERFECT!",G:"GOOD",M:"MISS"}[r],col:{P:"#ffe14f",G:"#7fe0ff",M:"#aaa"}[r],x:LX+l*LW+LW/2,y:HITY-40,life:1});}
+ G.fx.push({txt:{P:"PERFECT!",G:"GOOD",M:"MISS"}[r],col:{P:"#ffe14f",G:LANE_COLS[l],M:"#aaa"}[r],x:LX+l*LW+LW/2,y:HITY-40,life:1});}
 function special(){if(!G||G.gauge<100||G.sp>0)return;G.gauge=0;G.sp=1;G.nsp++;G.spT=ac().currentTime;G.score+=2000+G.sc.total;flash();
  [0,.1,.2,.3,.45].forEach((d,i)=>tone(N(84+[0,4,7,12,16][i]),.4,"triangle",.12,ac().currentTime+d));}
 function flash(){const f=$("flash");f.style.opacity=1;setTimeout(()=>f.style.opacity=0,350)}
@@ -253,10 +254,10 @@ function loop(){if(!G)return;raf=requestAnimationFrame(loop);const now=ac().curr
  const b=BRANDS.find(x=>x.id==coordCards()[0].brand);
  if(!(USE3D||window.STAGE2D)){drawIdol(idol,130,330+Math.sin(now*6)*4,b);cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(idol.n,130,430);
  if(G.unit){drawIdol(G.unit,60,400+Math.sin(now*6+1)*4,null,.7);cx.fillStyle="#fff";cx.fillText("Unit ×1.2",60,480);}}else{cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.textAlign="center";cx.fillText(window.STAGE2D?"":idol.n+(G.unit?" & "+G.unit.n+" (Unit ×1.2)":""),120,520);}
- for(let l=0;l<4;l++){const x=LX+l*LW,pr=performance.now()-G.press[l]<120;cx.fillStyle=pr?"#fff6":((USE3D||window.STAGE2D)?"#1a063055":"#0003");cx.fillRect(x+3,0,LW-6,560);
-  cx.fillStyle="#fff";cx.font="bold 22px sans-serif";cx.textAlign="center";cx.fillText(KEYS[l].toUpperCase(),x+LW/2,535);}
+ for(let l=0;l<4;l++){const x=LX+l*LW,pr=performance.now()-G.press[l]<120;cx.fillStyle=pr?LANE_COLS[l]+"aa":((USE3D||window.STAGE2D)?"#1a063055":"#0003");cx.fillRect(x+3,0,LW-6,560);cx.fillStyle=LANE_COLS[l]+"33";cx.fillRect(x+3,HITY-6,LW-6,12);
+  cx.fillStyle=LANE_COLS[l];cx.font="bold 22px sans-serif";cx.textAlign="center";cx.fillText(KEYS[l].toUpperCase(),x+LW/2,535);}
  cx.strokeStyle="#fff";cx.lineWidth=4;cx.shadowColor="#ff4fa3";cx.shadowBlur=15;cx.beginPath();cx.moveTo(LX,HITY);cx.lineTo(LX+4*LW,HITY);cx.stroke();cx.shadowBlur=0;
- const cols=["#ff6fae","#ffb02e","#4fa8ff","#b04fff"];
+ const cols=LANE_COLS;
  for(const n of G.notes){if(n.hit)continue;const y=HITY-(n.t-now)*SPEED;if(y<-30||y>600)continue;const x=LX+n.lane*LW+LW/2;
   cx.fillStyle=cols[n.lane];cx.strokeStyle="#fff";cx.lineWidth=3;cx.beginPath();for(let k=0;k<10;k++){const r=k%2?10:22,a=k*Math.PI/5-Math.PI/2+now*2;cx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}cx.closePath();cx.fill();cx.stroke();}
  G.fx=G.fx.filter(f=>(f.life-=.02)>0);G.fx.forEach(f=>{cx.globalAlpha=f.life;cx.fillStyle=f.col;cx.font="bold 24px sans-serif";cx.fillText(f.txt,f.x,f.y-(1-f.life)*40)});cx.globalAlpha=1;
@@ -269,7 +270,7 @@ function loop(){if(!G)return;raf=requestAnimationFrame(loop);const now=ac().curr
  cx.textAlign="center";cx.fillStyle="#fff";cx.font="bold 14px sans-serif";cx.fillText("APPEAL",820,40);cx.fillStyle="#0005";cx.fillRect(800,50,40,240);
  const gg=cx.createLinearGradient(0,290,0,50);gg.addColorStop(0,"#ff4fa3");gg.addColorStop(1,"#ffe14f");cx.fillStyle=gg;cx.fillRect(800,290-2.4*G.gauge,40,2.4*G.gauge);
  if(G.gauge>=100&&!sp){cx.fillStyle=`rgba(255,255,255,${.5+.5*Math.sin(now*10)})`;cx.fillText("SPACE!",820,310);cx.fillText("Special",820,326);}
- if(sp&&el<6){cx.save();cx.translate(450,250);for(let k=0;k<24;k++){cx.rotate(Math.PI/12);cx.fillStyle=`hsla(${k*15+now*200},100%,70%,${Math.max(0,.5-el/12)})`;cx.fillRect(0,-4,600*Math.min(1,el*2),8)}cx.restore();
+ if(sp&&el<6&&!window.STAGE2D){cx.save();cx.translate(450,250);for(let k=0;k<24;k++){cx.rotate(Math.PI/12);cx.fillStyle=`hsla(${k*15+now*200},100%,70%,${Math.max(0,.5-el/12)})`;cx.fillRect(0,-4,600*Math.min(1,el*2),8)}cx.restore();
   if(el<2.5){cx.textAlign="center";cx.font=`bold ${40+el*16}px sans-serif`;cx.fillStyle="#fff";cx.strokeStyle="#ff4fa3";cx.lineWidth=6;cx.strokeText("✦ SPECIAL APPEAL ✦",450,260);cx.fillText("✦ SPECIAL APPEAL ✦",450,260);
    cx.font="bold 22px sans-serif";cx.fillText(b.name+" Shine!",450,300)}}
  if(now<G.t0){cx.textAlign="center";cx.font="bold 50px sans-serif";cx.fillStyle="#fff";cx.fillText(Math.ceil(G.t0-now),450,280)}
@@ -2009,7 +2010,7 @@ body.touch{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 body.touch button{min-height:44px;min-width:44px}
 #tpad{position:fixed;left:0;right:0;bottom:0;height:calc(28vh + env(safe-area-inset-bottom));padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);display:none;z-index:40;gap:6px;box-sizing:border-box;touch-action:none}
 #tpad .ln{flex:1;border-radius:18px 18px 0 0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font:bold 26px sans-serif;color:#fff;text-shadow:0 2px 4px #0006;background:linear-gradient(#ffffff22,#ffffff55);border:2px solid #fff8;transition:background .05s}
-#tpad .ln:nth-child(1){background-color:#ff7ab866}#tpad .ln:nth-child(2){background-color:#7ad7ff66}#tpad .ln:nth-child(3){background-color:#ffd84a66}#tpad .ln:nth-child(4){background-color:#9b7aff66}
+#tpad .ln:nth-child(1){background-color:#ff6fae66}#tpad .ln:nth-child(2){background-color:#4fa8ff66}#tpad .ln:nth-child(3){background-color:#ffb02e66}#tpad .ln:nth-child(4){background-color:#b04fff66}
 #tpad .ln.on{background:#fff;color:#ff4fa3}
 #tpAp{position:fixed;right:calc(10px + env(safe-area-inset-right));bottom:calc(28vh + 10px + env(safe-area-inset-bottom));z-index:41;display:none;border-radius:999px;padding:10px 18px;font:bold 16px sans-serif;background:linear-gradient(135deg,#ff7ac4,#b57bff);color:#fff;border:2px solid #fff;touch-action:none}
 body.touch #s-stage.on{padding-bottom:30vh}
@@ -2020,7 +2021,7 @@ body.touch #s-stage.on{padding-bottom:30vh}
  const b=document.createElement("button");b.id="tpAp";b.textContent="✨ Appeal";document.body.appendChild(b);
  const lanes=[...p.children],held={};
  const down=(id,l)=>{if(l<0||l>3)return;held[id]=l;lanes[l].classList.add("on");if(G)judge(l)},up=id=>{const l=held[id];delete held[id];if(l!=null&&!Object.values(held).includes(l))lanes[l].classList.remove("on")};
- p.addEventListener("touchstart",e=>{e.preventDefault();const r=p.getBoundingClientRect();for(const t of e.changedTouches)down(t.identifier,Math.floor((t.clientX-r.left)/r.width*4))},{passive:false});
+ p.addEventListener("touchstart",e=>{e.preventDefault();const r=p.getBoundingClientRect();for(const t of e.changedTouches){let l=lanes.findIndex(L=>{const q=L.getBoundingClientRect();return t.clientX>=q.left&&t.clientX<=q.right&&t.clientY>=q.top&&t.clientY<=q.bottom});if(l<0)l=Math.floor((t.clientX-r.left)/r.width*4);down(t.identifier,l)}},{passive:false});
  ["touchend","touchcancel"].forEach(ev=>p.addEventListener(ev,e=>{e.preventDefault();for(const t of e.changedTouches)up(t.identifier)},{passive:false}));
  // taps directly on the note lanes of the stage also count
  const sw=$("stageWrap");sw.addEventListener("touchstart",e=>{if(!G)return;e.preventDefault();const r=sw.getBoundingClientRect();for(const t of e.changedTouches){const x=(t.clientX-r.left)/r.width*900;if(x>=LX&&x<LX+4*LW)down("s"+t.identifier,Math.floor((x-LX)/LW))}},{passive:false});
@@ -2335,7 +2336,7 @@ function frame2D(){requestAnimationFrame(frame2D);const on=$("s-stage")&&$("s-st
  // camera
  let cz=1+.012*pulse,cx0=450,cy0=330,shake=0;if(sec=="chorus")cz+=.03+.02*Math.sin(beat*Math.PI/8);
  const L=team(),n=L.length,F=FORM[n]||FORM[1],phrase=Math.floor(beat/16),focus=L[((phrase%n)+n)%n];
- if(ap){const z=ae<2?1:Math.min(1.22,1+(ae-2)*.25);cz=z;const P=POS[S.idol];if(P&&ae>2){const f=Math.min(1,(ae-2)/1.2);cx0=450+(P.x-450)*f;cy0=330+(205-330)*f}shake=ae>2&&ae<2.35?(2.35-ae)*18:0}
+ if(ap){const C=apCam(ae);cz=C.z;cx0=C.x;cy0=C.y;shake=ae>2.1&&ae<2.45?(2.45-ae)*22:ae>1.6&&ae<1.8?8:0}
  g.save();g.translate(450+(Math.random()-.5)*shake,330+(Math.random()-.5)*shake);g.scale(cz,cz);g.translate(-cx0,-cy0);
  if(ap)apBg(g,t,ae,beat,pulse);else bg(g,t,beat,pulse,sec,false);
  // formation: rotate slots each phrase for 3+ (curved glide)
@@ -2475,7 +2476,130 @@ for(const i in ADD)if(PERS[i])PERS[i].m=PERS[i].m.slice(0,3).concat(ADD[i]);
 (function(){const _d=dressSVG;dressSVG=function(coord,hair,size){try{const a=artFor(S.idol,coord||S.coord);if(a&&a.k){const h=Math.round((size||160)*2.1);return `<img class="artprev" src="${A2D+a.k}.webp" alt="" style="height:${h}px;max-width:100%;object-fit:contain;filter:drop-shadow(0 6px 12px #c060a055);animation:artbob 2.4s ease-in-out infinite">`}}catch(e){}return _d.apply(this,arguments)};
  const st=document.createElement("style");st.textContent="@keyframes artbob{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-6px) rotate(.6deg)}}";document.head.appendChild(st)})();
 // Alternate looks by wearer type (Meganee alt art). Girls by type: Cute, Cool, Pop, Sexy; boys: none yet
-(function(){const TV={Cute:"cute",Cool:"cool",Sexy:"sexy",Pop:"pop"};const V=new Proxy({},{get:(o,i)=>IDOLS[i]&&!IDOLS[i].male?TV[IDOLS[i].t]:undefined});const ALT=new Set(["nocturne_edge-eclipse_sovereign-cute", "nocturne_edge-eclipse_sovereign-pop", "nocturne_edge-eclipse_sovereign-sexy", "nocturne_edge-frozen_stardust-cute", "nocturne_edge-frozen_stardust-pop", "nocturne_edge-frozen_stardust-sexy", "nocturne_edge-frozen_starlight_requiem-cute", "nocturne_edge-frozen_starlight_requiem-pop", "nocturne_edge-frozen_starlight_requiem-sexy", "nocturne_edge-gothic_nebula_rose-cute", "nocturne_edge-gothic_nebula_rose-pop", "nocturne_edge-gothic_nebula_rose-sexy", "nocturne_edge-midnight_constellation-cute", "nocturne_edge-midnight_constellation-pop", "nocturne_edge-midnight_constellation-sexy", "nocturne_edge-nebula_raven_queen-cute", "nocturne_edge-nebula_raven_queen-pop", "nocturne_edge-nebula_raven_queen-sexy", "nocturne_edge-obsidian_starfall-cute", "nocturne_edge-obsidian_starfall-pop", "nocturne_edge-obsidian_starfall-sexy", "nocturne_edge-raven_eclipse-cute", "nocturne_edge-raven_eclipse-pop", "nocturne_edge-raven_eclipse-sexy", "nocturne_edge-silver_comet_knight-cute", "nocturne_edge-silver_comet_knight-pop", "nocturne_edge-silver_comet_knight-sexy", "pop_circuit-arcade_galaxy_queen-cool", "pop_circuit-arcade_galaxy_queen-cute", "pop_circuit-arcade_galaxy_queen-sexy", "pop_circuit-bubblegum_graffiti-cool", "pop_circuit-bubblegum_graffiti-cute", "pop_circuit-bubblegum_graffiti-sexy", "pop_circuit-bubblegum_rocket_diva-cool", "pop_circuit-bubblegum_rocket_diva-cute", "pop_circuit-bubblegum_rocket_diva-sexy", "pop_circuit-cyber_lemonade-cool", "pop_circuit-cyber_lemonade-cute", "pop_circuit-cyber_lemonade-sexy", "pop_circuit-electric_candy-cool", "pop_circuit-electric_candy-cute", "pop_circuit-electric_candy-sexy", "pop_circuit-heart_arcade-cool", "pop_circuit-heart_arcade-cute", "pop_circuit-heart_arcade-sexy", "pop_circuit-hyper_prism_superstar-cool", "pop_circuit-hyper_prism_superstar-cute", "pop_circuit-hyper_prism_superstar-sexy", "pop_circuit-neon_pop_star-cool", "pop_circuit-neon_pop_star-cute", "pop_circuit-neon_pop_star-sexy", "pop_circuit-retro_boombox-cool", "pop_circuit-retro_boombox-cute", "pop_circuit-retro_boombox-sexy", "sugarpetal-candy_crystal_fairy-cool", "sugarpetal-candy_crystal_fairy-pop", "sugarpetal-candy_crystal_fairy-sexy", "sugarpetal-cherry_blossom_mochi-cool", "sugarpetal-cherry_blossom_mochi-pop", "sugarpetal-cherry_blossom_mochi-sexy", "sugarpetal-lavender_macaron-cool", "sugarpetal-lavender_macaron-pop", "sugarpetal-lavender_macaron-sexy", "sugarpetal-lemon_meringue_picnic-cool", "sugarpetal-lemon_meringue_picnic-pop", "sugarpetal-lemon_meringue_picnic-sexy", "sugarpetal-peony_cream_puff-cool", "sugarpetal-peony_cream_puff-pop", "sugarpetal-peony_cream_puff-sexy", "sugarpetal-rose_candy_waltz-cool", "sugarpetal-rose_candy_waltz-pop", "sugarpetal-rose_candy_waltz-sexy", "sugarpetal-royal_macaron_princess-cool", "sugarpetal-royal_macaron_princess-pop", "sugarpetal-royal_macaron_princess-sexy", "sugarpetal-sakura_blossom_empress-cool", "sugarpetal-sakura_blossom_empress-pop", "sugarpetal-sakura_blossom_empress-sexy", "velvet_temptation-black_diamond_diva-cool", "velvet_temptation-black_diamond_diva-cute", "velvet_temptation-black_diamond_diva-pop", "velvet_temptation-black_pearl_noir-cool", "velvet_temptation-black_pearl_noir-cute", "velvet_temptation-black_pearl_noir-pop", "velvet_temptation-crimson_rose_empress-cool", "velvet_temptation-crimson_rose_empress-cute", "velvet_temptation-crimson_rose_empress-pop", "velvet_temptation-crimson_velvet_rose-cool", "velvet_temptation-crimson_velvet_rose-cute", "velvet_temptation-crimson_velvet_rose-pop", "velvet_temptation-golden_champagne-cool", "velvet_temptation-golden_champagne-cute", "velvet_temptation-golden_champagne-pop", "velvet_temptation-golden_phoenix_siren-cool", "velvet_temptation-golden_phoenix_siren-cute", "velvet_temptation-golden_phoenix_siren-pop"]);const _a=artFor;artFor=function(idx,coord){const a=_a(idx,coord);const v=V[idx];if(!a||!a.k||!v)return a;
+(function(){const TV={Cute:"cute",Cool:"cool",Sexy:"sexy",Pop:"pop"};const BV={Energetic:"energetic",Dreamy:"luna",Divine:"divine",Cheerful:"cheerful"};const V=new Proxy({},{get:(o,i)=>IDOLS[i]?(IDOLS[i].male?BV[IDOLS[i].t]:TV[IDOLS[i].t]):undefined});const ALT=new Set(["lunar_revel-amethyst_cat_prince-cheerful", "lunar_revel-amethyst_cat_prince-divine", "lunar_revel-amethyst_cat_prince-energetic", "lunar_revel-amethyst_eclipse_emperor-cheerful", "lunar_revel-amethyst_eclipse_emperor-divine", "lunar_revel-amethyst_eclipse_emperor-energetic", "lunar_revel-amethyst_midnight-cheerful", "lunar_revel-amethyst_midnight-divine", "lunar_revel-amethyst_midnight-energetic", "lunar_revel-cosmic_moon_monarch-cheerful", "lunar_revel-cosmic_moon_monarch-divine", "lunar_revel-cosmic_moon_monarch-energetic", "lunar_revel-crystal_eclipse-cheerful", "lunar_revel-crystal_eclipse-divine", "lunar_revel-crystal_eclipse-energetic", "lunar_revel-galaxy_serenade-cheerful", "lunar_revel-galaxy_serenade-divine", "lunar_revel-galaxy_serenade-energetic", "lunar_revel-starlight_bow_prince-cheerful", "lunar_revel-starlight_bow_prince-divine", "lunar_revel-starlight_bow_prince-energetic", "lunar_revel-starlit_masquerade-cheerful", "lunar_revel-starlit_masquerade-divine", "lunar_revel-starlit_masquerade-energetic", "lunar_revel-violet_moonlit_waltz-cheerful", "lunar_revel-violet_moonlit_waltz-divine", "lunar_revel-violet_moonlit_waltz-energetic", "nocturne_edge-eclipse_sovereign-cute", "nocturne_edge-eclipse_sovereign-pop", "nocturne_edge-eclipse_sovereign-sexy", "nocturne_edge-frozen_stardust-cute", "nocturne_edge-frozen_stardust-pop", "nocturne_edge-frozen_stardust-sexy", "nocturne_edge-frozen_starlight_requiem-cute", "nocturne_edge-frozen_starlight_requiem-pop", "nocturne_edge-frozen_starlight_requiem-sexy", "nocturne_edge-gothic_nebula_rose-cute", "nocturne_edge-gothic_nebula_rose-pop", "nocturne_edge-gothic_nebula_rose-sexy", "nocturne_edge-midnight_constellation-cute", "nocturne_edge-midnight_constellation-pop", "nocturne_edge-midnight_constellation-sexy", "nocturne_edge-nebula_raven_queen-cute", "nocturne_edge-nebula_raven_queen-pop", "nocturne_edge-nebula_raven_queen-sexy", "nocturne_edge-obsidian_starfall-cute", "nocturne_edge-obsidian_starfall-pop", "nocturne_edge-obsidian_starfall-sexy", "nocturne_edge-raven_eclipse-cute", "nocturne_edge-raven_eclipse-pop", "nocturne_edge-raven_eclipse-sexy", "nocturne_edge-silver_comet_knight-cute", "nocturne_edge-silver_comet_knight-pop", "nocturne_edge-silver_comet_knight-sexy", "pop_circuit-arcade_galaxy_queen-cool", "pop_circuit-arcade_galaxy_queen-cute", "pop_circuit-arcade_galaxy_queen-sexy", "pop_circuit-bubblegum_graffiti-cool", "pop_circuit-bubblegum_graffiti-cute", "pop_circuit-bubblegum_graffiti-sexy", "pop_circuit-bubblegum_rocket_diva-cool", "pop_circuit-bubblegum_rocket_diva-cute", "pop_circuit-bubblegum_rocket_diva-sexy", "pop_circuit-cyber_lemonade-cool", "pop_circuit-cyber_lemonade-cute", "pop_circuit-cyber_lemonade-sexy", "pop_circuit-electric_candy-cool", "pop_circuit-electric_candy-cute", "pop_circuit-electric_candy-sexy", "pop_circuit-heart_arcade-cool", "pop_circuit-heart_arcade-cute", "pop_circuit-heart_arcade-sexy", "pop_circuit-hyper_prism_superstar-cool", "pop_circuit-hyper_prism_superstar-cute", "pop_circuit-hyper_prism_superstar-sexy", "pop_circuit-neon_pop_star-cool", "pop_circuit-neon_pop_star-cute", "pop_circuit-neon_pop_star-sexy", "pop_circuit-retro_boombox-cool", "pop_circuit-retro_boombox-cute", "pop_circuit-retro_boombox-sexy", "solstice_prince-amber_sunset_waltz-divine", "solstice_prince-amber_sunset_waltz-energetic", "solstice_prince-amber_sunset_waltz-luna", "solstice_prince-citrus_summer_royal-divine", "solstice_prince-citrus_summer_royal-energetic", "solstice_prince-citrus_summer_royal-luna", "solstice_prince-golden_dawn_paladin-divine", "solstice_prince-golden_dawn_paladin-energetic", "solstice_prince-golden_dawn_paladin-luna", "solstice_prince-golden_sunrise_prince-divine", "solstice_prince-golden_sunrise_prince-energetic", "solstice_prince-golden_sunrise_prince-luna", "solstice_prince-radiant_noon_parade-divine", "solstice_prince-radiant_noon_parade-energetic", "solstice_prince-radiant_noon_parade-luna", "solstice_prince-radiant_sun_king-divine", "solstice_prince-radiant_sun_king-energetic", "solstice_prince-radiant_sun_king-luna", "solstice_prince-sky_festival_prince-divine", "solstice_prince-sky_festival_prince-energetic", "solstice_prince-sky_festival_prince-luna", "solstice_prince-sunflower_festival_prince-divine", "solstice_prince-sunflower_festival_prince-energetic", "solstice_prince-sunflower_festival_prince-luna", "solstice_prince-sunflower_knight-divine", "solstice_prince-sunflower_knight-energetic", "solstice_prince-sunflower_knight-luna", "sugarpetal-candy_crystal_fairy-cool", "sugarpetal-candy_crystal_fairy-pop", "sugarpetal-candy_crystal_fairy-sexy", "sugarpetal-cherry_blossom_mochi-cool", "sugarpetal-cherry_blossom_mochi-pop", "sugarpetal-cherry_blossom_mochi-sexy", "sugarpetal-lavender_macaron-cool", "sugarpetal-lavender_macaron-pop", "sugarpetal-lavender_macaron-sexy", "sugarpetal-lemon_meringue_picnic-cool", "sugarpetal-lemon_meringue_picnic-pop", "sugarpetal-lemon_meringue_picnic-sexy", "sugarpetal-peony_cream_puff-cool", "sugarpetal-peony_cream_puff-pop", "sugarpetal-peony_cream_puff-sexy", "sugarpetal-rose_candy_waltz-cool", "sugarpetal-rose_candy_waltz-pop", "sugarpetal-rose_candy_waltz-sexy", "sugarpetal-royal_macaron_princess-cool", "sugarpetal-royal_macaron_princess-pop", "sugarpetal-royal_macaron_princess-sexy", "sugarpetal-sakura_blossom_empress-cool", "sugarpetal-sakura_blossom_empress-pop", "sugarpetal-sakura_blossom_empress-sexy", "velvet_temptation-black_diamond_diva-cool", "velvet_temptation-black_diamond_diva-cute", "velvet_temptation-black_diamond_diva-pop", "velvet_temptation-black_pearl_noir-cool", "velvet_temptation-black_pearl_noir-cute", "velvet_temptation-black_pearl_noir-pop", "velvet_temptation-crimson_rose_empress-cool", "velvet_temptation-crimson_rose_empress-cute", "velvet_temptation-crimson_rose_empress-pop", "velvet_temptation-crimson_velvet_rose-cool", "velvet_temptation-crimson_velvet_rose-cute", "velvet_temptation-crimson_velvet_rose-pop", "velvet_temptation-golden_champagne-cool", "velvet_temptation-golden_champagne-cute", "velvet_temptation-golden_champagne-pop", "velvet_temptation-golden_phoenix_siren-cool", "velvet_temptation-golden_phoenix_siren-cute", "velvet_temptation-golden_phoenix_siren-pop", "velvet_temptation-ruby_diamond_diva-cool", "velvet_temptation-ruby_diamond_diva-cute", "velvet_temptation-ruby_diamond_diva-pop", "velvet_temptation-scarlet_silk_peony-cool", "velvet_temptation-scarlet_silk_peony-cute", "velvet_temptation-scarlet_silk_peony-pop", "velvet_temptation-wine_red_masquerade-cool", "velvet_temptation-wine_red_masquerade-cute", "velvet_temptation-wine_red_masquerade-pop"]);const _a=artFor;artFor=function(idx,coord){const a=_a(idx,coord);const v=V[idx];if(!a||!a.k||!v)return a;
  if(a.k=="mg_sugarpetal-strawberry_parfait"&&v!="cute")return Object.assign({},a,{k:a.k+"-"+v});const b=a.k.split("/").pop().replace(/^mg_/,"");if(ALT.has(b+"-"+v))return Object.assign({},a,{k:"../2dalt/mg_"+b+"-"+v});return a};if(window.STAGE2D_API)STAGE2D_API.artFor=artFor})();
+// ===== Aikatsu-style SPECIAL APPEAL showstopper (2D) + automatic trigger =====
+// timeline (s): 0 flash/freeze · .15-1.75 cut-in (portrait + coord art sweep, big appeal name) · 1.6 world transformation + burst · 2.1 "APPEAL!" score burst · signature pose + zoom · 4.7 flash out, song resumes
+const AP_LEN=4.8;
+const AP_THEME={0:{c:["#ffe0f0","#ff7ab8","#7a1450"],m:"hearts"},1:{c:["#e6f6ff","#5fb0ff","#0c1e52"],m:"ice"},2:{c:["#ffd6c8","#c8102e","#2a0610"],m:"roses"},3:{c:["#fff6a8","#ff5fb0","#3a0a5a"],m:"pop"},
+ 5:{c:["#e8d8ff","#6a3fd0","#0a0626"],m:"moon"},6:{c:["#fff2b0","#ff7a1f","#5a1a00"],m:"sun"},7:{c:["#eaffd0","#3fbf6a","#0a3a1a"],m:"fest"},8:{c:["#fffbe8","#e6b84a","#5a4a20"],m:"divine"}};
+const AP_PART={Cute:"heart",Cool:"snow",Pop:"star",Sexy:"petal",Dreamy:"moon",Energetic:"spark",Divine:"feather",Cheerful:"note"};
+const PIMG={};function portrait(i){const d=IDOLS[i];if(!d)return null;const k=d.n.split(" ").pop().toLowerCase();if(!PIMG[k]){const im=new Image();im.src="assets/portraits/web/"+k+".webp?v=2";PIMG[k]=im}const im=PIMG[k];return im.complete&&im.naturalWidth?im:null}
+let APP=[];const APMAX=()=>(typeof MOBILE!="undefined"&&MOBILE)?90:200;
+function apEmit(n,x,y,types,cols,sp){for(let i=0;i<n&&APP.length<APMAX();i++){const a=Math.random()*Math.PI*2,v=(sp||1)*(120+Math.random()*420);APP.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-120,r:Math.random()*6,vr:(Math.random()-.5)*6,s:8+Math.random()*14,life:1.6+Math.random()*1.4,age:0,t:types[i%types.length],c:cols[i%cols.length]})}}
+function apRain(dt,types,cols){if(Math.random()<dt*28&&APP.length<APMAX())APP.push({x:Math.random()*1000-50,y:-30,vx:(Math.random()-.5)*60,vy:80+Math.random()*120,r:Math.random()*6,vr:(Math.random()-.5)*3,s:8+Math.random()*12,life:5,age:0,t:types[(Math.random()*types.length)|0],c:cols[(Math.random()*cols.length)|0]})}
+function shape(g,t,s,c){g.fillStyle=c;g.strokeStyle=c;g.beginPath();
+ if(t=="heart"){g.moveTo(0,s*.35);g.bezierCurveTo(-s,-s*.3,-s*.4,-s,0,-s*.4);g.bezierCurveTo(s*.4,-s,s,-s*.3,0,s*.35);g.fill()}
+ else if(t=="star"){star(g,0,0,s*.7,s*.3);g.fill()}
+ else if(t=="snow"){g.lineWidth=Math.max(1.5,s*.12);for(let k=0;k<3;k++){g.rotate(Math.PI/3);g.moveTo(-s*.6,0);g.lineTo(s*.6,0)}g.stroke()}
+ else if(t=="petal"){g.ellipse(0,0,s*.55,s*.25,0,0,7);g.fill()}
+ else if(t=="moon"){g.arc(0,0,s*.5,0,7);g.fill();g.globalCompositeOperation="destination-out";g.beginPath();g.arc(s*.22,-s*.1,s*.42,0,7);g.fill();g.globalCompositeOperation="source-over"}
+ else if(t=="spark"){g.moveTo(-s*.1,-s*.6);g.lineTo(s*.25,-s*.05);g.lineTo(0,0);g.lineTo(s*.1,s*.6);g.lineTo(-s*.25,s*.05);g.lineTo(0,0);g.closePath();g.fill()}
+ else if(t=="feather"){g.ellipse(0,0,s*.18,s*.6,.3,0,7);g.fill()}
+ else if(t=="note"){g.font="bold "+Math.round(s*1.3)+"px sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText("♪",0,0)}}
+function apParts(g,dt){for(let i=APP.length-1;i>=0;i--){const p=APP[i];p.age+=dt;if(p.age>p.life){APP.splice(i,1);continue}p.vy+=(p.t=="petal"||p.t=="feather"||p.t=="snow"?20:160)*dt;p.vx*=1-dt*.8;p.x+=p.vx*dt;p.y+=p.vy*dt;p.r+=p.vr*dt;
+ g.save();g.globalAlpha=Math.min(1,(p.life-p.age)*1.5);g.translate(p.x,p.y);g.rotate(p.r);shape(g,p.t,p.s,p.c);g.restore()}g.globalAlpha=1}
+function apTeam(){try{return team()}catch(e){return[S.idol]}}
+function apInfo(){return(A2&&A2.info)||{}}
+// --- camera: zoom + pan to the leader, signature pose framing ---
+function apCam(ae){const P=POS[S.idol]||{x:450};if(ae<1.6)return{z:1,x:450,y:330};const u=Math.min(1,(ae-1.6)/.9),k=ease(u),out=ae>AP_LEN-.5?ease((ae-(AP_LEN-.5))/.5):0;
+ const z=1+(.32+.06*Math.sin(ae*2))*k*(1-out),n=apTeam().length,fx=n>1?450+(P.x-450)*.35:P.x;return{z,x:450+(fx-450)*k*(1-out),y:330+(215-330)*k*(1-out)}}
+// --- background transformation ---
+apBg=function(g,t,ae,beat,pulse){const L=apTeam(),T=AP_THEME[S.idol]||AP_THEME[0],c=T.c,grow=Math.min(1,Math.max(0,(ae-1.5)/.5));
+ if(ae<1.6){g.fillStyle="#12021f";g.fillRect(-300,-300,1500,1200);g.save();g.translate(450,300);g.globalCompositeOperation="lighter";for(let i=0;i<24;i++){g.rotate(Math.PI/12);g.fillStyle=`rgba(255,255,255,${.05+.05*(i%2)})`;g.beginPath();g.moveTo(0,0);g.lineTo(1100,-30);g.lineTo(1100,30);g.fill()}g.restore();return}
+ const rg=g.createRadialGradient(450,300,10,450,300,750*grow+50);rg.addColorStop(0,c[0]);rg.addColorStop(.45,c[1]);rg.addColorStop(1,c[2]);g.fillStyle=rg;g.fillRect(-300,-300,1500,1200);
+ g.save();g.translate(450,300);g.globalCompositeOperation="lighter";
+ // member-colour rays (group) or theme rays (solo)
+ const rc=L.length>1?L.map(m=>IDOLS[m].h):[c[1],c[0]];g.rotate(t*.25);for(let i=0;i<18;i++){g.rotate(Math.PI/9);g.fillStyle=rc[i%rc.length]+"30";g.beginPath();g.moveTo(0,0);g.lineTo(1000,-80);g.lineTo(1000,80);g.fill()}g.restore();
+ g.save();g.globalCompositeOperation="lighter";const m=T.m;
+ if(m=="moon"){g.fillStyle="#fffbe8";g.globalAlpha=.9*grow;g.beginPath();g.arc(640,150,90*grow,0,7);g.fill();g.globalAlpha=1;for(let i=0;i<60;i++){g.fillStyle=`rgba(255,255,255,${.4+.6*Math.abs(Math.sin(t*2+i))})`;g.fillRect((i*137)%900,(i*71)%420,2,2)}}
+ if(m=="sun"){g.translate(450,250);g.rotate(t*.6);for(let i=0;i<12;i++){g.rotate(Math.PI/6);g.fillStyle="rgba(255,240,150,.25)";g.fillRect(60*grow,-14,700,28)}}
+ if(m=="ice"){for(let i=0;i<9;i++){const x=60+i*100,h=(140+((i*53)%120))*grow;g.fillStyle="rgba(200,235,255,.35)";g.beginPath();g.moveTo(x-30,560);g.lineTo(x,560-h);g.lineTo(x+30,560);g.fill()}g.fillStyle="rgba(140,255,220,.12)";for(let i=0;i<3;i++){g.beginPath();g.moveTo(-50,100+i*40);for(let x=0;x<=1000;x+=50)g.lineTo(x,100+i*40+Math.sin(x*.01+t*1.5+i)*30);g.lineTo(1000,0);g.lineTo(-50,0);g.fill()}}
+ if(m=="hearts"){for(let i=0;i<6;i++){g.save();g.translate(450,300);g.rotate(t*.4+i);g.translate(220+40*Math.sin(t+i),0);g.scale(2.2*grow,2.2*grow);shape(g,"heart",40,"rgba(255,190,220,.35)");g.restore()}}
+ if(m=="roses"){for(let i=0;i<14;i++){const a=i*.45+t*.5,r=40+i*28*grow;g.save();g.translate(450+Math.cos(a)*r,300+Math.sin(a)*r*.6);g.rotate(a);shape(g,"petal",44,"rgba(255,60,90,.3)");g.restore()}g.fillStyle="rgba(120,0,20,.35)";g.fillRect(-300,-300,260*grow+300,1200);g.fillRect(940-260*grow,-300,600,1200)}
+ if(m=="pop"){const s=60;for(let y=0;y<9;y++)for(let x=0;x<15;x++)if((x+y+Math.floor(t*2))%2==0){g.fillStyle=`hsla(${(x*25+y*40+t*120)%360},100%,70%,${.12*grow})`;g.fillRect(x*s,y*s+((t*40)%s),s,s)}}
+ if(m=="divine"){for(let i=0;i<5;i++){g.fillStyle="rgba(255,250,220,.22)";g.fillRect(100+i*180-20,-50,40+20*Math.sin(t*2+i),700)}g.strokeStyle="rgba(255,230,150,.6)";g.lineWidth=6;g.beginPath();g.ellipse(450,120,140*grow,30*grow,0,0,7);g.stroke()}
+ if(m=="fest"){for(let i=0;i<10;i++){g.fillStyle=["#ffd23f","#3fbf6a","#ff6a8a","#7fd0ff"][i%4]+"55";g.beginPath();g.moveTo(i*100,0);g.lineTo(i*100+50,40*grow+10);g.lineTo(i*100+100,0);g.fill()}}
+ g.restore()};
+// --- foreground: cut-in, particles, APPEAL! burst ---
+let apLast=0,apFlags={};
+apFg=function(g,t,ae,L){const dt=Math.min(.05,Math.max(0,t-apLast));apLast=t;const info=apInfo(),grp=L.length>1;
+ const types=[...new Set(L.map(m=>AP_PART[IDOLS[m].t]||"star"))],cols=[...new Set(L.map(m=>IDOLS[m].h))].concat(["#ffffff","#fff6a8"]);
+ const P=POS[S.idol]||{x:450};
+ if(ae>1.6&&!apFlags.b1){apFlags.b1=1;apEmit(MOBILE?40:80,P.x,300,types,cols,1.2)}
+ if(ae>2.1&&!apFlags.b2){apFlags.b2=1;apEmit(MOBILE?30:60,450,250,types,cols,1.6);apSwellHit()}
+ if(ae>1.6&&ae<AP_LEN-.4)apRain(dt,types,cols);
+ g.save();g.setTransform(K,0,0,K,0,0);apParts(g,dt);
+ // shockwave rings at the burst
+ if(ae>2.1&&ae<3.1){const u=(ae-2.1);g.strokeStyle=`rgba(255,255,255,${1-u})`;g.lineWidth=8*(1-u);g.beginPath();g.ellipse(450,280,u*600,u*380,0,0,7);g.stroke()}
+ // cut-in
+ if(ae>.15&&ae<1.8){const u=ae-.15,k=u<.3?ease(u/.3):u>1.35?1-ease((u-1.35)/.3):1;const strips=grp?Math.min(4,L.length):1;
+  g.fillStyle="rgba(10,0,25,.6)";g.fillRect(0,0,900,560);
+  for(let s=0;s<strips;s++){const m=grp?L[s]:S.idol,hh=(grp?380/strips:230),cy=grp?100+hh*(s+.5):280,dir=s%2?-1:1;g.save();g.translate(450,cy);g.rotate(-.16);g.beginPath();g.rect(-700,-hh/2*k,1400,hh*k);g.clip();
+   const tc=TYPES[IDOLS[m].t]||IDOLS[m].h;const gr=g.createLinearGradient(-700,0,700,0);gr.addColorStop(0,IDOLS[m].h);gr.addColorStop(1,tc);g.fillStyle=gr;g.fillRect(-700,-hh/2,1400,hh);
+   g.globalAlpha=.25;g.fillStyle="#fff";for(let i=0;i<14;i++)g.fillRect(-700+((i*120+u*900*dir)%1400+1400)%1400,-hh/2,30,hh);g.globalAlpha=1;
+   const pi=portrait(m),off=(1-k)*900*dir+u*40*dir;
+   if(pi){const H=hh*1.15,W=pi.naturalWidth*H/pi.naturalHeight;g.drawImage(pi,-W/2-160*dir+off,-H/2,W,H)}
+   const a=artFor(m,coordOf(m)),im=a.tint?tinted(a.k,a.tint,a.ta):img(a.k);if(im&&im.naturalWidth&&!grp){const H=520,W=im.naturalWidth*H/im.naturalHeight;g.drawImage(im,260-off-W/2,-140,W,H)}
+   g.restore()}
+  // big stylized title
+  const ty=grp?510:430,sx=(1-k)*500;g.textAlign="center";g.lineJoin="round";g.font="italic 900 "+(grp?20:24)+"px sans-serif";g.lineWidth=5;g.strokeStyle="#3a0a5a";g.strokeText(grp?"✦ UNIT SPECIAL APPEAL ✦":"✦ SPECIAL APPEAL ✦",450-sx,grp?60:150);g.fillStyle="#fff";g.fillText(grp?"✦ UNIT SPECIAL APPEAL ✦":"✦ SPECIAL APPEAL ✦",450-sx,grp?60:150);
+  const nm=info.name||"Starlight Appeal";let fs=48;g.font="italic 900 "+fs+"px sans-serif";while(g.measureText(nm).width>820&&fs>22){fs-=2;g.font="italic 900 "+fs+"px sans-serif"}
+  const tg=g.createLinearGradient(0,ty-fs,0,ty);tg.addColorStop(0,"#fff");tg.addColorStop(.5,"#ffe14f");tg.addColorStop(1,IDOLS[S.idol].h);g.lineWidth=9;g.strokeStyle="#2a0640";g.strokeText(nm,450+sx,ty);g.fillStyle=tg;g.fillText(nm,450+sx,ty)}
+ // APPEAL! score burst
+ if(ae>2.1&&ae<4.2){const u=ae-2.1,s=u<.25?ease(u/.25)*1.25:1.25-.25*Math.min(1,(u-.25)/.3),al=u>1.7?1-(u-1.7)/.4:1;g.save();g.globalAlpha=al;g.translate(450,150);g.scale(s,s);g.rotate(-.06);g.textAlign="center";g.lineJoin="round";
+  g.font="italic 900 72px sans-serif";g.lineWidth=12;g.strokeStyle="#3a0a5a";const w=grp?"UNIT APPEAL!":"APPEAL!";g.strokeText(w,0,0);const tg=g.createLinearGradient(0,-60,0,0);tg.addColorStop(0,"#fff6a8");tg.addColorStop(1,"#ff4fa3");g.fillStyle=tg;g.fillText(w,0,0);
+  const b=Math.round((A2.bonus||0)*Math.min(1,u/.8));g.font="900 34px sans-serif";g.lineWidth=7;g.strokeText("+"+b.toLocaleString(),0,48);g.fillStyle="#fff";g.fillText("+"+b.toLocaleString(),0,48);g.restore()}
+ g.restore()};
+// --- audio: chime + swell ---
+function apSwell(){try{const a=ac(),t0=a.currentTime,o=a.createGain();o.gain.setValueAtTime(.0001,t0);o.gain.exponentialRampToValueAtTime(.09,t0+2);o.gain.exponentialRampToValueAtTime(.0001,t0+3.4);
+ const lp=a.createBiquadFilter();lp.type="lowpass";lp.frequency.setValueAtTime(400,t0);lp.frequency.exponentialRampToValueAtTime(4000,t0+2);lp.connect(o).connect(a.destination);
+ [0,7,12,16].forEach(n=>{const s=a.createOscillator();s.type="sawtooth";s.frequency.value=N(55+n);s.detune.value=(Math.random()-.5)*14;s.connect(lp);s.start(t0);s.stop(t0+3.5)});
+ [0,4,7,12,16,19,24].forEach((n,i)=>tone(N(79+n),.6,"triangle",.09,t0+.05+i*.07))}catch(e){}}
+function apSwellHit(){try{const t=ac().currentTime;[0,4,7,12].forEach(n=>tone(N(72+n),1.2,"sine",.11,t));tone(N(96),1.5,"triangle",.08,t+.02)}catch(e){}}
+// --- the appeal itself (replaces the 3D-era special) ---
+special=function(){if(!G||G.gauge<100||G.sp>0||A2)return;const now=ac().currentTime;const bonus=2000+(G.sc&&G.sc.total||0);
+ G.gauge=0;G.sp=1;G.nsp=(G.nsp||0)+1;G.spT=now;G.score+=bonus;
+ G.notes.forEach(n=>{if(!n.hit&&n.t>=now-.05&&n.t<=now+AP_LEN+.35)n.hit=2});
+ let info={};try{info=appealInfo()||{}}catch(e){}APP=[];apFlags={};apLast=performance.now()/1000;
+ A2={t0:performance.now()/1000,len:AP_LEN,info,bonus};const my=A2;$("stage").style.visibility="hidden";
+ const f=$("flash");if(f){f.style.opacity=1;setTimeout(()=>f.style.opacity=0,220)}apSwell();
+ setTimeout(()=>{if(A2===my){A2=null;APP=[];$("stage").style.visibility="";if(G)G.spT=ac().currentTime-.5}},AP_LEN*1000)};
+// --- automatic trigger when the meter fills ---
+(function auto(){requestAnimationFrame(auto);if(!G||!G.notes||A2||G.gauge<100||G.sp>0)return;const now=ac().currentTime;if(now<G.t0+1)return;if(G.end&&G.end-now<AP_LEN+1)return;
+ const st=$("s-stage");if(st&&!st.classList.contains("on"))return;special()})();
+// signature pose during the appeal (blended by the puppet's smoothing)
+motion=(o=>function(mv,beat,P){const r=o(mv,beat,P);if(!A2)return r;const ae=performance.now()/1000-A2.t0;if(ae<1.6||ae>AP_LEN-.35)return r;
+ const k=Math.min(1,(ae-1.6)/.4),b=Math.sin(beat*Math.PI);return Object.assign(r,{x:r.x*(1-k),y:-Math.abs(b)*6*k+r.y*(1-k),r:-.06*k,sx:1+.04*k,sy:1+.04*k,head:-1.8*k,lean:-.1*k,turn:.5*k,aL:.3*k,aR:-.35*k,wink:ae>2.1&&ae<3.2?1:0,kick:ae<2.2?1.2:0,skirt:2*k*b})})(motion);
+document.head.insertAdjacentHTML("beforeend","<style>#tpAp{display:none!important}</style>");
 })();
+// ===== Responsive / adaptive layout pass (PC, iPhone portrait+landscape, iPad) =====
+(function(){const css=`
+#title3d,#apCard,#apBanner{display:none!important}
+#s-title h1{margin-top:18px}
+#idols{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;justify-items:stretch}
+#idols .idol{width:auto;margin:0}
+@media (min-width:1280px){.screen{max-width:min(1400px,96vw)}#stageWrap{width:min(1100px,calc(78vh*900/560))!important}}
+@media (max-width:640px){
+ h1{font-size:26px!important;line-height:1.15}h2{font-size:20px}
+ .screen{padding:8px}
+ #scBtn{position:static!important;display:block;margin:4px auto 0!important;transform:none!important}
+ #idols{grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}
+ #idols .idol{padding:6px}#idols .idol small,#idols .idol .q{font-size:10px}
+ .card{zoom:.82}
+ button{padding:9px 16px}
+}
+@media (max-width:380px){.card{zoom:.74}}
+/* iPhone/iPad landscape rhythm layout: Q W lanes left, stage centre, E R lanes right */
+@media (orientation:landscape) and (max-height:600px){
+ body.touch #s-stage.on{padding:0!important;min-height:100vh!important;display:flex!important;align-items:center;justify-content:center}
+ body.touch #stageWrap{width:min(calc(94vh*900/560),64vw)!important;margin:auto!important}
+ body.touch #tpad[style*="flex"]{display:grid!important;top:0;height:100%!important;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  grid-template-columns:1fr 1fr min(calc(94vh*900/560),64vw) 1fr 1fr;gap:6px;pointer-events:none;background:none}
+ body.touch #tpad .ln{pointer-events:auto;border-radius:18px;align-items:center}
+ body.touch #tpad .ln:nth-child(3){grid-column:4}body.touch #tpad .ln:nth-child(4){grid-column:5}
+}`;const st=document.createElement("style");st.textContent=css;document.head.appendChild(st);
+// album: hide tier filters that no longer have cards (old Constellation/Jeweling/Star Premium tiers)
+const hideEmpty=()=>{const f=$("tierFlt");if(!f)return;f.querySelectorAll("button").forEach(b=>{if(/Constellation|Jeweling|Star Premium/.test(b.textContent))b.style.display="none"})};
+setInterval(hideEmpty,700);})();
 </script></body></html>
