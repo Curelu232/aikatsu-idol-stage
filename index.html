@@ -2157,21 +2157,39 @@ const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes",
 L.forEach(([k,name,accN,m,acc])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg3/solstice_prince-"+k+"-"+f+".webp";
  CARDS.push({id:"mg_"+k+"_"+i,brand:"so",slot,name:name+" "+(lab||accN),rarity:"PR",type:"Pop",typeLabel:"Cheerful",ap:AP[i],kind:["tailcoat","slacks","boots",acc][i],boy:true,col:{m,a:"#ffd23f",t:"#d4af37"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d3/mg_solstice_prince-"+k,code:"MG-"+String(++n).padStart(2,"0")})}));
 })();
+// ===== Meganee San boys' coords: Celestia Regalia (Divine boy -> Cute), Blitz Horizon (Energetic boy -> Pop) — unassigned: any boy; + 3 Sugarpetal / 3 Nocturne Edge girls' coords =====
+(function(){
+BRANDS.push({id:"cr",name:"Celestia Regalia",tag:"Divine Heavenly Couture",type:"Cute",c1:"#fff8e6",c2:"#c9a43a",icon:"👼",motif:"star",g:"b"},
+ {id:"bh",name:"Blitz Horizon",tag:"Energetic Street Speed",type:"Pop",c1:"#fff0d8",c2:"#ff6a1a",icon:"⚡",motif:"rainbow",g:"b"});
+PAL.cr=["#fffaf0","#e6c35c","#cfd8f0","#b9a6ff","#ffffff"];PAL.bh=["#ff6a1a","#fff0d8","#2a2a3a","#7fe0ff","#c8102e"];
+const D=[
+ ["cr","celestia_regalia","Cute","Divine",true,"R",[["seraph_dawn","Seraph Dawn","Wing Ornament","#fffaf0"],["holy_starlight","Holy Starlight","Halo","#1f2f6e"],["eden_garden","Eden Garden","Laurel Crown","#cfeee0"],
+   ["archangel_aegis","Archangel Aegis","Angel Spear","#f4ead0"],["aurora_halo","Aurora Halo","Halo Earrings","#e6dcff"],["celestial_throne","Celestial Throne","Halo Mic","#5a2a8a"]]],
+ ["bh","blitz_horizon","Pop","Energetic",true,"R",[["turbo_spark","Turbo Spark","Goggle Cap","#ff6a1a"],["neon_drift","Neon Drift","Headphones","#3fa8ff"],["red_rush_rider","Red Rush Rider","Racing Gloves","#c8102e"],
+   ["sky_kick_breaker","Sky Kick Breaker","Star Headband","#8fd0ff"],["midnight_beat","Midnight Beat","Neon Mic","#3a1a5a"],["golden_velocity","Golden Velocity","Aviator Shades","#e6a83a"]]],
+ ["sg","sugarpetal","Cute","Cute",false,"PR",[["royal_macaron_princess","Royal Macaron Princess","Macaron Tiara","#ffc8dc"],["sakura_blossom_empress","Sakura Blossom Empress","Sakura Crown","#ffb8d0"],["candy_crystal_fairy","Candy Crystal Fairy","Crystal Wand","#ffd8f0"]]],
+ ["ne","nocturne_edge","Cool","Cool",false,"PR",[["eclipse_sovereign","Eclipse Sovereign","Star Tiara & Veil","#141030"],["nebula_raven_queen","Nebula Raven Queen","Raven Star Scepter","#2a1f5e"],["frozen_starlight_requiem","Frozen Starlight Requiem","Starlight Harp","#2a3f8e"]]]];
+const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]];
+let n=CARDS.filter(c=>c.mg).length;
+D.forEach(([bid,pre,type,tl,boy,rar,L])=>{const AP=rar=="R"?[650,600,550,500]:[1200,900,700,500];
+ L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg4/"+pre+"-"+k+"-"+f+".webp";
+  CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:rar,type,typeLabel:tl,ap:AP[i],kind:boy?["tailcoat","slacks","boots","bow"][i]:["top","skirt","shoes","acc"][i],boy,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d4/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})}))});
+})();
 // ===== Meganee-only catalogue: remove every non-Meganee coord/card (backup in /workspace/backup-old-coords) + save migration =====
 (function(){
 const removed=CARDS.filter(c=>!c.mg);window.REMOVED_CARDS=removed.map(c=>({id:c.id,name:c.name,brand:c.brand,slot:c.slot,rarity:c.rarity,tier:c.tier||null}));
 const keep=CARDS.filter(c=>c.mg);CARDS.length=0;keep.forEach(c=>CARDS.push(c));
 const used=new Set(CARDS.map(c=>c.brand));for(let i=BRANDS.length-1;i>=0;i--)if(!used.has(BRANDS[i].id))BRANDS.splice(i,1);
 const lr=BRANDS.find(b=>b.id=="ns");if(lr){lr.type="Sexy";lr.tag="Moonlit Dream Fashion · Meganee San"}
-for(const k in RAR)if(k!="PR")RAR[k].w=0;// every Meganee card is Premium Rare
+for(const k in RAR)if(!CARDS.some(c=>c.rarity==k))RAR[k].w=0;// only rarities Meganee made (PR, R)
 // signature (starter) coord per idol
-const SIGSET={0:"strawberry_parfait",1:"frozen_stardust",2:"crimson_velvet_rose",3:"neon_pop_star",5:"galaxy_serenade",6:"golden_sunrise_prince",7:"amber_sunset_waltz",8:"sunflower_knight"};
+const SIGSET={0:"strawberry_parfait",1:"frozen_stardust",2:"crimson_velvet_rose",3:"neon_pop_star",5:"galaxy_serenade",6:"turbo_spark",7:"midnight_beat",8:"holy_starlight"};
 window.SIGSET=SIGSET;
 sigCoord=i=>{const k=SIGSET[i]||(IDOLS[i]&&IDOLS[i].male?"golden_sunrise_prince":"strawberry_parfait"),o={};CARDS.filter(c=>c.set=="MG_"+k).forEach(c=>o[c.slot]=c.id);return o};
 // brand appeals for the new brands
 Object.assign(AP_BRAND,{sg:["Sugarpetal Sweet Bloom","halo","rise",["heart","spin","reach","pose"],["#fff0f6","#ff9ac4"]],ne:["Nocturne Edge Starfall Requiem","crown","crane",["step","reach","spin","pose"],["#1a1440","#9f9fd0"]],
  pc:["Pop Circuit Neon Rush","sundae","dolly",["jump","clap","spin","heart"],["#2a0a40","#ff3fa8"]],vt:["Velvet Temptation Crimson Encore","generic","orbit",["step","pose","spin","reach"],["#2a0610","#c8102e"]],
- so:["Solstice Prince Sunrise Fanfare","generic","rise",["jump","clap","reach","pose"],["#fff0c8","#ff8a1f"]],ns:["Lunar Revel Moonlit Revel","generic","orbit",["step","reach","spin","pose"],["#1c1450","#b9a6ff"]]});
+ so:["Solstice Prince Sunrise Fanfare","generic","rise",["jump","clap","reach","pose"],["#fff0c8","#ff8a1f"]],cr:["Celestia Regalia Seraph Ascension","halo","rise",["reach","spin","pose","heart"],["#fffaf0","#e6c35c"]],bh:["Blitz Horizon Turbo Rush","generic","dolly",["jump","clap","spin","pose"],["#1a1030","#ff6a1a"]],ns:["Lunar Revel Moonlit Revel","generic","orbit",["step","reach","spin","pose"],["#1c1450","#b9a6ff"]]});
 // story rewards -> Meganee cards
 const RW=["mg_cherry_blossom_mochi_0","mg_heart_arcade_0","mg_black_pearl_noir_2","mg_rose_candy_waltz_3","mg_midnight_constellation_3","mg_golden_champagne_3","mg_sunflower_knight_0","mg_raven_eclipse_0"];
 STORY.forEach((ch,i)=>{if(!card(ch.reward))ch.reward=RW[i%RW.length]});
