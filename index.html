@@ -2175,6 +2175,19 @@ D.forEach(([bid,pre,type,tl,boy,rar,L])=>{const AP=rar=="R"?[650,600,550,500]:[1
  L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg4/"+pre+"-"+k+"-"+f+".webp";
   CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:rar,type,typeLabel:tl,ap:AP[i],kind:boy?["tailcoat","slacks","boots","bow"][i]:["top","skirt","shoes","acc"][i],boy,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d4/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})}))});
 })();
+// ===== Meganee San batch 5: 18 Premium Rare coords for existing brands (Pop Circuit, Velvet Temptation, Solstice Prince, Celestia Regalia, Blitz Horizon, Lunar Revel = Luna only) =====
+(function(){
+const D=[["pc","pop_circuit","Pop","Pop",false,[["hyper_prism_superstar","Hyper Prism Superstar","Prism Headset","#c8a8ff"],["arcade_galaxy_queen","Arcade Galaxy Queen","Galaxy Heart Wand","#7a3fe8"],["bubblegum_rocket_diva","Bubblegum Rocket Diva","Rocket Star Tiara","#ff7ac8"]]],
+ ["vt","velvet_temptation","Sexy","Sexy",false,[["crimson_rose_empress","Crimson Rose Empress","Rose Ruby Crown","#a8102e"],["black_diamond_diva","Black Diamond Diva","Diamond Mic","#141018"],["golden_phoenix_siren","Golden Phoenix Siren","Phoenix Headdress","#e8501a"]]],
+ ["so","solstice_prince","Pop","Cheerful",true,[["radiant_sun_king","Radiant Sun King","Sunburst Crown","#fff6e0"],["sunflower_festival_prince","Sunflower Festival Prince","Sunflower Scepter","#e6b82a"],["golden_dawn_paladin","Golden Dawn Paladin","Paladin Gauntlet","#8fc0ff"]]],
+ ["cr","celestia_regalia","Cute","Divine",true,[["seraphim_archangel","Seraphim Archangel","Halo Crown","#fffaf0"],["crystal_sanctum_oracle","Crystal Sanctum Oracle","Oracle Staff","#e6e0f4"],["aurora_throne_emperor","Aurora Throne Emperor","Aurora Scepter","#d8f0ff"]]],
+ ["bh","blitz_horizon","Pop","Energetic",true,[["thunderbolt_racer_king","Thunderbolt Racer King","Lightning Visor","#1a1a1a"],["turbo_jet_skyrider","Turbo Jet Skyrider","Skyrider Headphones","#f4f4f8"],["blazing_comet_breaker","Blazing Comet Breaker","Comet Chain","#e8301a"]]],
+ ["ns","lunar_revel","Sexy","Passionate",true,[["starlight_bow_prince","Starlight Bow Prince","Starlight Bow","#3a3ab8"],["cosmic_moon_monarch","Cosmic Moon Monarch","Moon Scepter","#2a1f5e"],["amethyst_eclipse_emperor","Amethyst Eclipse Emperor","Eclipse Crown","#4a1f7a"]]]];
+const SL=[["Tops","01_tops","Tops"],["Bottoms","02_bottoms","Bottoms"],["Shoes","03_shoes","Shoes"],["Accessory","04_accessory",null]],AP=[1200,900,700,500];
+let n=CARDS.filter(c=>c.mg).length;
+D.forEach(([bid,pre,type,tl,boy,L])=>L.forEach(([k,name,accN,m])=>SL.forEach(([slot,f,lab],i)=>{const src="assets/user/mg5/"+pre+"-"+k+"-"+f+".webp";
+ CARDS.push({id:"mg_"+k+"_"+i,brand:bid,slot,name:name+" "+(lab||accN),rarity:"PR",type,typeLabel:tl,ap:AP[i],kind:boy?["tailcoat","slacks","boots","bow"][i]:["top","skirt","shoes","acc"][i],boy,only:bid=="ns"?5:null,col:{m,a:"#ffffff",t:"#e6c35c"},mg:1,set:"MG_"+k,img:src,fullArt:src,mgArt:"../2d5/mg_"+pre+"-"+k,code:"MG-"+String(++n).padStart(2,"0")})})));
+})();
 // ===== Meganee-only catalogue: remove every non-Meganee coord/card (backup in /workspace/backup-old-coords) + save migration =====
 (function(){
 const removed=CARDS.filter(c=>!c.mg);window.REMOVED_CARDS=removed.map(c=>({id:c.id,name:c.name,brand:c.brand,slot:c.slot,rarity:c.rarity,tier:c.tier||null}));
@@ -2368,7 +2381,7 @@ function initGL(){if(gl!==null)return gl;cvG=document.createElement("canvas");cv
  gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,"precision mediump float;varying vec2 v;uniform sampler2D T;void main(){gl_FragColor=texture2D(T,v);}"));
  gl.linkProgram(prog);gl.useProgram(prog);locP=gl.getAttribLocation(prog,"p");locU=gl.getAttribLocation(prog,"u");locR=gl.getUniformLocation(prog,"R");
  buf=gl.createBuffer();uvbuf=gl.createBuffer();ibuf=gl.createBuffer();gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);return gl}
-function tex(im){let t=TEX.get(im);if(t)return t;t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
+function tex(im){let t=TEX.get(im);if(t){t.n=(t.n||0)+1;if(t.n==20||t.n==90){gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im)}return t}t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL,true);
  gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);[gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(p=>gl.texParameteri(gl.TEXTURE_2D,p,gl.LINEAR));
  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);TEX.set(im,t);if(TEX.size>24){const k=TEX.keys().next().value;gl.deleteTexture(TEX.get(k));TEX.delete(k)}return t}
 function grid(R){const key=R.gc+"x"+R.gr;if(curGrid==key)return;curGrid=key;const uv=[],ix=[];for(let j=0;j<=R.gr;j++)for(let i=0;i<=R.gc;i++)uv.push(i/R.gc,j/R.gr);
