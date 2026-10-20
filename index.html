@@ -74,7 +74,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script async src="assets/user/rig.js"></script><script src="assets/user/fullcoord/index.js"></script><script>
+<script>window.BUILD="20261020203502"</script><script async src="assets/user/rig.js?v=20261020203502"></script><script src="assets/user/fullcoord/index.js?v=20261020203502"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -1114,7 +1114,7 @@ stopStage=(o=>function(){if(G&&G.userSrc){try{G.userSrc.stop()}catch(e){}G.userS
 const b64buf=b=>{const s=atob(b),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u.buffer};
 function loadUserSongs(){(window.USER_SONGS||[]).forEach(m=>{if(m.data)addUserSong(m,b64buf(m.data))});
  if(/^https?:/.test(location.protocol))fetch("songs/songs.json").then(r=>r.ok?r.json():[]).then(list=>(list.songs||list||[]).forEach(m=>{if(m.file&&!m._example)fetch("songs/"+m.file).then(r=>r.arrayBuffer()).then(b=>addUserSong(m,b)).catch(()=>{})})).catch(()=>{})}
-(()=>{const ld=(src,next)=>{const s=document.createElement("script");s.src=src;s.onload=next;s.onerror=next;document.head.appendChild(s)};
+(()=>{const ld=(src,next)=>{const s=document.createElement("script");s.src=src+(window.BUILD&&/user-songs\.js$/.test(src)?"?v="+window.BUILD:"");s.onload=next;s.onerror=next;document.head.appendChild(s)};
  ld("songs/user-songs.js",function step(){const P=window.USER_SONG_PARTS||[];if(P.length){const n=P.shift();ld("songs/"+n,step)}else loadUserSongs()})})();
 // in-game picker (works from file:// too)
 renderCoord=(o=>function(){o();const box=$("songs");if(box&&!$("songPick")){box.insertAdjacentHTML("beforeend",`<button id="songPickBtn" class="mini" onclick="$('songPick').click()">➕ Load my songs (mp3/ogg + json)</button><input id="songPick" type="file" accept="audio/*,.json" multiple style="display:none" onchange="pickSongs(this.files)">`)}})(renderCoord);
@@ -3169,36 +3169,72 @@ const css=document.createElement("style");css.textContent=`
 `;document.head.appendChild(css);
 })();
 try{if($("s-title").classList.contains("on"))renderTitle()}catch(e){console.error(e)}
-// ===== Fix: "I wasn't able to select all my unit's cards" =====
-// (a) luna211 used before newer coords were added -> those were never owned. The code means "own every card", so keep it true for cards added later.
-// (b) unit/story lineups: every idol in the lineup can be dressed from the Coordinate Change screen (story unit chapters had no member tabs; free/unit tabs
-//     silently did nothing when UNIT.cur was unset). The lead is restored before the stage, so scoring/story roles stay with the lead.
+// ===== Coordinate Change: idol bar (every unlocked idol) — dress any lineup member, add/remove members (up to 8), make lead; per-idol coords persist =====
+// also: luna211 saves own cards added later; stale-build check (GitHub Pages caches index.html for 10 min)
 (function(){
 if(S.allIdols){let n=0;CARDS.forEach(c=>{if(!S.own[c.id]){S.own[c.id]=1;n++}});if(n){try{FC.SETS.forEach((cs,k)=>{if(cs.some(c=>S.own[c.id]))FC.grantSet(k)})}catch(e){}save()}}
-const DR={lead:null,list:[]};window.DRESS=DR;
+// --- stale build: if the server has a newer index.html than this one, reload once onto a cache-busted URL
+(function(){const B=window.BUILD;if(!B||location.protocol=="file:")return;const chk=()=>fetch(location.pathname+"?cb="+Date.now(),{cache:"no-store"}).then(r=>r.ok?r.text():"").then(t=>{const m=/window\.BUILD="(\d+)"/.exec(t);if(!m||!(+m[1]>+B))return;const k="isc_reload_"+m[1];
+  const busy=$("s-stage")&&$("s-stage").classList.contains("on");if(sessionStorage.getItem(k)||busy){if(!$("updBar")){document.body.insertAdjacentHTML("beforeend",`<button id="updBar" onclick="location.replace(location.pathname+'?v=${m[1]}')">✨ A new version is ready — tap to update</button>`)}return}
+  sessionStorage.setItem(k,1);location.replace(location.pathname+"?v="+m[1])}).catch(()=>{});setTimeout(chk,1500);setInterval(chk,10*60*1000)})();
+// --- art audit: every coord image comes from Meganee San's files. Piece cards (rewards, organizer piece view, album) show her full-coord card
+//     instead of the old pre-Meganee piece art (assets/user/mg..mg6); stage/preview bodies are re-sourced from incoming/coords by tools/meganee_bodies.py
+CARDS.forEach(c=>{if(!c.mg||!c.mgArt)return;const s=c.mgArt.split("/").pop().replace(/^mg_/,""),a="assets/user/fullcoord/"+s+".webp";if((window.FULLCOORD_ART||[]).includes(s)){c.img=a;c.fullArt=a}});
+S.coords=S.coords||{};
+const DR={lead:null};window.DRESS=DR;
 const ok=i=>IDOLS[i]&&!IDOLS[i].gone&&(typeof idolUnlocked!="function"||idolUnlocked(i));
-function lineupNow(){let L;if(UNIT.lead!=null)L=unitAll();else{const ch=STORY[STORYCH];L=ch&&ch.unit&&typeof chLineup=="function"?chLineup(ch):[S.idol]}return[...new Set(L)].filter(ok)}
+const leadOf=()=>DR.lead==null?S.idol:DR.lead;
+function storyPartner(){const ch=STORY[STORYCH];if(!(ch&&ch.unit))return null;const s=S.idol;S.idol=leadOf();let p=null;try{p=cast(ch.unit)}catch(e){}S.idol=s;return p!=null&&ok(p)&&p!=leadOf()?p:null}
+function lineup(){const l=leadOf(),L=[l],p=storyPartner();if(p!=null)L.push(p);if(UNIT.lead!=null)UNIT.mem.forEach(i=>{if(!L.includes(i))L.push(i)});return L.filter(ok).slice(0,8)}
+window.coordLineup=lineup;
 const fitOrSig=i=>{let v={};try{v=validCoord(i,S.coords[i]||{})}catch(e){}return Object.keys(v).length?v:sigOwned(i)};
-function restoreLead(){if(DR.lead==null)return;S.coords=S.coords||{};S.coords[S.idol]=S.coord;const l=DR.lead;DR.lead=null;if(S.idol!=l){S.idol=l;S.coord=fitOrSig(l)}if(UNIT.lead!=null)UNIT.cur=UNIT.lead;try{save()}catch(e){}}
+function stash(){S.coords[S.idol]=S.coord}
+function restoreLead(){if(DR.lead==null)return;stash();const l=DR.lead;DR.lead=null;if(S.idol!=l){S.idol=l;S.coord=fitOrSig(l)}if(UNIT.lead!=null)UNIT.cur=UNIT.lead;try{save()}catch(e){}}
 window.restoreLead=restoreLead;
-memberSwitch=function(i){if(!ok(i))return;if(DR.lead==null){DR.lead=S.idol;DR.list=lineupNow()}S.coords=S.coords||{};S.coords[S.idol]=S.coord;if(UNIT.lead!=null)UNIT.cur=i;S.idol=i;S.coord=fitOrSig(i);S.coords[i]=S.coord;save();renderCoord();try{tone(880,.05)}catch(e){}};
-go=(o=>function(s){if(s!="coord")restoreLead();else if(DR.lead==null)DR.list=lineupNow();return o(s)})(go);
-beginScan=(o=>function(){restoreLead();return o.apply(this,arguments)})(beginScan);
-renderCoord=(o=>function(){const r=o();try{if(DR.lead==null||S.idol==DR.lead)DR.list=lineupNow();const old=$("unitTabs");const g=$("stageGoal");
- const L=DR.list,lead=DR.lead==null?S.idol:DR.lead,P=i=>`<img src="assets/portraits/web/${IDOLS[i].n.split(" ").pop().toLowerCase()}.webp?v=2" alt="">`;
- let d=$("ccDress");if(!d){d=document.createElement("div");d.id="ccDress";$("ccLeft").insertBefore(d,$("ccLeft").firstChild)}
- d.style.display=L.length>1?"":"none";$("ccLeft").classList.toggle("hasDress",L.length>1);
- d.innerHTML=L.length>1?`<div class="ccDT">👥 Dress your unit <small>(tap an idol)</small></div><div class="ccDL">${L.map(i=>`<button class="ccDB${i==S.idol?" on":""}" data-i="${i}">${P(i)}<span>${i==lead?"★ ":""}${IDOLS[i].n.split(" ").pop()}</span><i>${(S.coords&&S.coords[i])||i==S.idol?"✓":""}</i></button>`).join("")}</div>`:"";
- d.querySelectorAll(".ccDB").forEach(b=>b.onclick=()=>memberSwitch(+b.dataset.i));
- if(old){[...old.querySelectorAll("button")].forEach(b=>{if(/memberSwitch/.test(b.getAttribute("onclick")||""))b.remove()});old.childNodes.forEach(n=>{if(n.nodeType==3&&/Dress members/.test(n.textContent))n.textContent=""})}
+function syncUnit(){if(UNIT.lead!=null){UNIT.lead=S.idol;UNIT.cur=S.idol;UNIT.mem=UNIT.mem.filter(i=>i!=S.idol&&ok(i))}}
+function dress(i){if(!ok(i)||i==S.idol)return;if(DR.lead==null)DR.lead=S.idol;stash();if(UNIT.lead!=null)UNIT.cur=i;S.idol=i;S.coord=fitOrSig(i);S.coords[i]=S.coord;save()}
+function ensureUnit(){if(UNIT.lead==null){UNIT.lead=leadOf();UNIT.mem=[];UNIT.cur=S.idol}else UNIT.lead=leadOf()}
+function addMember(i){const L=lineup();if(L.includes(i)||!ok(i))return;if(L.length>=8){ulToast("Up to 8 idols on stage");return}ensureUnit();UNIT.mem.push(i)}
+function removeMember(i){if(i==leadOf())return;if(i==storyPartner()){ulToast(`${IDOLS[i].n} is this chapter's unit partner`);return}if(S.idol==i){stash();S.idol=leadOf();S.coord=fitOrSig(S.idol)}UNIT.mem=UNIT.mem.filter(x=>x!=i);if(!UNIT.mem.length&&STORYCH<0){}}
+function makeLead(i){const old=leadOf();if(i==old||!lineup().includes(i)||i==storyPartner())return;stash();ensureUnit();UNIT.mem=[old,...UNIT.mem.filter(x=>x!=i&&x!=old)];UNIT.lead=i;DR.lead=null;S.idol=i;S.coord=fitOrSig(i);UNIT.cur=i;save()}
+memberSwitch=function(i){dress(i);renderCoord()};
+window.idolBar={dress:i=>{if(!lineup().includes(i))addMember(i);if(lineup().includes(i))dress(i);tap();renderCoord()},rm:i=>{removeMember(i);tap();renderCoord()},lead:i=>{makeLead(i);tap();renderCoord()}};
+const tap=()=>{try{tone(880,.05)}catch(e){}};
+// song version follows the whole lineup (free play AND story chapters), using the lead even while another idol is being dressed
+songLineup=function(){return lineup()};window.songLineup=songLineup;
+reVersion=function(){const L=lineup(),ch=STORY[STORYCH];try{if(ch){if(ch.group){const k=resolveVersion(ch.group,L,0);if(k>=0){ch.song=k;song=k}}return}const g=((SONGS[song]||{}).lazyMeta||{}).group;if(g){const k=resolveVersion(g,L);if(k>=0)song=k}}catch(e){}};
+playChapter=(o=>function(i){UNIT.lead=null;UNIT.mem=[];UNIT.cur=null;DR.lead=null;return o(i)})(playChapter);
+go=(o=>function(s){if(s!="coord")restoreLead();return o(s)})(go);
+beginScan=(o=>function(){restoreLead();syncUnit();reVersion();return o.apply(this,arguments)})(beginScan);
+startStage=(o=>function(){restoreLead();syncUnit();return o.apply(this,arguments)})(startStage);
+const P=i=>`<img src="assets/portraits/web/${IDOLS[i].n.split(" ").pop().toLowerCase()}.webp?v=2" alt="" draggable="false">`;
+renderCoord=(o=>function(){try{reVersion()}catch(e){}const r=o();try{
+ let bar=$("ccIdols");if(!bar){bar=document.createElement("div");bar.id="ccIdols";$("cc").insertBefore(bar,$("ccMain"))}
+ const L=lineup(),lead=leadOf(),sp=storyPartner(),all=IDOLS.map((_,i)=>i).filter(ok);
+ const chip=i=>{const on=L.includes(i),cur=i==S.idol,dr=on&&(cur||S.coords[i]);return`<button class="idB${on?" on":" off"}${cur?" cur":""}" data-i="${i}" title="${on?"Dress "+IDOLS[i].n:"Add "+IDOLS[i].n+" to the stage"}">${P(i)}<span class="idN">${i==lead?"★ ":""}${IDOLS[i].n.split(" ").pop()}</span>${on?(dr?'<i class="idOk">✓</i>':""):'<i class="idAdd">＋</i>'}${i==sp?'<i class="idSt">📕</i>':""}</button>`};
+ const cur=S.idol,isLead=cur==lead,canRm=!isLead&&cur!=sp;
+ bar.innerHTML=`<div class="idRow">${[...L,...all.filter(i=>!L.includes(i))].map(chip).join("")}</div>
+ <div class="idInfo"><span>👗 Dressing <b style="color:${IDOLS[cur].h||"#b04fff"}">${IDOLS[cur].n}</b> · On stage <b>${L.length}</b>/8${L.length>1?` <small>(${L.map(i=>IDOLS[i].n.split(" ").pop()).join(" · ")})</small>`:" <small>— tap ＋ to add idols</small>"}</span>
+ ${!isLead?`<span class="idAct">${cur!=sp?`<button class="mini" data-act="lead">★ Make lead</button>`:""}${canRm?`<button class="mini" data-act="rm">✕ Remove</button>`:""}<button class="mini" data-act="back">‹ Back to ★ ${IDOLS[lead].n.split(" ").pop()}</button></span>`:""}</div>`;
+ bar.querySelectorAll(".idB").forEach(b=>b.onclick=()=>idolBar.dress(+b.dataset.i));
+ bar.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{const a=b.dataset.act;if(a=="lead")idolBar.lead(cur);else if(a=="rm")idolBar.rm(cur);else idolBar.dress(lead)});
+ const c=bar.querySelector(".idB.cur");if(c&&bar.dataset.sc!=String(cur)){bar.dataset.sc=cur;const row=bar.querySelector(".idRow");row.scrollLeft=Math.max(0,c.offsetLeft-row.clientWidth/2+c.clientWidth/2)}
+ const ut=$("unitTabs");if(ut)ut.style.display="none";const od=$("ccDress");if(od)od.remove();
 }catch(e){console.error(e)}return r})(renderCoord);
 const css=document.createElement("style");css.textContent=`
-#ccDress{grid-column:1/-1;grid-row:1;margin:0 0 8px;padding:8px;border-radius:14px;background:#fff6fd;box-shadow:0 2px 8px #c070b022}
-.ccDT{font-weight:bold;color:#7a3a8a;font-size:14px;margin-bottom:6px}.ccDT small{font-weight:normal;color:#a080b0}
-.ccDL{display:flex;flex-wrap:wrap;gap:6px}
-.ccDB{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;border-radius:12px;border:2px solid #ead6f5;background:#fff;color:#7a3a8a;font:bold 12px sans-serif;cursor:pointer;opacity:.75;position:relative;min-width:62px}
-.ccDB img{width:56px;height:32px;object-fit:cover;border-radius:8px}.ccDB.on{opacity:1;border-color:#ff4fa3;box-shadow:0 0 0 2px #ffc2e2}.ccDB i{position:absolute;top:1px;right:4px;font-style:normal;color:#2bb36a}
-@media (max-width:760px){#ccLeft.hasDress #ccPrev{grid-row:2/4;grid-column:1}#ccLeft.hasDress #ccWho{grid-row:2;grid-column:2}#ccLeft.hasDress #ccScore{grid-row:3;grid-column:2}}
+#ccIdols{margin:0 0 8px;padding:6px 8px;border-radius:16px;background:#fffc;box-shadow:0 4px 16px #c08ad033}
+.idRow{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding:2px 2px 4px;scroll-snap-type:x proximity}
+.idB{flex:0 0 auto;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;width:68px;padding:4px 3px 3px;border-radius:12px;border:2px solid #ead6f5;background:#fff;color:#7a3a8a;font:bold 11.5px sans-serif;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;min-height:44px}
+.idB img{width:58px;height:34px;object-fit:cover;border-radius:8px;pointer-events:none}
+.idB.on{border-color:#c79cf0;background:#fbf3ff}.idB.cur{border-color:#ff4fa3;box-shadow:0 0 0 3px #ffc2e2;background:#fff0f8}
+.idB.off{opacity:.55}.idB.off img{filter:grayscale(.6)}.idB.off:hover{opacity:.9}
+.idB .idN{white-space:nowrap;max-width:64px;overflow:hidden;text-overflow:ellipsis}
+.idOk,.idAdd,.idSt{position:absolute;font-style:normal;font-size:12px;line-height:16px;width:16px;height:16px;border-radius:50%;text-align:center}
+.idOk{top:-4px;right:-4px;background:#2bb36a;color:#fff}.idAdd{top:-4px;right:-4px;background:#ff4fa3;color:#fff}.idSt{top:-4px;left:-4px;font-size:11px}
+.idInfo{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 8px;font-size:13px;color:#7a3a8a;padding:2px 4px 0}.idInfo small{color:#9a7aaa}
+.idAct{display:flex;gap:6px;flex-wrap:wrap}.idAct .mini{min-height:32px;padding:4px 10px}
+#updBar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3000;border-radius:24px;padding:12px 20px;font:bold 15px sans-serif;background:linear-gradient(135deg,#ff6fae,#b57bff);color:#fff;box-shadow:0 6px 20px #8a3ac066}
+@media (max-width:760px){.idB{width:62px}.idB img{width:52px;height:30px}.idInfo{font-size:12px}}
 `;document.head.appendChild(css);
 })();
 </script></body></html>
