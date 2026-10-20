@@ -1,0 +1,1 @@
+window.FULLCOORD_ART=[];
