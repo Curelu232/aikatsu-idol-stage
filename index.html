@@ -71,7 +71,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script>window.BUILD="20261020214033"</script><script async src="assets/user/rig.js?v=20261020214033"></script><script src="assets/user/fullcoord/index.js?v=20261020214033"></script><script>
+<script>window.BUILD="20261020215539"</script><script async src="assets/user/rig.js?v=20261020215539"></script><script src="assets/user/fullcoord/index.js?v=20261020215539"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -223,7 +223,7 @@ function startStage(){const sc=coordScore();if(!sc.full){alert("Complete your co
  for(let i=0;i<60;i++)G.stars.push([Math.random()*900,Math.random()*560,Math.random()*2+.5]);
  cancelAnimationFrame(raf);loop();}
 function stopStage(){cancelAnimationFrame(raf);G=null}
-function judge(l){if(!G)return;G.press[l]=performance.now();const now=ac().currentTime;let best=null,bd=1;
+function judge(l){if(!G||G.hide)return;G.press[l]=performance.now();const now=ac().currentTime;let best=null,bd=1;
  for(const n of G.notes)if(!n.hit&&n.lane==l){const d=Math.abs(n.t-now);if(d<bd){bd=d;best=n}}
  if(!best||bd>.15)return;best.hit=1;add(bd<.06?"P":bd<.12?"G":"M",l);}
 function add(r,l){G.j[r]++;if(r=="M"){G.combo=0}else{G.combo++;G.max=Math.max(G.max,G.combo);G.score+=(r=="P"?100:60)*(1+Math.min(G.combo,50)/50)*(G.sp>0?2:1);
@@ -240,7 +240,7 @@ function drawIdol(d,x,y,b,s=1){cx.save();cx.translate(x,y);cx.scale(s,s);cx.fill
  cx.fillStyle="#5a2a6e";cx.fillRect(-10,-58,5,6);cx.fillRect(5,-58,5,6);cx.font="28px sans-serif";cx.textAlign="center";cx.fillText(b?b.icon:d.e,0,30);cx.restore();}
 function curScore(){return G.score*(G.unit?1.2:1)}
 function loop(){if(!G)return;raf=requestAnimationFrame(loop);const now=ac().currentTime,idol=IDOLS[S.idol];
- for(const n of G.notes)if(!n.hit&&now-n.t>.15){n.hit=1;add("M",n.lane)}
+ if(!G.hide)for(const n of G.notes)if(!n.hit&&now-n.t>.15){n.hit=1;add("M",n.lane)}
  if(G.sp>0&&now-G.spT>6)G.sp=0;
  const sp=G.sp>0,el=now-G.spT;const g=cx.createLinearGradient(0,0,0,560);g.addColorStop(0,sp?`hsl(${now*120%360},80%,35%)`:"#3a0f5a");g.addColorStop(1,"#ff6fae");if((USE3D||window.STAGE2D))cx.clearRect(0,0,900,560);else{cx.fillStyle=g;cx.fillRect(0,0,900,560);}
  if(!(USE3D||window.STAGE2D)){cx.fillStyle="#fff";G.stars.forEach(s=>{cx.globalAlpha=.4+.6*Math.abs(Math.sin(now*2+s[0]));cx.beginPath();cx.arc(s[0],s[1],s[2],0,7);cx.fill()});cx.globalAlpha=1;
@@ -252,7 +252,7 @@ function loop(){if(!G)return;raf=requestAnimationFrame(loop);const now=ac().curr
   cx.fillStyle=LANE_COLS[l];cx.font="bold 22px sans-serif";cx.textAlign="center";cx.fillText(KEYS[l].toUpperCase(),x+LW/2,535);}
  cx.strokeStyle="#fff";cx.lineWidth=4;cx.shadowColor="#ff4fa3";cx.shadowBlur=15;cx.beginPath();cx.moveTo(LX,HITY);cx.lineTo(LX+4*LW,HITY);cx.stroke();cx.shadowBlur=0;
  const cols=LANE_COLS;
- for(const n of G.notes){if(n.hit)continue;const y=HITY-(n.t-now)*SPEED;if(y<-30||y>600)continue;const x=LX+n.lane*LW+LW/2;
+ for(const n of G.notes){if(n.hit||G.hide)continue;const y=HITY-(n.t-now)*SPEED;if(y<-30||y>600)continue;const x=LX+n.lane*LW+LW/2;
   cx.fillStyle=cols[n.lane];cx.strokeStyle="#fff";cx.lineWidth=3;cx.beginPath();for(let k=0;k<10;k++){const r=k%2?10:22,a=k*Math.PI/5-Math.PI/2+now*2;cx.lineTo(x+Math.cos(a)*r,y+Math.sin(a)*r)}cx.closePath();cx.fill();cx.stroke();}
  G.fx=G.fx.filter(f=>(f.life-=.02)>0);G.fx.forEach(f=>{cx.globalAlpha=f.life;cx.fillStyle=f.col;cx.font="bold 24px sans-serif";cx.fillText(f.txt,f.x,f.y-(1-f.life)*40)});cx.globalAlpha=1;
  cx.textAlign="left";cx.fillStyle="#fff";cx.font="bold 22px sans-serif";cx.fillText("Score "+Math.round(curScore()),20,34);cx.font="bold 15px \"Noto Sans CJK JP\",\"Hiragino Sans\",\"Yu Gothic\",sans-serif";cx.fillText("♪ "+G.s.name,20,58);
@@ -3044,7 +3044,7 @@ const css=document.createElement("style");css.textContent=`
 @media (orientation:landscape) and (max-height:500px){#sgTrack{height:72vh}.sgCard{display:flex;gap:12px;align-items:center;width:min(560px,62vw)}.sgJ{width:46%;flex:none}.sgInfo{text-align:left}#sgHint{display:none}#s-songs{padding:4px}#sgStage{margin:6px 0 0}}
 `;document.head.appendChild(css);
 })();
-// ===== Special Appeal v3: barely-animated STILL cut-ins (unique per idol + unit) · clears the 3 nearest notes as PERFECT · clean appeal meter =====
+// ===== Special Appeal v3: barely-animated STILL cut-ins (unique per idol + unit) · hides all notes for the cut-in and counts every note inside it as PERFECT · clean appeal meter =====
 (function(){
 const CUT=3.0;let CI=null,chime=null;
 const PN=i=>IDOLS[i]?IDOLS[i].n.split(" ").pop().toLowerCase():"lulu";
@@ -3052,7 +3052,7 @@ const PIC=i=>"assets/portraits/"+PN(i)+".jpg";
 const coordOf2=i=>i==S.idol?S.coord:((S.coords&&S.coords[i])||sigOwned(i));
 const BODY=i=>{try{return"assets/user/2d/"+STAGE2D_API.artFor(i,coordOf2(i)).k+".webp"}catch(e){return""}};
 const pre=new Map();function preload(L){L.forEach(i=>{[PIC(i),BODY(i)].forEach(u=>{if(u&&!pre.has(u)){const im=new Image();im.src=u;pre.set(u,im)}})})}
-// separate tiny context for the chime: the song's context is frozen during the cut-in
+// separate tiny context for the chime (the song keeps playing under the cut-in)
 function unlockChime(){try{if(!chime){const C=window.AudioContext||window.webkitAudioContext;chime=new C()}if(chime.state!="running")chime.resume()}catch(e){}}
 addEventListener("pointerdown",unlockChime,true);addEventListener("keydown",unlockChime,true);addEventListener("touchstart",unlockChime,{capture:true,passive:true});
 function ding(notes,type,base){try{const c=chime;if(!c)return;const t=c.currentTime;notes.forEach((n,k)=>{const o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=440*Math.pow(2,(base+n-69)/12);
@@ -3090,16 +3090,18 @@ function cutIn(){const L=team2(),i=L[0];let info={};try{info=appealInfo()||{}}ca
 // queued PERFECT pops are shown when play resumes
 special=function(){if(!G||!G.notes||CI||G.gauge<100||G.done)return;const now=ac().currentTime;if(G.end&&G.end-now<CUT+1.2){return}
  G.gauge=0;G.sp=0;G.nsp=(G.nsp||0)+1;const bonus=2000+((G.sc&&G.sc.total)||0);G.score+=bonus;
- const up=G.notes.filter(n=>!n.hit&&n.t>=now-.12).sort((a,b)=>a.t-b.t).slice(0,3);const n0=G.fx.length;up.forEach(n=>{n.hit=1;add("P",n.lane)});const pops=G.fx.splice(n0);G.gauge=0;
+ // every note whose hit time falls inside the cut-in window [now, now+CUT] is hidden and counted PERFECT (combo keeps climbing)
+ const up=G.notes.filter(n=>!n.hit&&n.t>=now-.12&&n.t<=now+CUT).sort((a,b)=>a.t-b.t);const n0=G.fx.length;up.forEach(n=>{n.hit=1;add("P",n.lane)});const pops=G.fx.splice(n0,6);G.fx.length=n0;G.gauge=0;G.hide=1;G.hideFrom=now;
  G.apLog=(G.apLog||[]).concat([{at:now,cleared:up.length,lanes:up.map(n=>n.lane)}]);
  const el=cutIn(),my={el,pops,t0:performance.now()};CI=my;unlockChime();ding([0,4,7,12,16],"triangle",79);
- try{ac().suspend()}catch(e){}
- console.log("APPEAL fired: cleared "+up.length+" notes as PERFECT, bonus "+bonus);
+ console.log("APPEAL fired: "+CUT+"s cut-in, "+up.length+" notes in the window counted PERFECT, bonus "+bonus);
  my.tm=setTimeout(()=>endCut(my),CUT*1000)};
-function endCut(my,quiet){if(!my||CI!==my)return;CI=null;clearTimeout(my.tm);const el=my.el;el.classList.remove("on");el.classList.add("off");setTimeout(()=>el.remove(),320);
+function endCut(my,quiet){if(!my||CI!==my)return;CI=null;clearTimeout(my.tm);
+ // the song kept playing: any hidden note that came due while the cut-in was up (timer jitter) is PERFECT too, then notes reappear in place
+ if(G&&G.hide){const t=ac().currentTime;let k=0;G.notes.forEach(n=>{if(!n.hit&&n.t>=(G.hideFrom||0)-.12&&n.t<=t+.06){n.hit=1;add("P",n.lane);k++}});if(k&&G.apLog&&G.apLog.length)G.apLog[G.apLog.length-1].cleared+=k;G.hide=0}const el=my.el;el.classList.remove("on");el.classList.add("off");setTimeout(()=>el.remove(),320);
  const res=()=>{try{return ac().resume()}catch(e){return Promise.resolve()}};
  res().then(()=>{if(quiet||!G)return;my.pops.forEach(f=>{f.life=1;G.fx.push(f)});ding([12,7],"sine",84)});
- if(!quiet)setTimeout(()=>{try{if(ac().state!="running"&&G){const b=document.createElement("button");b.id="ciTap";b.textContent="▶ Tap to resume";($("stageWrap")||document.body).appendChild(b);b.onclick=()=>{ac().resume();b.remove()}}}catch(e){}},700)}
+}
 window.endCutIn=()=>endCut(CI,true);
 // stage lifecycle: never leave a cut-in, a frozen clock, a hidden canvas or a stale meter behind
 stopStage=(o=>function(){if(CI)endCut(CI,true);const t=$("ciTap");if(t)t.remove();try{if(ac().state=="suspended")ac().resume()}catch(e){}const s=$("stage");if(s)s.style.visibility="";if(typeof A2!="undefined")try{A2=null}catch(e){}return o()})(stopStage);
