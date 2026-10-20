@@ -47,13 +47,10 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen on" id="s-title"><h1 style="font-size:46px;margin-top:30px">✦ Idol Stardust Coordinate ✦</h1>
 <p class="center">Collect dress cards, build your coordinate, and shine on stage!</p>
 <div class="panel"><h2>Choose your idol</h2><div class="row" id="idols"></div></div>
-<div class="center"><button onclick="go('story')">📕 Story Mode</button><button onclick="go('scan')">💎 Card Scan</button><button onclick="free()">👗 Free Live</button><button onclick="go('album')">📖 Card Album</button></div>
+<div class="center"><button onclick="go('story')">📕 Story Mode</button><button onclick="free()">👗 Free Live</button><button onclick="go('album')">📖 Card Album</button></div>
 <p class="center" style="font-size:12px">Original fan-made game inspired by arcade idol card games. All brands, characters and art are original placeholders.</p></div>
 <div class="screen" id="s-story"><h2>📕 Story Mode</h2><div id="chapters"></div><div class="center"><button onclick="go('title')">Back</button></div></div>
 <div class="screen" id="s-dialog"><h2 id="dlgTitle"></h2><div class="dlg" id="dlg" onclick="nextLine()"></div><p class="center" style="font-size:12px">Click / press Enter to continue</p></div>
-<div class="screen" id="s-scan"><h2>💎 Card Scan</h2><p class="center">Stardust: <b id="dust"></b> ✦ (scan costs 10 — earn more on stage)</p>
-<div class="center"><button id="scan1" onclick="scan(1)">Scan ×1 (10✦)</button><button onclick="scan(5)" id="scan5">Scan ×5 (45✦)</button><button onclick="go('title')">Back</button></div>
-<div class="row" id="pulls" style="min-height:220px;margin-top:16px"></div></div>
 <div class="screen" id="s-album"><h2>📖 Card Album <span id="albumCount"></span></h2><div class="center"><button onclick="go('title')">Back</button></div><div id="album"></div></div>
 <div class="screen" id="s-coord"><h2>👗 Coordinate & Dress-up</h2><div class="panel center" id="stageGoal" style="display:none"></div>
 <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">

@@ -50,13 +50,10 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <p class="center">Collect dress cards, build your coordinate, and shine on stage!</p>
 <div id="title3d" class="mount3d" style="height:380px"></div>
 <div class="panel"><h2>Choose your idol</h2><div class="row" id="idols"></div></div>
-<div class="center"><button onclick="go('story')">📕 Story Mode</button><button onclick="go('scan')">💎 Card Scan</button><button onclick="free()">👗 Free Live</button><button onclick="go('album')">📖 Card Album</button></div>
+<div class="center"><button onclick="go('story')">📕 Story Mode</button><button onclick="free()">👗 Free Live</button><button onclick="go('album')">📖 Card Album</button></div>
 <p class="center" style="font-size:12px">Original fan-made game inspired by arcade idol card games. All brands, characters and art are original placeholders.</p></div>
 <div class="screen" id="s-story"><h2>📕 Story Mode</h2><div id="chapters"></div><div class="center"><button onclick="go('title')">Back</button></div></div>
 <div class="screen" id="s-dialog"><h2 id="dlgTitle"></h2><div class="dlg" id="dlg" onclick="nextLine()"></div><p class="center" style="font-size:12px">Click / press Enter to continue</p></div>
-<div class="screen" id="s-scan"><h2>💎 Card Scan</h2><p class="center">Stardust: <b id="dust"></b> ✦ (scan costs 10 — earn more on stage)</p>
-<div class="center"><button id="scan1" onclick="scan(1)">Scan ×1 (10✦)</button><button onclick="scan(5)" id="scan5">Scan ×5 (45✦)</button><button onclick="go('title')">Back</button></div>
-<div class="row" id="pulls" style="min-height:220px;margin-top:16px"></div></div>
 <div class="screen" id="s-album"><h2>📖 Card Album <span id="albumCount"></span></h2><div class="center"><button onclick="go('title')">Back</button></div><div id="album"></div></div>
 <div class="screen" id="s-coord"><h2>👗 Coordinate & Dress-up</h2><div class="panel center" id="stageGoal" style="display:none"></div>
 <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
@@ -74,7 +71,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script>window.BUILD="20261020210816"</script><script async src="assets/user/rig.js?v=20261020210816"></script><script src="assets/user/fullcoord/index.js?v=20261020210816"></script><script>
+<script>window.BUILD="20261020212735"</script><script async src="assets/user/rig.js?v=20261020212735"></script><script src="assets/user/fullcoord/index.js?v=20261020212735"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -165,14 +162,11 @@ function cardHTML(c,opts={}){const b=BRANDS.find(x=>x.id==c.brand);const n=S.own
 function avatar(d,w=90){if(!d)return`<svg viewBox="0 0 100 110" width="${w}"><circle cx="50" cy="50" r="30" fill="#ddd"/><text x="38" y="62" font-size="34">✂️</text></svg>`;
  return `<svg viewBox="0 0 100 110" width="${w}"><circle cx="50" cy="45" r="34" fill="${d.h}"/><circle cx="50" cy="50" r="24" fill="#ffe6d6"/><circle cx="42" cy="50" r="4" fill="#5a2a6e"/><circle cx="58" cy="50" r="4" fill="#5a2a6e"/><path d="M44 60 Q50 65 56 60" stroke="#ff4f7a" stroke-width="2" fill="none"/><path d="M26 30 Q50 10 74 30 L74 40 Q50 26 26 40Z" fill="${d.h}"/><path d="M30 80 L70 80 L80 108 L20 108Z" fill="${TYPES[d.t]}"/><text x="70" y="25" font-size="16">${d.e}</text></svg>`;}
 function go(s){document.querySelectorAll(".screen").forEach(e=>e.classList.remove("on"));$("s-"+s).classList.add("on");if(s!="stage")stopStage();
- const f={title:renderTitle,scan:renderScan,album:renderAlbum,coord:renderCoord,story:renderStory}[s];if(f)f();}
+ const f={title:renderTitle,album:renderAlbum,coord:renderCoord,story:renderStory}[s];if(f)f();}
 function renderTitle(){STORYCH=-1;$("idols").innerHTML=IDOLS.map((d,i)=>`<div class="idol ${S.idol==i?'sel':''}" onclick="S.idol=${i};save();renderTitle()">
  ${avatar(d)}<div><b>${d.n}</b></div><div style="color:${TYPES[d.t]}">${d.t} type</div><div style="font-size:11px">"${d.q}"</div></div>`).join("");}
 function pick(force){let c;if(force)c=card(force);else{let tot=0;for(const k in RAR)tot+=RAR[k].w;let r=Math.random()*tot,rr="N";for(const k in RAR){if((r-=RAR[k].w)<0){rr=k;break}}
  const pool=CARDS.filter(x=>x.rarity==rr);c=pool[Math.floor(Math.random()*pool.length)];}S.own[c.id]=(S.own[c.id]||0)+1;save();return c;}
-function renderScan(){$("dust").textContent=S.dust;$("scan1").disabled=S.dust<10;$("scan5").disabled=S.dust<45;}
-function scan(n){const cost=n==1?10:45;if(S.dust<cost)return;S.dust-=cost;tone(880,.1);const got=[];for(let i=0;i<n;i++)got.push(pick());save();
- $("pulls").innerHTML="";got.forEach((c,i)=>setTimeout(()=>{$("pulls").insertAdjacentHTML("beforeend",cardHTML(c));tone(c.rarity=="CP"?1320:c.rarity=="PR"?1100:660,.15);if(c.rarity!="N"&&c.rarity!="R")flash();},i*350));renderScan();}
 function renderAlbum(){const own=CARDS.filter(c=>S.own[c.id]).length;$("albumCount").textContent=`(${own}/${CARDS.length})`;
  $("album").innerHTML=BRANDS.map(b=>`<div class="panel"><h3 style="color:${b.c2};margin:4px">${b.icon} ${b.name} <small>(${b.type}) — full set bonus +50%</small></h3><div class="row">${CARDS.filter(c=>c.brand==b.id).map(c=>cardHTML(c,{locked:!S.own[c.id]})).join("")}</div></div>`).join("");}
 function coordCards(){const C=S.coord;const ids=C["One-piece"]?[C["One-piece"],C.Shoes,C.Accessory]:[C.Tops,C.Bottoms,C.Shoes,C.Accessory];return ids.filter(Boolean).map(card).filter(Boolean);}
@@ -184,7 +178,7 @@ function coordScore(){const cs=coordCards(),idol=IDOLS[S.idol];let base=cs.reduc
  return{base,bonus,total:base+bonus,notes,full};}
 function renderCoord(){for(const s in S.coord)if(!S.own[S.coord[s]])delete S.coord[s];const own=CARDS.filter(c=>S.own[c.id]);
  $("slotTabs").innerHTML=SLOTS.map(s=>`<button class="${s==slotTab?'on':''}" onclick="slotTab='${s}';renderCoord()">${s}${S.coord[s]?' ✔':''}</button>`).join("");
- const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id})).join(""):"<p>No cards for this slot yet — try Card Scan!</p>";
+ const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id})).join(""):"<p>No cards for this slot yet — clear story chapters to earn more!</p>";
  document.querySelectorAll("#coordCards .card").forEach(e=>e.onclick=()=>{const id=e.dataset.id;if(S.coord[slotTab]==id)delete S.coord[slotTab];else{S.coord[slotTab]=id;
   if(slotTab=="One-piece"){delete S.coord.Tops;delete S.coord.Bottoms}if(slotTab=="Tops"||slotTab=="Bottoms")delete S.coord["One-piece"];}tone(990,.05);save();renderCoord();});
  const sc=coordScore(),idol=IDOLS[S.idol];
@@ -282,7 +276,7 @@ function finish(){const g=G;stopStage();const tot=g.notes.filter(n=>n.hit!==2).l
    const q=g.rival?(ROLE.iceQueen==IDOLS.indexOf(g.rival)||g.rival==IDOLS[cast("iceQueen")]?"\"...Hmph. Fine. You shine. Next time, I won't lose.\"":"\"Wow, you got me! Crêpes are on me ♪\""):"";if(q)story+=`<br><i>${g.rival.n}: ${q}</i>`;}}
  save();go("result");
  $("resBox").innerHTML=`<div class="big">${rank}</div><b>${IDOLS[S.idol].n}</b>${g.unit?" & "+g.unit.n:""} — ${g.s.name}<br>Perfect ${g.j.P} · Good ${g.j.G} · Miss ${g.j.M} · Max Combo ${g.max} · Accuracy ${Math.round(acc*100)}% · Special Appeals ${g.nsp}<br>
- Rhythm ${Math.round(g.score)} + Coordinate ${g.sc.total}×${(1+acc).toFixed(2)}${g.unit?" ×1.2 unit":""} = <b style="font-size:26px;color:#ff4fa3">${final}</b><br>Best ${S.best} · +${earn}✦ Stardust${story}<br><b>🎁 Reward cards:</b>`;
+ Rhythm ${Math.round(g.score)} + Coordinate ${g.sc.total}×${(1+acc).toFixed(2)}${g.unit?" ×1.2 unit":""} = <b style="font-size:26px;color:#ff4fa3">${final}</b><br>Best ${S.best}${story}<br><b>🎁 Reward cards:</b>`;
  $("reward").innerHTML=rewards.map(c=>cardHTML(c)).join("");
  $("resBtns").innerHTML=ch?`<button onclick="go('coord')">Retry</button><button onclick="go('story')">Story Menu</button>`:`<button onclick="go('coord')">Play Again</button><button onclick="go('title')">Title</button>`;flash();tone(1046,.3,"triangle",.15);}
 add=(o=>function(r,l){try{if(r!="M"&&G)G.hitT=performance.now()/1000}catch(e){}return o.apply(this,arguments)})(add);
@@ -348,7 +342,7 @@ art=function(c){const k=cols(c),b=c.brand;let s;
 renderCoord=function(){for(const s in S.coord)if(!S.own[S.coord[s]])delete S.coord[s];const own=CARDS.filter(c=>S.own[c.id]);
  $("preview").innerHTML=dressSVG(S.coord,S.hair,160);
  $("slotTabs").innerHTML=SLOTS.map(s=>`<button class="${s==slotTab?'on':''}" onclick="slotTab='${s}';renderCoord()">${s}${S.coord[s]?' ✔':''}</button>`).join("");
- const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id}).replace('class="card','class="card thumb')).join(""):"<p>No cards for this slot yet — try Card Scan!</p>";
+ const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id}).replace('class="card','class="card thumb')).join(""):"<p>No cards for this slot yet — clear story chapters to earn more!</p>";
  document.querySelectorAll("#coordCards .card").forEach(e=>e.onclick=()=>{const id=e.dataset.id;if(S.coord[slotTab]==id)delete S.coord[slotTab];else{S.coord[slotTab]=id;
   if(slotTab=="One-piece"){delete S.coord.Tops;delete S.coord.Bottoms}if(slotTab=="Tops"||slotTab=="Bottoms")delete S.coord["One-piece"];}tone(990,.05);save();renderCoord();});
  $("hairOpts").innerHTML=HAIRC.map(c=>`<span class="sw ${(S.hair.color||IDOLS[S.idol].h)==c?'on':''}" style="background:${c}" onclick="S.hair.color='${c}';save();renderCoord()"></span>`).join("")+" "+HAIRS.map(h=>`<button class="mini ${S.hair.style==h?'':'off'}" style="${S.hair.style==h?'':'opacity:.5'}" onclick="S.hair.style='${h}';save();renderCoord()">${h}</button>`).join("");
@@ -838,13 +832,11 @@ renderCoord=(o=>function(){const boy=isBoy(S.idol);for(const s in S.coord){const
  if(boy&&slotTab=="One-piece")slotTab="Tops";o();
  document.querySelectorAll("#slotTabs button").forEach(b=>{if(boy&&/One-piece/.test(b.textContent))b.style.display="none"});
  const box=$("coordCards");box.querySelectorAll(".card").forEach(e=>{const c=card(e.dataset.id);if(c&&!fitsIdol(c))e.remove()});
- if(!box.querySelector(".card"))box.innerHTML=`<p>No ${boy?"boys'":"girls'"} cards for this slot yet — try Card Scan!</p>`;})(renderCoord);
+ if(!box.querySelector(".card"))box.innerHTML=`<p>No ${boy?"boys'":"girls'"} cards for this slot yet — clear story chapters to earn more!</p>`;})(renderCoord);
 const _pick=pick;
 pick=function(force){if(force){let c=card(force);if(c&&!fitsIdol(c)){const m={sa0:"sk5",cc0:"sk7",mb2:"ns7",sa4:"ns4",rt4:"sk4",pp4:"ns6"}[force];if(m)force=m}return _pick(force)}
  let tot=0;for(const k in RAR)tot+=RAR[k].w;let r=Math.random()*tot,rr="N";for(const k in RAR){if((r-=RAR[k].w)<0){rr=k;break}}
  let pool=CARDS.filter(x=>x.rarity==rr&&fitsIdol(x));if(!pool.length)pool=CARDS.filter(x=>fitsIdol(x));const c=pool[Math.floor(Math.random()*pool.length)];return _pick(c.id)};
-renderScan=(o=>function(){o();const n=$("scanFor")||(()=>{const d=document.createElement("div");d.id="scanFor";d.style.cssText="margin:6px;font-weight:bold;color:#7a4fd0";$("dust").parentNode.after(d);return d})();
- n.textContent=isBoy(S.idol)?"⚔️ Scanning for "+IDOLS[S.idol].n+": boys' brands (Lunar Noble, Starlit Knights Uniform)":"🎀 Scanning for "+IDOLS[S.idol].n+": girls' brands";})(renderScan);
 // --- 2D card art for boy kinds
 const starP=(x,y,r,f)=>{let d="";for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;d+=(i?"L":"M")+(x+rr*Math.cos(a)).toFixed(1)+" "+(y+rr*Math.sin(a)).toFixed(1)}return`<path d="${d}Z" fill="${f}"/>`};
 function boySVG(c){const{m,a,t}=cols(c),k=c.kind,trim=c.brand=="ns"?"#d8dde8":"#d4af37",em=(x,y,r)=>c.brand=="ns"?moon2(x,y,r,trim):starP(x,y,r,trim);
@@ -1082,7 +1074,6 @@ renderAlbum=(o=>function(){o();document.querySelectorAll("#album h3").forEach(h=
 aikatsuChange=(o=>function(){const old=$("lrChangeLogo");if(old)old.remove();o();if(coordCards().some(c=>c.brand=="ns")){const im=document.createElement("img");im.id="lrChangeLogo";im.src=LR_LOGO;im.alt="Lunar Revel";const host=$("s-change");host.style.position="relative";host.appendChild(im);
  const bn=$("changeBanner");const add=()=>{if(bn.classList.contains("on")&&!bn.querySelector(".lrb"))bn.insertAdjacentHTML("afterbegin",`<img class="lrb" src="assets/user/web/lunar-revel-logo-s.png" alt="" style="height:54px;display:block;margin:0 auto">`)};CHG.push(setInterval(add,300))}})(aikatsuChange);
 go=(o=>function(s){if(s!="change"){const l=$("lrChangeLogo");if(l)l.remove()}return o(s)})(go);
-renderScan=(o=>function(){o();const n=$("scanFor");if(n)n.textContent=isBoy(S.idol)?"⚔️ Scanning for "+IDOLS[S.idol].n+": boys' brands ("+BRANDS.filter(b=>b.g).map(b=>b.name).join(", ")+")":"🎀 Scanning for "+IDOLS[S.idol].n+": girls' brands";})(renderScan);
 boySVG=(o=>function(c){const{m,a,t}=cols(c),k=c.kind;
  if(k=="sunband")return`<path d="M64 62 Q100 30 136 62" stroke="${m}" stroke-width="8" fill="none"/>`+[...Array(10)].map((_,i)=>`<ellipse cx="${130+9*Math.cos(i*.63)}" cy="${48+9*Math.sin(i*.63)}" rx="5" ry="3" fill="#ffd23f" transform="rotate(${i*36} ${130+9*Math.cos(i*.63)} ${48+9*Math.sin(i*.63)})"/>`).join("")+`<circle cx="130" cy="48" r="6" fill="#7a4a1a"/>`;
  if(k=="choker")return`<rect x="72" y="40" width="56" height="12" rx="6" fill="#121014"/><circle cx="100" cy="56" r="9" fill="#b0102c"/><path d="M92 56 Q100 46 108 56" stroke="#5a0614" stroke-width="2" fill="none"/>`;
@@ -1239,9 +1230,6 @@ renderAlbum=(o=>function(){o();const al=$("album");if(!al)return;
  al.insertAdjacentHTML("afterbegin",`<div id="tierFlt" class="panel">Filter: `+[["all","All"],["PR","💗 Premium Rare"],["CON","✨ Constellation"],["JW","💎 Jeweling"],["SP","🌟 Star Premium"]].map(([k,n])=>`<button class="mini" style="${ALBF==k?'':'opacity:.5'}" onclick="ALBF='${k}';renderAlbum()">${n}</button>`).join("")+`</div>`);
  if(ALBF!="all"){[...al.children].forEach(p=>{if(p.id!="tierFlt")p.remove()});const L=CARDS.filter(c=>c.tier==ALBF);
   al.insertAdjacentHTML("beforeend",`<div class="panel"><h3 style="margin:4px">${TIER[ALBF].ic} ${TIER[ALBF].n} coords (${L.filter(c=>S.own[c.id]).length}/${L.length})</h3><div class="row">${L.map(c=>cardHTML(c,{locked:!S.own[c.id]})).join("")}</div></div>`)}})(renderAlbum);
-// ---------- scan fanfare ----------
-scan=(o=>function(n){const before=$("pulls")?$("pulls").children.length:0;o(n);setTimeout(()=>{const got=[...document.querySelectorAll("#pulls .card")].map(d=>card(d.dataset.id)).filter(c=>c&&c.tier);
- const top=["SP","JW","CON","PR"].find(t=>got.some(c=>c.tier==t));if(top){flash();[0,4,7,12,16,19].forEach((k,i)=>tone(N(76+k),.3,"triangle",.1,ac().currentTime+i*.07));const p=$("pulls");p.insertAdjacentHTML("afterbegin",`<div class="panel" style="width:100%;text-align:center;font-weight:bold;font-size:22px">${TIER[top].ic} ${TIER[top].n} coord card! ${TIER[top].ic}</div>`)}},n*350+60)})(scan);
 // ---------- Aikatsu Change ----------
 aikatsuChange=(o=>function(){const T=coordTiers(),host=$("s-change");host.style.position="relative";let fx=$("tierFx");if(fx)fx.remove();host.insertAdjacentHTML("beforeend",'<div id="tierFx"></div>');fx=$("tierFx");
  const deco=()=>{if(T.CON&&T.CON.sign)fx.insertAdjacentHTML("beforeend",`<div class="tierLbl">✨ ${T.CON.sign} Constellation Coord ${ZOD[T.CON.sign][0]}</div>`+conSVG(T.CON.sign,"").replace("<svg ",'<svg style="position:absolute;left:20%;top:12%;width:60%;height:70%" '));
@@ -1467,8 +1455,6 @@ function cardBack(){return `<div class="bk"><div class="cback"><div class="rays"
 cardHTML=(o=>function(c,opts={}){let h=o(c,opts);const b=BRANDS.find(x=>x.id==c.brand);
  h=h.replace('<div class="pat"></div>',`<div class="pat" style="background-image:${motifBG(b)}"></div>`);
  const i=h.lastIndexOf("</div></div>");return h.slice(0,i)+`</div><div class="lace" style="background-image:${laceFor(c)}"></div>${cardBack()}</div>`})(cardHTML);
-// flip reveal on scan
-scan=(o=>function(n){o(n);const mark=()=>document.querySelectorAll("#pulls .card.dc:not(.revd)").forEach(d=>{d.classList.add("rev","revd")});for(let i=0;i<=n;i++)setTimeout(mark,i*350+30)})(scan);
 // posed close-up snapshots (3/4 body, card-style framing)
 const POSES=["pose","reach","heart","clap"];
 snapOne=function(key,c){if(!USE3D||!USE_VRM||VR.fail||SN.fail||!snapInit())return"nope";const idx=+key.split("|")[0],prev=VRM_SLOT;VRM_SLOT="card";
@@ -2806,10 +2792,10 @@ function checkUnlocks(){const fresh=IDOLS.map((_,i)=>i).filter(i=>unl(i)&&!S.unl
  toast(`<div class="ulT">✨ New idol unlocked! ✨</div>${fresh.map(i=>`<div class="ulI">${P(i)}<b>${IDOLS[i].n}</b><small>${IDOLS[i].t} type · base coord added</small></div>`).join("")}`,4200);
  try{[0,4,7,12,16].forEach((n,k)=>tone(N(76+n),.35,"triangle",.1,ac().currentTime+k*.09))}catch(e){}}
 window.checkUnlocks=checkUnlocks;
-const lockMsg=i=>`🔒 ${IDOLS[i].n} joins after Story Ch.${unlockCh(i)}`;
+const lockMsg=i=>window.unlockText?`🔒 ${IDOLS[i].n} — ${unlockText(i)}`:`🔒 ${IDOLS[i].n} joins after Story Ch.${unlockCh(i)}`;
 function idxFromEl(e){const m=(e.getAttribute("onclick")||"").match(/(?:S\.idol=|unitToggle\()(\d+)/);return m?+m[1]:-1}
 function lockIdols(box){if(!box)return;box.querySelectorAll(".idol").forEach(e=>{const i=idxFromEl(e);if(i<0||unl(i))return;e.classList.add("idLock");e.setAttribute("onclick","");e.onclick=()=>toast(lockMsg(i));
-  if(!e.querySelector(".idLk"))e.insertAdjacentHTML("beforeend",`<div class="idLk">🔒<small>Story Ch.${unlockCh(i)}</small></div>`)})}
+  if(!e.querySelector(".idLk"))e.insertAdjacentHTML("beforeend",`<div class="idLk">🔒<small>${window.unlockShort?unlockShort(i):"Story Ch."+unlockCh(i)}</small></div>`)})}
 renderTitle=(o=>function(){if(!unl(S.idol)){S.idol=0;S.coord=sigCoord(0)}const r=o();lockIdols($("idols"));
  const n=IDOLS.filter((d,i)=>!d.gone&&unl(i)).length,tot=IDOLS.filter(d=>!d.gone).length,pg=$("ulProg");if(pg)pg.innerHTML=`Idols unlocked <b>${n}/${tot}</b> · Story ${Math.min(S.story||0,STORY.length)}/${STORY.length} chapters`;return r})(renderTitle);
 renderUnit=(o=>function(){UNIT.mem=UNIT.mem.filter(unl);o();lockIdols($("unitIdols"))})(renderUnit);
@@ -2901,10 +2887,6 @@ renderAlbum=(o=>function(){o();try{const al=$("album");if(!al)return;const tf=$(
  const old=$("og_album");if(old)old.remove();const bar=ORG.bar("album",all.map(k=>F.SETS.get(k)[0]),()=>renderAlbum());al.parentNode.insertBefore(bar,al);
  const st=ORG.F("album"),srt=ORG.sorter(st);const L=all.filter(k=>{const c=F.SETS.get(k)[0];return ORG.pass(c,st,"album")}).sort((a,b)=>srt(F.SETS.get(a)[0],F.SETS.get(b)[0]));
  al.innerHTML=`<div class="fcGrid">${L.map(k=>{const c=F.SETS.get(k)[0];const fitI=IDOLS.findIndex((d,i)=>!d.gone&&F.fits(k,i));return F.fcHTML(k,{locked:!F.owned(k),idol:F.fits(k,S.idol)?S.idol:fitI})}).join("")}</div>`}catch(e){console.error(e)}})(renderAlbum);
-// ---------- card scan (gacha) shows coord cards ----------
-scan=function(n){const cost=n==1?10:45;if(S.dust<cost)return;S.dust-=cost;try{tone(880,.1)}catch(e){}const got=[];for(let i=0;i<n;i++)got.push(pick());save();
- $("pulls").innerHTML="";got.forEach((c,i)=>setTimeout(()=>{const fi=F.fits(c.set,S.idol)?S.idol:IDOLS.findIndex((d,j)=>!d.gone&&F.fits(c.set,j));$("pulls").insertAdjacentHTML("beforeend",`<div class="fcPull">${F.fcHTML(c.set,{idol:fi})}</div>`);
-  try{tone(c.rarity=="CON"?1320:c.rarity=="PR"?1100:660,.15);if(c.rarity!="R")flash()}catch(e){}},i*350));renderScan()};
 // ---------- results: reward coords ----------
 go=(o=>function(s){const r=o(s);if(s=="result")setTimeout(()=>{const rw=$("reward");if(!rw)return;const ks=[...new Set([...rw.querySelectorAll("[data-id]")].map(e=>F.setOf(e.dataset.id)).filter(Boolean))];if(ks.length)rw.innerHTML=ks.map(k=>`<div class="fcPull">${F.fcHTML(k,{})}</div>`).join("")},30);return r})(go);
 const css=document.createElement("style");css.textContent=`
@@ -2933,7 +2915,7 @@ const css=document.createElement("style");css.textContent=`
 #ccOk{font-size:20px;padding:12px 34px;margin:0;background:linear-gradient(135deg,#ff6fae,#b57bff);box-shadow:0 5px 0 #8a3ac0}
 .fcGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:8px}
 .fcPull{width:160px;display:inline-block;margin:6px;animation:fcIn .5s cubic-bezier(.2,1.5,.4,1)}@keyframes fcIn{from{transform:scale(.3) rotateY(90deg);opacity:0}}
-#pulls,#reward{display:flex;flex-wrap:wrap;justify-content:center}
+#reward{display:flex;flex-wrap:wrap;justify-content:center}
 .card.fcScan{width:190px;height:auto;padding:0;border:none;background:none;box-shadow:none;overflow:visible}
 @media (max-width:760px){#ccMain{grid-template-columns:1fr}#ccLeft{position:static;display:grid;grid-template-columns:46% 1fr;align-items:center;gap:4px 10px}
  #ccPrev{grid-row:1/3}#ccPrev .previewBox{height:min(42vh,320px)}#ccWho{align-self:end}#ccScore{align-self:start}#ccLeft>#ccGoal,#ccLeft>#ccMore{grid-column:1/3}
@@ -2972,7 +2954,7 @@ scr.innerHTML=`<div id="sgHead"><button class="ccBack" id="sgBack">‹ Back</but
 document.body.insertBefore(scr,$("s-coord"));
 let cur=0;const meta=s=>(s&&s.lazyMeta)||{};
 // one entry per TITLE (meta.group); the entry's index is the version that fits the current lineup
-const list=()=>{const seen=new Set(),L=[];SONGS.forEach((s,i)=>{if(!s||!s.main||s.planned||!songAvail(s))return;const g=meta(s).group;if(!g){L.push(i);return}if(seen.has(g))return;seen.add(g);L.push(resolveVersion(g,songLineup()))});const key=i=>meta(SONGS[i]).group||SONGS[i].name;return L.sort((x,y)=>key(x).localeCompare(key(y),"ja"))};
+const list=()=>{const seen=new Set(),L=[];SONGS.forEach((s,i)=>{if(!s||!s.main||s.planned||!songAvail(s))return;const g=meta(s).group;if(!g){L.push(i);return}if(seen.has(g))return;if(window.songOpen&&!songOpen(g))return;/* locked until its story chapter is cleared */seen.add(g);L.push(resolveVersion(g,songLineup()))});const key=i=>meta(SONGS[i]).group||SONGS[i].name;return L.sort((x,y)=>key(x).localeCompare(key(y),"ja"))};
 const grpOf=i=>SONGS[i]&&meta(SONGS[i]).group;
 const DN=["","Easy","Normal","Hard","Extreme"];
 const hue=t=>{let h=0;for(const c of t||"")h=(h*31+c.charCodeAt(0))%360;return h};
@@ -2986,7 +2968,8 @@ function cardH(i,pos){const s=SONGS[i],m=meta(s);const lv=m.level||m.diff_stars|
  <div class="sgS">🎤 ${m.kind=="inst"?"Off vocal (karaoke)":sing}</div>${pos.startsWith("main")&&V.length>1?`<div class="sgVs">Plays for your lineup: <b>${m.label||m.kind}</b><br>${vers}</div>`:""}
  ${pos.startsWith("main")&&inst!=null?`<button class="mini sgOV ${S.offVocal?"on":""}" id="sgOV">${S.offVocal?"🎼 Off vocal ON":"🎤 Vocal · tap for off vocal"}</button>`:""}
  <div class="sgM">${lv?"Lv "+"★".repeat(Math.min(5,lv))+" · ":""}${Math.round(m.bpm||s.bpm||0)} BPM${m.dur?" · "+fmt(m.dur):""}${m.lyrics&&m.lyrics.length?" · 字 subtitles":""}</div></div></div>`}
-function render(dir){const L=list();if(!L.length){$("sgTrack").innerHTML="<p class='center'>No songs installed yet.</p>";return}
+function render(dir){const L=list();const lk=window.songLockedCount?songLockedCount():0;$("sgHint").innerHTML=(lk?`🔒 ${lk} more song${lk>1?"s":""} unlock as you clear Story chapters · `:"")+"Swipe or use ← → · Enter to select";
+ if(!L.length){$("sgTrack").innerHTML="<p class='center'>🔒 No songs unlocked yet — clear a Story chapter to add its song to Free Live!</p>";$("sgN").textContent="";$("sgDots").innerHTML="";return}
  let k=L.indexOf(song);if(k<0&&grpOf(song))k=L.findIndex(i=>grpOf(i)==grpOf(song));if(k<0)k=0;song=L[k];cur=k;const n=L.length,at=d=>L[(k+d+n)%n];
  $("sgTrack").innerHTML=(n>1?cardH(at(-1),"prev"):"")+cardH(L[k],"main"+(dir?" in"+(dir>0?"R":"L"):""))+(n>1?cardH(at(1),"next"):"");
  $("sgN").textContent=`${k+1} / ${n}`;$("sgDots").innerHTML=n<=24?L.map((_,j)=>`<i class="${j==k?"on":""}"></i>`).join(""):"";
@@ -2997,7 +2980,7 @@ function render(dir){const L=list();if(!L.length){$("sgTrack").innerHTML="<p cla
  const ov=$("sgOV");if(ov)ov.onclick=e=>{e.stopPropagation();S.offVocal=S.offVocal?0:1;save();render()};
  preview(SONGS[L[k]])}
 function step(d){const L=list();if(L.length<2)return;song=L[(cur+d+L.length)%L.length];try{tone(880+d*60,.04)}catch(e){}render(d)}
-function pickSong(){stopPrev();STORYCH=-1;try{ensureDecoded(SONGS[song])}catch(e){}go("coord")}
+function pickSong(){if(!list().length)return;stopPrev();STORYCH=-1;try{ensureDecoded(SONGS[song])}catch(e){}go("coord")}
 $("sgL").onclick=()=>step(-1);$("sgR").onclick=()=>step(1);$("sgGo").onclick=pickSong;
 $("sgBack").onclick=()=>{stopPrev();go(UNIT.lead!=null&&UNIT.mem.length?"unit":"title")};
 addEventListener("keydown",e=>{if(!scr.classList.contains("on"))return;if(e.key=="ArrowLeft"){e.preventDefault();step(-1)}else if(e.key=="ArrowRight"){e.preventDefault();step(1)}else if(e.key=="Enter"){e.preventDefault();pickSong()}});
@@ -3191,8 +3174,8 @@ S.coords=S.coords||{};
 const DR={lead:null};window.DRESS=DR;
 const ok=i=>IDOLS[i]&&!IDOLS[i].gone&&(typeof idolUnlocked!="function"||idolUnlocked(i));
 const leadOf=()=>DR.lead==null?S.idol:DR.lead;
-function storyPartner(){const ch=STORY[STORYCH];if(!(ch&&ch.unit))return null;const s=S.idol;S.idol=leadOf();let p=null;try{p=cast(ch.unit)}catch(e){}S.idol=s;return p!=null&&ok(p)&&p!=leadOf()?p:null}
-function lineup(){const l=leadOf(),L=[l],p=storyPartner();if(p!=null)L.push(p);if(UNIT.lead!=null)UNIT.mem.forEach(i=>{if(!L.includes(i))L.push(i)});return L.filter(ok).slice(0,8)}
+function storyPartner(){const ch=STORY[STORYCH];if(!(ch&&ch.unit))return null;const s=S.idol;S.idol=leadOf();let p=null;try{p=cast(ch.unit)}catch(e){}S.idol=s;return p!=null&&(ok(p)||ch.guest)&&p!=leadOf()?p:null}
+function lineup(){const l=leadOf(),L=[l],p=storyPartner();if(p!=null)L.push(p);if(UNIT.lead!=null)UNIT.mem.forEach(i=>{if(!L.includes(i))L.push(i)});return L.filter(i=>ok(i)||i===p).slice(0,8)}// a story guest joins even before being unlocked
 window.coordLineup=lineup;
 const fitOrSig=i=>{let v={};try{v=validCoord(i,S.coords[i]||{})}catch(e){}return Object.keys(v).length?v:sigOwned(i)};
 function stash(){S.coords[S.idol]=S.coord}
@@ -3243,5 +3226,122 @@ const css=document.createElement("style");css.textContent=`
 #updBar{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:3000;border-radius:24px;padding:12px 20px;font:bold 15px sans-serif;background:linear-gradient(135deg,#ff6fae,#b57bff);color:#fff;box-shadow:0 6px 20px #8a3ac066}
 @media (max-width:760px){.idB{width:62px}.idB img{width:52px;height:30px}.idInfo{font-size:12px}}
 `;document.head.appendChild(css);
+})();
+// ===== Per-idol Story Mode: every idol has an own storyline (own chapters, dialogue, goals) built on their brand & type.
+// Each chapter plays a UNIQUE song from that idol's own songs (solos first, then duets — no title is reused across stories).
+// Clearing a chapter unlocks its song in Free Live + one coord of the idol's own brand; clearing the final chapter unlocks the next idol:
+// Lulu → Rinne → Pochi → Sera → Luna → Taiyo → Kanata → Ren.  luna211 (S.allIdols) still unlocks everything.
+(function(){
+const CHAIN=[0,1,3,2,5,6,8,7];
+Object.assign(ROLE,{lulu:0,rinne:1,sera:2,pochi:3,luna:5,taiyo:6,ren:7,kanata:8});
+const NM=i=>IDOLS[i].n.split(" ")[1];
+// ---- storylines ---------------------------------------------------------------------------------------------
+// g = song title (versions.json group), unit = duet guest (joins even if not unlocked yet), rival = rival idol
+const ST={
+0:{brand:"Sugarpetal",arc:"New to the school: a nervous transfer student bakes her courage into every stage until Starlight Academy feels like home.",ch:[
+ {t:"The New Girl",g:"Petals in Love",win:"Welcome to Starlight Academy, Lulu!",lines:[["Student","Wait, who's that? A transfer student? In the middle of the term?"],["Student","She got lost on the way to the gym. Twice. Is she even an idol?"],["me","(Deep breath... new school, new uniform, new everything.) H-hello! I'm Hoshimi Lulu! I like strawberries and... and stages!"],["pochi","Hiii! Don't mind them — everyone's new once! The intro showcase is today. Show them who you are!"],["me","Okay! If I can't say it, I'll sing it. Let's sparkle together!"]]},
+ {t:"A Seat at the Lunch Table",g:"秘密のシュガームーン",win:"Your secret recipe: sharing.",lines:[["Classmate","The new girl's eating alone again... should someone sit with her?"],["Classmate","Eh, she'll find her own group. New kids always do."],["me","(I baked moon cookies to share... but I don't know anyone's name yet.)"],["Sugarpetal Designer","Lulu. Sugarpetal's moonlight stage is tonight. Sing like you're handing a cookie to every seat in the hall."],["me","Every seat... even the ones that didn't save me a seat. Okay — sugar moon, here I come!"]]},
+ {t:"Stardust Parade Tryouts",g:"星屑ロマンス☆パレード",rival:"sera",win:"You're no 'new girl' now, darling. You're a rival.",lines:[["Student","Parade tryouts! Only one first-year spot. The transfer student won't stand a chance."],["sera","Hm. Ignore the hallway chorus, Lulu. I'm trying out too — and I'd hate to win against someone holding back."],["me","Sera-senpai... thank you. I won't hold back!"],["Audience Member","Go strawberry girl!! ...What? She's cute!"]]},
+ {t:"Rose Parfait Showcase",g:"誘惑♡ローズパフェ",rival:"rinne",win:"...Sweet and steady. You belong here.",lines:[["Upperclassman","The academy's top idol, Aoba Rinne, is judging today? The new girl's going to freeze."],["rinne","I don't judge newcomers. I judge stages. ...Yours, so far, has been honest. Continue."],["me","A rose parfait — sweet on top, strong underneath. That's the kind of idol I want to be!"],["pochi","LULU! I made a banner! It says 'OUR LULU'! Because you're ours now!"]]},
+ {t:"Colorful Parade Finale (Duet)",g:"恋するカラフル☆パレード",unit:"pochi",win:"The whole school is dancing in color — with you in the middle.",lines:[["Student","Hey... the new girl's headlining the festival parade with Pochi?"],["Student","Honestly? She earned it. I've been humming her song all week."],["me","A month ago I couldn't find the gym. Now I know everyone's name... and they know mine."],["pochi","Lulu × Pochi, full-power colorful parade! Ready?"],["rinne","...After tonight, I'd like to try something difficult too. Opening up. Watch me, Lulu."],["me","We'll all watch! Let's sparkle together!"]]}]},
+1:{brand:"Nocturne Edge",arc:"Learning to open up: the 'ice queen' who never let anyone close discovers that warmth makes her elegance shine.",ch:[
+ {t:"The Ice Queen's Silhouette",g:"Silhouette of Moonlight",win:"Perfect. ...And for once, a little warm.",lines:[["Student","Don't talk to Aoba-senpai. She just stares at you like you're a wrong note."],["Student","I said 'good morning' and she nodded. NODDED. Ice queen confirmed."],["me","(I wanted to say good morning back. The words just... didn't come.)"],["Nocturne Edge Designer","Rinne, your silhouette is flawless. But the audience can't reach you. Tonight, let one feeling slip through."],["me","One feeling. ...Very well. Under the moonlight, I'll try."]]},
+ {t:"Sugar Nocturne",g:"月夜のシュガーノクターン",win:"You smiled on stage. The whole hall noticed.",lines:[["lulu","Rinne-senpai! I brought moon cookies! ...You can say no, but I'll be sad!"],["me","I— thank you. I don't usually... accept things."],["Classmate","Whoa, is Aoba-senpai actually eating a cookie? Someone take a picture!"],["me","(My face is burning.) Lulu. How do you talk to people so easily?"],["lulu","I just say what I feel! Try singing it first — it's easier!"]]},
+ {t:"Beyond the Moonshadow",g:"月影を越えて",rival:"luna",win:"Heh~ you sang like you were talking to us, Rinne.",lines:[["Student","A battle between the ice queen and the new Starlit Knights guy? She'll freeze him solid."],["luna","Rinne~ I don't want a frozen battle. I want to see what's past your shadow. Show me?"],["me","...There's nothing past it but me."],["luna","That's exactly what I want to see~"]]},
+ {t:"Black Rose Eclipse",g:"黒薔薇エクリプス",rival:"sera",win:"Your black rose finally has a heartbeat, darling.",lines:[["Underclassman","U-um, Aoba-senpai... I'm a huge fan... b-but everyone says you hate fans..."],["me","I don't hate anyone. I'm just... bad at showing it. What's your name?"],["Underclassman","S-she asked my NAME!"],["sera","Look at you, Rinne. A black rose that talks to people. Now let's see if it blooms on stage."]]},
+ {t:"Flash Synthesis (Duet)",g:"閃光シンセシス",unit:"pochi",win:"Ice and neon, perfectly in sync — and laughing.",lines:[["Student","Aoba-senpai asked Pochi for a duet? HER? Asked SOMEONE?"],["me","Pochi. I'd like to sing with you. ...I want people to see the side of me that laughs."],["pochi","Senpai!!! YES! Your cool synth plus my neon beat = flash synthesis!!"],["me","And if it clashes... we'll make the clash beautiful. Together."],["pochi","After this, will you cheer for me too? Some people say I'm too childish to make it..."],["me","Then I'll cheer the loudest. I promise."]]}]},
+3:{brand:"Pop Circuit",arc:"Being put down: told she's too childish and too loud to be a 'real' idol, Pochi proves her joy is her strength.",ch:[
+ {t:"Too Loud, Too Childish",g:"ときめき☆ミラクルビート",win:"Miracle beat! The street crowd went wild!",lines:[["Student","Pochi's audition outfit has GAME CONTROLLERS on it. Is she serious?"],["Student","An arcade kid won't last a month at this academy. Too loud, too childish."],["me","(...Hehe. It's fine. It's fine! I just have to smile harder.)"],["rinne","Pochi. Don't smile harder. Smile truer. That is enough."],["me","Senpai...! Okay — insert coin, press start! Pop Circuit, full power!"]]},
+ {t:"Burst! Colorful Stream",g:"はじけろ！カラフルビート",win:"Ten thousand colorful comments cheering you on!",lines:[["Stream Comment","lol is this a kids' show"],["Stream Comment","turn the volume down, she's screaming"],["me","(...They're just comments. Just comments.)"],["lulu","Pochi! Read this one: 'your song made my bad day better.' And this one! And this one!"],["me","...There are way more of those, huh. Okay! One huge colorful burst — for everyone who's smiling!"]]},
+ {t:"Rainbow Galaxy Battle",g:"レインボー☆ギャラクシー！",rival:"luna",win:"A rainbow brighter than the moon~ I lose, little comet!",lines:[["Upperclassman","Pochi versus Luna-senpai? He'll eat her alive. She's a kid next to him."],["luna","Pochi~ Ignore them. I asked for this battle because your rainbow makes ME want to dance. Give me everything~"],["me","Deal!! I'll paint the whole galaxy rainbow!"],["Audience Member","...Wait, she's actually really good?!"]]},
+ {t:"Moonshadow Prism",g:"月影のプリズム",win:"Precise, bright, and completely you.",lines:[["Classmate","Pochi's taking lessons from Aoba-senpai? Trying to act grown-up now?"],["me","I'm not trying to be someone else! I want to be MORE me — every color, all pointed at the crowd!"],["rinne","Then breathe. Count. And when the chorus comes, let every color out at once."],["me","Breathe, count... BURST! Got it, senpai!"]]},
+ {t:"Neon Rouge Fever (Duet)",g:"ネオン・ルージュ♡フィーバー",unit:"sera",win:"Neon and rouge set the whole club on fire!",lines:[["Student","Kurenai-senpai picked POCHI for the neon gala? The 'childish' one?"],["sera","I picked the brightest idol I know. Keep up with my glamour, darling, and I'll keep up with your bounce."],["me","Sera-senpai... everyone keeps away from you, but you're the first upperclassman who chose me."],["sera","...Funny. They keep away from me because I'm 'different'. Let's show them different is dazzling."],["me","Neon pink plus crimson rouge — fever combo, GO!"]]}]},
+2:{brand:"Velvet Temptation",arc:"No one wants to be her friend because they think she is different — until Sera lets the school see the warm heart under the velvet.",ch:[
+ {t:"Waltz of Crimson Flames",g:"Waltz of Crimson Flames",win:"The hall is burning for you, darling.",lines:[["Student","Kurenai-senpai is sooo different. The makeup, the way she talks... she's like a grown-up from another world."],["Student","I'd never sit with her. What would we even talk about?"],["me","(Lunch alone again. ...Velvet Temptation's showcase is tonight. At least the stage doesn't avoid me.)"],["Velvet Temptation Designer","Sera, your waltz is magnificent. But you dance as if no one could ever hold your hand."],["me","Maybe no one will. ...Still, fall for my autumn charm."]]},
+ {t:"Sweet Velvet Kiss",g:"スウィート・ヴェルベット・キス",win:"Sweet AND velvet. Who knew?",lines:[["lulu","Sera-senpai! Can I sit here? You shared your crêpe with me at tryouts!"],["Classmate","Is the new girl really sitting with HER?"],["me","You don't have to, Lulu. People will talk."],["lulu","Let them! I like talking with you. Your stages are so pretty and you laugh like a bell!"],["me","...Like a bell. Hm. Then tonight, a little sweetness inside the velvet."]]},
+ {t:"Neon Kiss Parade",g:"ネオン・キスパレード",win:"The neon city is blowing kisses back!",lines:[["Student","Pochi's dragging Kurenai-senpai into the neon parade? With BALLOONS?"],["pochi","Sera-senpai! You looked so happy at the gala that I nominated you! Glamour that's FUN!"],["me","Fun? People expect me to be mysterious..."],["pochi","People expected me to be a joke! Let's surprise them together!"],["Audience Member","Kurenai-senpai is... waving at us? She's actually super nice?!"]]},
+ {t:"Love Unravelling in Moonlight",g:"月華にほどける恋",rival:"luna",win:"You let the moon see your heart. Beautiful, Sera.",lines:[["Student","She only hangs out with the idols now. Thinks she's too good for regular students."],["me","(That's not it. I just... don't know how to walk up to them.)"],["luna","Sera~ Tonight's moonlit stage is a battle, but also a letter. Write one to the whole school~"],["me","A letter... saying I wish I'd been braver. Very well. Let it unravel."]]},
+ {t:"Lunar Eclipse Noir",g:"月蝕ノワール",rival:"rinne",win:"Your passion eclipsed my perfection.",lines:[["Underclassman","Kurenai-senpai, um... I-I made a fan sign. Is that weird?"],["me","Weird? Darling, it's the loveliest thing I've seen all week. What's your name?"],["rinne","Sera. They call us both 'different'. Shall we show them the same stage can hold two very different flowers?"],["me","With pleasure, Rinne. No mercy — and no masks."]]},
+ {t:"Neon Paradise Gala",g:"魅惑のネオン・パラダイス",win:"Paradise — and they love the real Sera most of all.",lines:[["Classmate","...Kurenai-senpai? We saved you a seat at lunch tomorrow. If you want."],["me","(Oh. Oh no, I'm going to cry before the gala.) ...I'd love that."],["pochi","Front row! Heart glowsticks! We're your fan club now!"],["luna","After tonight, Sera, may I tell my story? I'm still new here myself~"],["me","Of course. Now — let me seduce them with the real me."]]}]},
+5:{brand:"Lunar Revel",arc:"Also new to the school: the dreamy Starlit Knights leader is written off as a celebrity who won't fit in, and earns his place by throwing a moon party for everyone.",ch:[
+ {t:"The Celebrity Transfer",g:"満月パーティー",win:"Party success~ The moon's grinning tonight!",lines:[["Student","THE Amane Luna transferred here? The Starlit Knights guy? He'll skip class and leave in a month."],["Student","Celebrities don't make friends with regular students. He's just here for the cameras."],["me","Excuse me~ which way is the music room? I've been walking in circles. The hallways all look like moonlight..."],["Student","...He's lost? Like, actually lost?"],["me","Hehe~ New school, new dream. C'mon, let's revel under the moon — my welcome party is on stage tonight!"]]},
+ {t:"Moonlit Sugar Party",g:"月明かりのシュガーパーティー",win:"Sweet dreams for every single guest~",lines:[["Classmate","Amane-kun sits at the back and stares out the window all class. Does he even care about school?"],["me","(I was daydreaming about a party where nobody eats alone...)"],["lulu","Luna-senpai! You're new too, right? Let's throw a party — moon macarons for the whole class!"],["me","Lulu~ You read my dream. A moonlit sugar party for everyone — especially the ones who don't think they're invited."]]},
+ {t:"Silver Moon Passion",g:"銀月に咲く情熱",rival:"rinne",win:"...You meant every word, Amane. I felt it.",lines:[["Student","He's covering Aoba-senpai's song? Bold for a guy who can't find the cafeteria."],["rinne","Amane. If you sing my song, sing it as yourself — not as the celebrity they think you are."],["me","Your silver moon, my golden dream~ I'll sing it like a promise to this school."],["Audience Member","...Okay, he's not just a pretty face."]]},
+ {t:"Star Dash in Love (Duet)",g:"恋するスターダッシュ☆",unit:"pochi",win:"Star dash complete! Fastest duet in the galaxy!",lines:[["Classmate","Hey, Amane-kun... sorry I said you'd leave in a month. Want to eat lunch with us?"],["me","Really~? I'd love that! I'm still learning everyone's names... and the hallways."],["pochi","Luna-senpai! Lunar Revel × Pop Circuit, star-dash duet! Ready, set, GO!!"],["me","Ahaha~ always running ahead, Pochi! I'll dash with you!"]]},
+ {t:"Eternal Last Dance (Studio Duet)",g:"永遠のラストダンス",unit:"sera",win:"A last dance that will last forever.",lines:[["Student","The new guy and Kurenai-senpai in a studio duet... they're both 'different', huh. Kinda perfect."],["sera","Luna. You came here as a stranger, like me. Now look how many people are waiting for us."],["me","Starlit Knights' promise: I shine so the people beside me shine brighter. Tonight that's the whole school~"],["taiyo","Luna-senpai! After this — can I go?! People keep telling me I'm TOO MUCH, but I've got so much to show!"],["me","Hehe~ You're exactly enough, Taiyo. After this last dance, the sun rises."]]}]},
+6:{brand:"Blitz Horizon",arc:"Told he is doing too much all the time, Taiyo learns his energy isn't too much — it just needs a horizon to run toward, together.",ch:[
+ {t:"Flash Accel Sunrise",g:"閃光アクセル",rival:"ren",win:"Heh. You waited for the crowd and still beat me. Respect.",lines:[["Student","Hinode's yelling 'GOOD MORNING' at the gate again. It's 7 a.m.!"],["Classmate","He volunteered for SIX festival committees. Can someone tell him he's doing too much?"],["Student","Tone it down, Hinode! Not everything has to be full speed!"],["me","(...Too much. I hear that every day. Maybe I really am...)"],["Blitz Horizon Designer","Taiyo, your speed isn't the problem. You sprint so far ahead that the audience can't run with you. A horizon is something you reach together."],["luna","Taiyo~ The sun doesn't dim itself. It just rises at the right pace so everyone wakes up smiling."],["ren","I'm battling you today, sunshine. Not because you're too much — because you're worth beating."],["me","Together, huh...? Then I'll accelerate WITH everyone! GOOD MORNING, WORLD — flash accel!!"],["Audience Member","...Wait, I'm actually running in place to this?! HINODE, YOU'RE AWESOME!"],["kanata","T-Taiyo-kun... that was amazing. Um... people are saying things about me, too. Could you... watch my stage?"]]}]},
+8:{brand:"Celestia Regalia",arc:"Rumors are spread about him; the gentle cookie-baking boy answers the whispers not with anger but with a stage of honest, heavenly kindness.",ch:[
+ {t:"The Soaring Crown",g:"天翔ける王冠",win:"A crown that shines because it's kind.",lines:[["Student","Did you hear? Amamiya only got the Celestia Regalia crown because his family knows the designer."],["Student","And I heard his 'homemade' cookies are store-bought. He's faking the sweet act."],["Classmate","Someone said he cried in the practice room and begged for the part..."],["me","(None of that is true... but if I say so, will anyone believe me?)"],["taiyo","Kanata! Don't listen! I watched you bake at 5 a.m. with flour on your nose! You're the real deal!"],["Celestia Regalia Designer","Kanata, I chose you because you notice who's sitting alone and bring them a cookie. That is what a crown is for."],["ren","Rumors are just noise. Drown them out with a melody. ...That's what I'd do, anyway."],["me","...Okay. I won't argue with whispers. I'll sing the truth. Let's soar!"],["Audience Member","...Those rumors were so wrong. He's literally glowing up there."]]}]},
+7:{brand:"Solstice Prince",arc:"Called too girly for his flowers, ribbons and soft songs, Ren stops hiding and shines as the cheerful Solstice Prince exactly as he is.",ch:[
+ {t:"Sunshine Smile",g:"太陽スマイル！",win:"...Fine. Smiling like this isn't so bad.",lines:[["Student","Kurogane wears ribbons in his hair? And a flower brooch? That's so girly."],["Student","The Solstice Prince coord has LACE. A guy in lace. Seriously?"],["Classmate","He acts all tough with the guitar, but I saw him pressing flowers in a notebook."],["me","(...I used to hide the notebook. Hide the ribbons. Play louder so no one would notice.)"],["Solstice Prince Designer","Ren, the solstice is the brightest day of the year. Bright doesn't have a gender. Neither does lace."],["taiyo","Ren! The flower brooch is the COOLEST part of you! And your smile when you think no one's looking? Sunshine!"],["kanata","Ren-kun... you told me rumors are just noise. That's true for you too."],["me","Rules are for people who don't have a melody. ...Including the rule about what a guy should look like. Let's go — sunshine smile!"],["Audience Member","He's wearing the ribbons ON STAGE?! ...Okay that's actually so cool."]]}]},
+99:{brand:"All 8 brands",arc:"Special chapter: after all eight stories, the idols plan their first 8-person song together — and perform it for every student who once doubted them.",special:1,ch:[
+ {t:"The Eight-Star Song",g:"STARLIGHT REVOLUTION!",all8:1,win:"Eight stars, one song — a starlight revolution!",lines:[["lulu","Everyone! The academy wants one stage with ALL of us. Let's make our first 8-person song!"],["rinne","Then we plan it properly. ...And I want everyone's ideas. Everyone's."],["pochi","Arcade sound effects in the intro! Pew pew!"],["sera","Crimson spotlights for the bridge, darling. And harmonies — I'll take the low part."],["luna","A moonlit breakdown where the whole hall sings along~"],["taiyo","AND A HUGE RUN-UP TO THE LAST CHORUS! ...Is that too much?"],["kanata","It's exactly enough, Taiyo-kun. I'll bake cookies for every rehearsal."],["ren","...And ribbons on all eight coords. Matching. No complaints."],["Student","Remember when we said the new girl wouldn't last? And that Pochi was too childish?"],["Student","...Yeah. We were wrong about all of them. Front row?"],["me","Front row! Eight brands, eight stories — let's start a starlight revolution together!"]]}]}
+};
+// ---- song + coord unlocks -------------------------------------------------------------------------------
+const brandSets=i=>{const b=typeof OWN_BRAND!="undefined"&&OWN_BRAND[i];let sig=null;try{const c=card(Object.values(sigCoord(i))[0]);sig=c&&c.set}catch(e){}
+ return[...FC.SETS.keys()].filter(k=>{const c=FC.SETS.get(k)[0];return c&&(b?c.brand==b:fitsIdol(c,i))&&fitsIdol(c,i)&&k!=sig}).sort()};
+const BUILT={},SP=99,ALLK=CHAIN.concat([SP]);
+function build(i){if(BUILT[i])return BUILT[i];const d=ST[i],n=d.ch.length,sets=brandSets(i==SP?(S.idol||0):i),pos=i==SP?8:CHAIN.indexOf(i);
+ BUILT[i]=d.ch.map((c,ci)=>{const k=sets.length?(i==SP?sets[sets.length-1]:sets[Math.floor((ci+.5)*sets.length/n)]):null,diff=n==1?3:[1,2,2,3,3,3][ci],pn=120+ci*14+pos*7;
+  const o={t:"Ch."+(ci+1)+" "+c.t,g:c.g,storyIdol:i,coordSet:k,reward:k?FC.SETS.get(k)[0].id:"sa0",diff,pn,t0:pn*160,target:pn*160,fbSong:0,win:c.win,
+   lines:()=>c.lines,last:ci==n-1};
+  if(c.unit){o.unit=c.unit;o.guest=1}if(c.all8)o.all8=1;if(c.rival){o.rival=c.rival;o.r0=Math.round(o.t0*1.08);o.rivalPow=o.r0}return o});return BUILT[i]}
+S.storyP=S.storyP||null;S.songU=S.songU||{};
+const titles=()=>ALLK.flatMap(i=>ST[i].ch.map(c=>c.g));
+window.songOpen=g=>!!(S.allIdols||S.songU[g]||!titles().includes(g));
+window.songLockedCount=()=>S.allIdols?0:titles().filter(g=>!S.songU[g]).length;
+// ---- migration: old saves keep every idol they had (S.story used to be Lulu's chapter count) ---------------
+if(!S.storyP){const OLD=Object.assign({},UNLOCK_AT),old=S.story||0,had=IDOLS.map((_,i)=>i).filter(i=>S.allIdols||(OLD[i]!=null&&old>=OLD[i]));
+ S.storyP={0:Math.min(old,ST[0].ch.length)};for(let c=0;c<S.storyP[0];c++)S.songU[ST[0].ch[c].g]=1;
+ let lv=0;had.forEach(i=>{const p=CHAIN.indexOf(i);if(p>lv)lv=p});if(S.storyP[0]>=ST[0].ch.length)lv=Math.max(lv,1);S.story=lv;S.storyLv=lv;save()}
+// unlock rule: S.story is now the chain level (number of idol storylines finished, at least); UNLOCK_AT = position in the chain
+for(const k in UNLOCK_AT)delete UNLOCK_AT[k];CHAIN.forEach((i,p)=>UNLOCK_AT[i]=p);
+const prog=i=>S.storyP[i]||0;
+window.unlockText=i=>{const p=CHAIN.indexOf(i);return p>0?`clear ${IDOLS[CHAIN[p-1]].n}'s story to unlock`:"available"};
+window.unlockShort=i=>{const p=CHAIN.indexOf(i);return p>0?`Clear ${NM(CHAIN[p-1])}'s story`:""};
+// ---- which idol's story is loaded --------------------------------------------------------------------------
+let SI=0;const allCleared=()=>!!(S.allIdols||CHAIN.every(i=>(S.storyP[i]||0)>=ST[i].ch.length));const open=i=>i==SP?allCleared():idolUnlocked(i);
+function load(i){SI=i;STORY.splice(0,STORY.length,...build(i));try{storyResolve()}catch(e){}}
+window.storyIdol=()=>SI;
+storyResolve=(o=>function(){o();STORY.forEach(c=>{if(c.g){const k=resolveVersion(c.g,chLineup(c),0);if(k>=0){c.song=k;c.group=c.g}}})})(storyResolve);
+function setIdol(i){if(i==SP)return;if(S.idol!=i){S.idol=i;if(S.coords&&S.coords[i])S.coord=S.coords[i];else{try{S.coord=sigOwned(i)}catch(e){}}save()}}
+const withProg=(i,f)=>{const lv=S.story;S.story=prog(i);try{return f()}finally{S.storyP[i]=Math.max(prog(i),S.story);S.story=lv}};
+// ---- story select: idol tabs + chapters --------------------------------------------------------------------
+renderStory=(o=>function(){if(!open(SI))SI=0;if(STORY[0]&&STORY[0].storyIdol!==SI||!STORY[0]||STORY[0].storyIdol==null)load(SI);
+ withProg(SI,o);const d=ST[SI],box=$("chapters");document.querySelectorAll("#chapters .ulTag").forEach(e=>e.remove());
+ box.querySelectorAll(".chap").forEach((e,ci)=>{const c=STORY[ci],sm=e.querySelector("small");if(!c||!sm)return;const done=prog(SI)>ci;
+  const nx=c.last?CHAIN[CHAIN.indexOf(SI)+1]:null;
+  sm.innerHTML=`🎵 ${c.g}${c.all8?" · 👥 All 8 idols on stage":""}${c.unit?` · 🤝 Duet with ${NM(cast(c.unit))}`:""}${c.rival?` · ⚔️ vs ${NM(cast(c.rival))}`:""} · Target ${c.target}<br><span class="ulTag">${done?"✅":"🔓"} Song + 👗 ${c.coordSet?FC.nameOf(c.coordSet):"coord"}${nx!=null?` + ✨ ${NM(nx)}`:""}</span>`});
+ let bar=$("stIdols");if(!bar){bar=document.createElement("div");bar.id="stIdols";box.before(bar)}
+ bar.innerHTML=`<div class="stRow">${ALLK.map(i=>{const u=open(i),n=ST[i].ch.length,p=Math.min(prog(i),n);return`<button class="stI ${i==SI?"on":""} ${u?"":"lk"} ${i==SP?"sp":""}" data-i="${i}" title="${u?"":i==SP?"Clear all 8 stories":unlockText(i)}">${i==SP?'<span class="spI">🌟</span>':avatar(IDOLS[i],38)}<b>${i==SP?"Special":NM(i)}</b><small>${u?(p>=n?"⭐ "+p+"/"+n:p+"/"+n):"🔒"}</small></button>`}).join("")}</div>
+ <div class="stHead" style="--c:${SI==SP?"#c9a43a":TYPES[IDOLS[SI].t]||"#ff4fa3"}"><b>${SI==SP?"🌟 Special Chapter":IDOLS[SI].n+"'s Story"}</b> <span>${d.brand}${SI==SP?"":" · "+IDOLS[SI].t}</span><br><i>${d.arc}</i></div>`;
+ bar.querySelectorAll(".stI").forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(!open(i)){toast(i==SP?"🔒 Clear all 8 idols' stories to unlock the Special Chapter":"🔒 "+IDOLS[i].n+" — "+unlockText(i));return}try{tone(880,.05)}catch(e){}setIdol(i);load(i);renderStory()})})(renderStory);
+go=(o=>function(s){if(s=="scan")s="title";if(s=="story"){const i=SI==SP&&open(SP)?SP:idolUnlocked(S.idol)?S.idol:SI;if(STORY[0]&&STORY[0].storyIdol!==i||!STORY[0])load(i);else SI=i}return o(s)})(go);
+playChapter=(o=>function(i){setIdol(SI);const r=o(i);const ch=STORY[i];if(ch&&ch.all8){UNIT.lead=S.idol;UNIT.mem=CHAIN.filter(x=>x!=S.idol&&!IDOLS[x].gone)}return r})(playChapter);
+// ---- results: progress, unlocks (song + coord + next idol) ---------------------------------------------------
+finish=(o=>function(){const ch=G&&G.ch;if(!ch||ch.storyIdol==null)return o();const i=ch.storyIdol,ci=STORY.indexOf(ch),before=prog(i);
+ withProg(i,o);const fresh=prog(i)>before&&before<=ci;let nx=null;
+ if(fresh){S.songU[ch.g]=1;if(ch.coordSet)FC.grantSet(ch.coordSet);
+  if(ch.last&&i!=SP){const p=CHAIN.indexOf(i);if(S.story<p+1){S.story=p+1;nx=CHAIN[p+1]}}}
+ save();const rb=$("resBox");if(!rb)return;rb.innerHTML=rb.innerHTML.replace("<br>🌟 You are the Grand Concert star! Story complete! 🌟","");
+ let ins="";if(/Chapter Clear/.test(rb.innerHTML)&&ch.win){const q=rb.querySelector("i");const who=ch.rival?NM(cast(ch.rival)):ch.unit?NM(cast(ch.unit)):i==SP?"Everyone":"Audience";const t=`${who}: "${ch.win}"`;if(q)q.textContent=t;else ins+=`<br><i>${t}</i>`}
+ const put=h=>{const k="<br><b>🎁 Reward cards:</b>";if(rb.innerHTML.includes(k))rb.innerHTML=rb.innerHTML.replace(k,h+k);else rb.insertAdjacentHTML("beforeend",h)};
+ if(fresh)ins+=(`<div class="stUnl"><b>🔓 Unlocked!</b><div>🎵 <b>${ch.g}</b> is now playable in Free Live</div>${ch.coordSet?`<div>👗 New ${i==SP?"":ST[i].brand+" "}coord: <b>${FC.nameOf(ch.coordSet)}</b></div>`:""}${nx!=null?`<div class="stNext">✨ ${IDOLS[nx].n}'s story is now open! ✨</div>`:ch.last?`<div class="stNext">⭐ ${i==SP?"Special chapter":IDOLS[i].n+"'s story"} complete! ⭐</div>`:""}${ch.last&&i!=SP&&allCleared()?`<div class="stNext">🌟 All 8 stories cleared — the Special Chapter is open! 🌟</div>`:""}</div>`);if(ins)put(ins)})(finish);
+// ---- random students / NPCs get their own little avatars in dialogue
+const NPC=[[/Stream/,"💬"],[/Audience/,"📣"],[/Upperclassman/,"🎓"],[/Underclassman/,"🌱"],[/Classmate/,"📚"],[/Student/,"🎒"],[/Teacher/,"📋"],[/Designer/,"✂️"]];
+showLine=(o=>function(){o();const r=DL[DI]&&DL[DI][0];if(r=="me"||ROLE[r]!=null)return;const m=NPC.find(([re])=>re.test(r));const av=$("dlg").firstElementChild;
+ if(m&&av&&av.tagName.toLowerCase()=="svg")av.outerHTML=`<div class="npcAv">${m[1]}</div>`})(showLine);
+// ---- title progress line ---------------------------------------------------------------------------------------
+renderTitle=(o=>function(){const r=o();const pg=$("ulProg");if(pg){const n=IDOLS.filter((d,i)=>!d.gone&&idolUnlocked(i)).length,tot=IDOLS.filter(d=>!d.gone).length,done=CHAIN.filter(i=>prog(i)>=ST[i].ch.length).length;
+ pg.innerHTML=`Idols unlocked <b>${n}/${tot}</b> · Stories cleared <b>${done}/${CHAIN.length}</b> · Songs <b>${titles().length-songLockedCount()}/${titles().length}</b>`}return r})(renderTitle);
+const css=document.createElement("style");css.textContent=`
+#stIdols{max-width:900px;margin:0 auto 8px}.stRow{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 8px;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.stI{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:64px;padding:4px 6px;margin:0;border-radius:14px;background:#fff;color:#7a3a8a;border:2px solid #f3d2ef;box-shadow:none;font-size:12px}
+.stI.on{border-color:#ff4fa3;background:#fff0f8;box-shadow:0 0 0 3px #ff4fa333}.stI.sp{border-color:#e9cf7a;background:#fffbea}.spI{font-size:30px;line-height:38px}.stI.lk{opacity:.45;filter:grayscale(.7)}.stI small{font-size:10px;color:#9a6ac0}.stI svg,.stI img{width:38px;height:auto}
+.stHead{background:#fffd;border-left:6px solid var(--c);border-radius:12px;padding:8px 12px;margin:4px 0;font-size:13px;color:#6a4a7a}.stHead b{font-size:18px;color:var(--c)}.stHead span{font-weight:bold}
+.stUnl{margin:10px auto 0;max-width:520px;background:linear-gradient(#fff8fd,#ffeefa);border:2px solid #ff9ccc;border-radius:14px;padding:8px 12px;font-size:15px}.stUnl b:first-child{color:#ff4fa3;font-size:18px}.stNext{margin-top:4px;font-weight:bold;color:#7a4fd0;font-size:17px}
+#chapters .ulTag{color:#2b8a5a}.npcAv{flex:0 0 auto;width:96px;height:96px;border-radius:50%;background:radial-gradient(#fff,#f3e3ff);border:3px solid #e6d0ff;display:flex;align-items:center;justify-content:center;font-size:50px}`;document.head.appendChild(css);
+window.STORY_DATA={ST,CHAIN,build};
 })();
 </script></body></html>

@@ -60,7 +60,7 @@ art=function(c){const k=cols(c),b=c.brand;let s;
 renderCoord=function(){for(const s in S.coord)if(!S.own[S.coord[s]])delete S.coord[s];const own=CARDS.filter(c=>S.own[c.id]);
  $("preview").innerHTML=dressSVG(S.coord,S.hair,160);
  $("slotTabs").innerHTML=SLOTS.map(s=>`<button class="${s==slotTab?'on':''}" onclick="slotTab='${s}';renderCoord()">${s}${S.coord[s]?' ✔':''}</button>`).join("");
- const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id}).replace('class="card','class="card thumb')).join(""):"<p>No cards for this slot yet — try Card Scan!</p>";
+ const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id}).replace('class="card','class="card thumb')).join(""):"<p>No cards for this slot yet — clear story chapters to earn more!</p>";
  document.querySelectorAll("#coordCards .card").forEach(e=>e.onclick=()=>{const id=e.dataset.id;if(S.coord[slotTab]==id)delete S.coord[slotTab];else{S.coord[slotTab]=id;
   if(slotTab=="One-piece"){delete S.coord.Tops;delete S.coord.Bottoms}if(slotTab=="Tops"||slotTab=="Bottoms")delete S.coord["One-piece"];}tone(990,.05);save();renderCoord();});
  $("hairOpts").innerHTML=HAIRC.map(c=>`<span class="sw ${(S.hair.color||IDOLS[S.idol].h)==c?'on':''}" style="background:${c}" onclick="S.hair.color='${c}';save();renderCoord()"></span>`).join("")+" "+HAIRS.map(h=>`<button class="mini ${S.hair.style==h?'':'off'}" style="${S.hair.style==h?'':'opacity:.5'}" onclick="S.hair.style='${h}';save();renderCoord()">${h}</button>`).join("");

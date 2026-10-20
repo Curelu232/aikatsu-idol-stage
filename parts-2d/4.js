@@ -77,6 +77,6 @@ function finish(){const g=G;stopStage();const tot=g.notes.length||1,acc=(g.j.P+g
    const q=g.rival?(ROLE.iceQueen==IDOLS.indexOf(g.rival)||g.rival==IDOLS[cast("iceQueen")]?"\"...Hmph. Fine. You shine. Next time, I won't lose.\"":"\"Wow, you got me! Crêpes are on me ♪\""):"";if(q)story+=`<br><i>${g.rival.n}: ${q}</i>`;}}
  save();go("result");
  $("resBox").innerHTML=`<div class="big">${rank}</div><b>${IDOLS[S.idol].n}</b>${g.unit?" & "+g.unit.n:""} — ${g.s.name}<br>Perfect ${g.j.P} · Good ${g.j.G} · Miss ${g.j.M} · Max Combo ${g.max} · Accuracy ${Math.round(acc*100)}% · Special Appeals ${g.nsp}<br>
- Rhythm ${Math.round(g.score)} + Coordinate ${g.sc.total}×${(1+acc).toFixed(2)}${g.unit?" ×1.2 unit":""} = <b style="font-size:26px;color:#ff4fa3">${final}</b><br>Best ${S.best} · +${earn}✦ Stardust${story}<br><b>🎁 Reward cards:</b>`;
+ Rhythm ${Math.round(g.score)} + Coordinate ${g.sc.total}×${(1+acc).toFixed(2)}${g.unit?" ×1.2 unit":""} = <b style="font-size:26px;color:#ff4fa3">${final}</b><br>Best ${S.best}${story}<br><b>🎁 Reward cards:</b>`;
  $("reward").innerHTML=rewards.map(c=>cardHTML(c)).join("");
  $("resBtns").innerHTML=ch?`<button onclick="go('coord')">Retry</button><button onclick="go('story')">Story Menu</button>`:`<button onclick="go('coord')">Play Again</button><button onclick="go('title')">Title</button>`;flash();tone(1046,.3,"triangle",.15);}

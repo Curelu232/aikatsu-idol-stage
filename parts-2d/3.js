@@ -15,14 +15,11 @@ function cardHTML(c,opts={}){const b=BRANDS.find(x=>x.id==c.brand);const n=S.own
 function avatar(d,w=90){if(!d)return`<svg viewBox="0 0 100 110" width="${w}"><circle cx="50" cy="50" r="30" fill="#ddd"/><text x="38" y="62" font-size="34">✂️</text></svg>`;
  return `<svg viewBox="0 0 100 110" width="${w}"><circle cx="50" cy="45" r="34" fill="${d.h}"/><circle cx="50" cy="50" r="24" fill="#ffe6d6"/><circle cx="42" cy="50" r="4" fill="#5a2a6e"/><circle cx="58" cy="50" r="4" fill="#5a2a6e"/><path d="M44 60 Q50 65 56 60" stroke="#ff4f7a" stroke-width="2" fill="none"/><path d="M26 30 Q50 10 74 30 L74 40 Q50 26 26 40Z" fill="${d.h}"/><path d="M30 80 L70 80 L80 108 L20 108Z" fill="${TYPES[d.t]}"/><text x="70" y="25" font-size="16">${d.e}</text></svg>`;}
 function go(s){document.querySelectorAll(".screen").forEach(e=>e.classList.remove("on"));$("s-"+s).classList.add("on");if(s!="stage")stopStage();
- const f={title:renderTitle,scan:renderScan,album:renderAlbum,coord:renderCoord,story:renderStory}[s];if(f)f();}
+ const f={title:renderTitle,album:renderAlbum,coord:renderCoord,story:renderStory}[s];if(f)f();}
 function renderTitle(){STORYCH=-1;$("idols").innerHTML=IDOLS.map((d,i)=>`<div class="idol ${S.idol==i?'sel':''}" onclick="S.idol=${i};save();renderTitle()">
  ${avatar(d)}<div><b>${d.n}</b></div><div style="color:${TYPES[d.t]}">${d.t} type</div><div style="font-size:11px">"${d.q}"</div></div>`).join("");}
 function pick(force){let c;if(force)c=card(force);else{let tot=0;for(const k in RAR)tot+=RAR[k].w;let r=Math.random()*tot,rr="N";for(const k in RAR){if((r-=RAR[k].w)<0){rr=k;break}}
  const pool=CARDS.filter(x=>x.rarity==rr);c=pool[Math.floor(Math.random()*pool.length)];}S.own[c.id]=(S.own[c.id]||0)+1;save();return c;}
-function renderScan(){$("dust").textContent=S.dust;$("scan1").disabled=S.dust<10;$("scan5").disabled=S.dust<45;}
-function scan(n){const cost=n==1?10:45;if(S.dust<cost)return;S.dust-=cost;tone(880,.1);const got=[];for(let i=0;i<n;i++)got.push(pick());save();
- $("pulls").innerHTML="";got.forEach((c,i)=>setTimeout(()=>{$("pulls").insertAdjacentHTML("beforeend",cardHTML(c));tone(c.rarity=="CP"?1320:c.rarity=="PR"?1100:660,.15);if(c.rarity!="N"&&c.rarity!="R")flash();},i*350));renderScan();}
 function renderAlbum(){const own=CARDS.filter(c=>S.own[c.id]).length;$("albumCount").textContent=`(${own}/${CARDS.length})`;
  $("album").innerHTML=BRANDS.map(b=>`<div class="panel"><h3 style="color:${b.c2};margin:4px">${b.icon} ${b.name} <small>(${b.type}) — full set bonus +50%</small></h3><div class="row">${CARDS.filter(c=>c.brand==b.id).map(c=>cardHTML(c,{locked:!S.own[c.id]})).join("")}</div></div>`).join("");}
 function coordCards(){const C=S.coord;const ids=C["One-piece"]?[C["One-piece"],C.Shoes,C.Accessory]:[C.Tops,C.Bottoms,C.Shoes,C.Accessory];return ids.filter(Boolean).map(card).filter(Boolean);}
@@ -34,7 +31,7 @@ function coordScore(){const cs=coordCards(),idol=IDOLS[S.idol];let base=cs.reduc
  return{base,bonus,total:base+bonus,notes,full};}
 function renderCoord(){for(const s in S.coord)if(!S.own[S.coord[s]])delete S.coord[s];const own=CARDS.filter(c=>S.own[c.id]);
  $("slotTabs").innerHTML=SLOTS.map(s=>`<button class="${s==slotTab?'on':''}" onclick="slotTab='${s}';renderCoord()">${s}${S.coord[s]?' ✔':''}</button>`).join("");
- const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id})).join(""):"<p>No cards for this slot yet — try Card Scan!</p>";
+ const list=own.filter(c=>c.slot==slotTab);$("coordCards").innerHTML=list.length?list.map(c=>cardHTML(c,{sel:S.coord[slotTab]==c.id})).join(""):"<p>No cards for this slot yet — clear story chapters to earn more!</p>";
  document.querySelectorAll("#coordCards .card").forEach(e=>e.onclick=()=>{const id=e.dataset.id;if(S.coord[slotTab]==id)delete S.coord[slotTab];else{S.coord[slotTab]=id;
   if(slotTab=="One-piece"){delete S.coord.Tops;delete S.coord.Bottoms}if(slotTab=="Tops"||slotTab=="Bottoms")delete S.coord["One-piece"];}tone(990,.05);save();renderCoord();});
  const sc=coordScore(),idol=IDOLS[S.idol];
