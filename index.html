@@ -71,7 +71,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script>window.BUILD="20261020215539"</script><script async src="assets/user/rig.js?v=20261020215539"></script><script src="assets/user/fullcoord/index.js?v=20261020215539"></script><script>
+<script>window.BUILD="20261020220314"</script><script async src="assets/user/rig.js?v=20261020220314"></script><script src="assets/user/fullcoord/index.js?v=20261020220314"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -2952,9 +2952,11 @@ scr.innerHTML=`<div id="sgHead"><button class="ccBack" id="sgBack">‹ Back</but
 <div id="sgStage"><button class="sgArr" id="sgL" aria-label="Previous song">‹</button><div id="sgTrack"></div><button class="sgArr" id="sgR" aria-label="Next song">›</button></div>
 <div id="sgDots"></div><div id="sgDiff"></div><div class="center"><button id="sgGo">Select ▶</button></div><div id="sgHint">Swipe or use ← → · Enter to select</div>`;
 document.body.insertBefore(scr,$("s-coord"));
+// user-defined song-select order (solo → female collabs → Lunar Revel collabs); unlisted titles follow in their previous (ja-collated) order
+const SONG_ORDER=["Petals in Love","Silhouette of Moonlight","はじけろ！カラフルビート","Waltz of Crimson Flames","満月パーティー","太陽スマイル！","天翔ける王冠","閃光アクセル","秘密のシュガームーン","恋するカラフル☆パレード","誘惑♡ローズパフェ","閃光シンセシス","黒薔薇エクリプス","ときめき☆ミラクルビート","月影のプリズム","魅惑のネオン・パラダイス","スウィート・ヴェルベット・キス","月蝕ノワール","月夜のシュガーノクターン","ネオン・キスパレード","月明かりのシュガーパーティー","星屑ロマンス☆パレード","月影を越えて","銀月に咲く情熱","恋するスターダッシュ☆","レインボー☆ギャラクシー！","月華にほどける恋"];window.SONG_ORDER=SONG_ORDER;
 let cur=0;const meta=s=>(s&&s.lazyMeta)||{};
 // one entry per TITLE (meta.group); the entry's index is the version that fits the current lineup
-const list=()=>{const seen=new Set(),L=[];SONGS.forEach((s,i)=>{if(!s||!s.main||s.planned||!songAvail(s))return;const g=meta(s).group;if(!g){L.push(i);return}if(seen.has(g))return;if(window.songOpen&&!songOpen(g))return;/* locked until its story chapter is cleared */seen.add(g);L.push(resolveVersion(g,songLineup()))});const key=i=>meta(SONGS[i]).group||SONGS[i].name;return L.sort((x,y)=>key(x).localeCompare(key(y),"ja"))};
+const list=()=>{const seen=new Set(),L=[];SONGS.forEach((s,i)=>{if(!s||!s.main||s.planned||!songAvail(s))return;const g=meta(s).group;if(!g){L.push(i);return}if(seen.has(g))return;if(window.songOpen&&!songOpen(g))return;/* locked until its story chapter is cleared */seen.add(g);L.push(resolveVersion(g,songLineup()))});const key=i=>meta(SONGS[i]).group||SONGS[i].name,rk=i=>{const r=SONG_ORDER.indexOf(key(i));return r<0?1e3:r};return L.sort((x,y)=>rk(x)-rk(y)||key(x).localeCompare(key(y),"ja"))};
 const grpOf=i=>SONGS[i]&&meta(SONGS[i]).group;
 const DN=["","Easy","Normal","Hard","Extreme"];
 const hue=t=>{let h=0;for(const c of t||"")h=(h*31+c.charCodeAt(0))%360;return h};
