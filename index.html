@@ -285,6 +285,7 @@ function finish(){const g=G;stopStage();const tot=g.notes.filter(n=>n.hit!==2).l
  Rhythm ${Math.round(g.score)} + Coordinate ${g.sc.total}×${(1+acc).toFixed(2)}${g.unit?" ×1.2 unit":""} = <b style="font-size:26px;color:#ff4fa3">${final}</b><br>Best ${S.best} · +${earn}✦ Stardust${story}<br><b>🎁 Reward cards:</b>`;
  $("reward").innerHTML=rewards.map(c=>cardHTML(c)).join("");
  $("resBtns").innerHTML=ch?`<button onclick="go('coord')">Retry</button><button onclick="go('story')">Story Menu</button>`:`<button onclick="go('coord')">Play Again</button><button onclick="go('title')">Title</button>`;flash();tone(1046,.3,"triangle",.15);}
+add=(o=>function(r,l){try{if(r!="M"&&G)G.hitT=performance.now()/1000}catch(e){}return o.apply(this,arguments)})(add);
 // ===== DRESS-UP SYSTEM =====
 const PAL={sa:["#ff8fc4","#fff0f6","#ff5fa2","#ffc2e0","#e8487f"],rt:["#6b52d9","#f2e9ff","#3d2a8f","#a995ff","#ffd34d"],
  pp:["#ffb3c7","#fff4b8","#8ee3ff","#ff8a5c","#b5f2a6"],cc:["#9fe8ff","#ffd1f0","#c7b3ff","#ffffff","#ff9ad5"],mb:["#d9733a","#f5d3a8","#8a3b1f","#e8a23c","#5e2a18"]};
@@ -2473,7 +2474,17 @@ function drawRig(g,im,R,fx,fy,H,o,t,ph,glow){const w0=im.naturalWidth,h0=im.natu
   if(c>.8){g.moveTo(-rx*.85,ry*.1);g.quadraticCurveTo(0,ry*(ei==1&&wink>.5?-.55:.55),rx*.85,ry*.1)}else{g.moveTo(-rx,lid);g.lineTo(rx,lid)}g.stroke();g.restore()})}
  g.restore()}
 const _draw=drawIdol2D;
-drawIdol2D=function(g,im,fx,fy,H,o,t,ph,glow){const R=!GLBAD&&im&&im.naturalWidth&&rigFor(im.src);if(!R||!initGL())return _draw(g,im,fx,fy,H,o,t,ph,glow);try{drawRig(g,im,R,fx,fy,H,o,t,ph,glow)}catch(e){GLBAD=true;console.log("rig fallback: "+e.name);_draw(g,im,fx,fy,H,o,t,ph,glow)}};
+// user: "use the full body models in the song, you can turn off Live2D" -> whole-image art with simple motion. Live2D-style rig (mesh warp, face detect, hair physics) kept behind a flag: localStorage live2d=1 or window.LIVE2D=true
+window.LIVE2D=(()=>{try{return localStorage.getItem("live2d")=="1"}catch(e){return false}})();
+function drawFlat(g,im,fx,fy,H,o,t,ph,glow){const w0=im&&(im.naturalWidth||im.width),h0=im&&(im.naturalHeight||im.height);if(!w0)return;if(w0/h0>.75)H*=Math.max(.62,.75/(w0/h0));const W=w0*H/h0;
+ let beat=t*2;try{if(G&&G.B)beat=(ac().currentTime-G.t0)/G.B.spb}catch(e){}const side=Math.round(ph)%2?-1:1;
+ let y=-Math.abs(Math.sin(Math.PI*beat))*7,x=Math.sin(Math.PI*beat/2)*6*side,r=Math.sin(Math.PI*beat/2)*.03*side,s=1+.01*Math.sin(t*2.6+ph);
+ const dh=G&&G.hitT?t-G.hitT:9;if(dh>=0&&dh<.28)y-=Math.sin(dh/.28*Math.PI)*14;
+ if(A2){const ae=t-A2.t0;if(ae>=0&&ae<A2.len){s*=1+.1*Math.exp(-Math.max(0,ae-2.05)*4)*(ae>2.05?1:ae/2.05)}}
+ g.save();g.translate(fx+x,fy+y);
+ if(glow){g.save();g.globalAlpha=.55;const rg=g.createRadialGradient(0,0,2,0,0,W*.6);rg.addColorStop(0,glow);rg.addColorStop(1,"transparent");g.fillStyle=rg;g.scale(1,.25);g.beginPath();g.arc(0,0,W*.6,0,7);g.fill();g.restore()}
+ g.rotate(r);g.scale(s,s);g.drawImage(im,-W/2,-H,W,H);g.restore()}
+drawIdol2D=function(g,im,fx,fy,H,o,t,ph,glow){if(!window.LIVE2D)return drawFlat(g,im,fx,fy,H,o,t,ph,glow);const R=!GLBAD&&im&&im.naturalWidth&&rigFor(im.src);if(!R||!initGL())return _draw(g,im,fx,fy,H,o,t,ph,glow);try{drawRig(g,im,R,fx,fy,H,o,t,ph,glow)}catch(e){GLBAD=true;console.log("rig fallback: "+e.name);_draw(g,im,fx,fy,H,o,t,ph,glow)}};
 window.L2D={rigFor,ST,on:()=>!!initGL(),test:(g,k,fx,fy,H,o,t,ph)=>{const im=img(k);if(im.complete)drawIdol2D(g,im,fx,fy,H,Object.assign({x:0,y:0,r:0,sx:1,sy:1,head:0,skirt:0},o),t,ph,null)},img};
 // ---- personality moves + smooth idle->dance ramp ----
 const _motion=motion;
@@ -3158,4 +3169,36 @@ const css=document.createElement("style");css.textContent=`
 `;document.head.appendChild(css);
 })();
 try{if($("s-title").classList.contains("on"))renderTitle()}catch(e){console.error(e)}
+// ===== Fix: "I wasn't able to select all my unit's cards" =====
+// (a) luna211 used before newer coords were added -> those were never owned. The code means "own every card", so keep it true for cards added later.
+// (b) unit/story lineups: every idol in the lineup can be dressed from the Coordinate Change screen (story unit chapters had no member tabs; free/unit tabs
+//     silently did nothing when UNIT.cur was unset). The lead is restored before the stage, so scoring/story roles stay with the lead.
+(function(){
+if(S.allIdols){let n=0;CARDS.forEach(c=>{if(!S.own[c.id]){S.own[c.id]=1;n++}});if(n){try{FC.SETS.forEach((cs,k)=>{if(cs.some(c=>S.own[c.id]))FC.grantSet(k)})}catch(e){}save()}}
+const DR={lead:null,list:[]};window.DRESS=DR;
+const ok=i=>IDOLS[i]&&!IDOLS[i].gone&&(typeof idolUnlocked!="function"||idolUnlocked(i));
+function lineupNow(){let L;if(UNIT.lead!=null)L=unitAll();else{const ch=STORY[STORYCH];L=ch&&ch.unit&&typeof chLineup=="function"?chLineup(ch):[S.idol]}return[...new Set(L)].filter(ok)}
+const fitOrSig=i=>{let v={};try{v=validCoord(i,S.coords[i]||{})}catch(e){}return Object.keys(v).length?v:sigOwned(i)};
+function restoreLead(){if(DR.lead==null)return;S.coords=S.coords||{};S.coords[S.idol]=S.coord;const l=DR.lead;DR.lead=null;if(S.idol!=l){S.idol=l;S.coord=fitOrSig(l)}if(UNIT.lead!=null)UNIT.cur=UNIT.lead;try{save()}catch(e){}}
+window.restoreLead=restoreLead;
+memberSwitch=function(i){if(!ok(i))return;if(DR.lead==null){DR.lead=S.idol;DR.list=lineupNow()}S.coords=S.coords||{};S.coords[S.idol]=S.coord;if(UNIT.lead!=null)UNIT.cur=i;S.idol=i;S.coord=fitOrSig(i);S.coords[i]=S.coord;save();renderCoord();try{tone(880,.05)}catch(e){}};
+go=(o=>function(s){if(s!="coord")restoreLead();else if(DR.lead==null)DR.list=lineupNow();return o(s)})(go);
+beginScan=(o=>function(){restoreLead();return o.apply(this,arguments)})(beginScan);
+renderCoord=(o=>function(){const r=o();try{if(DR.lead==null||S.idol==DR.lead)DR.list=lineupNow();const old=$("unitTabs");const g=$("stageGoal");
+ const L=DR.list,lead=DR.lead==null?S.idol:DR.lead,P=i=>`<img src="assets/portraits/web/${IDOLS[i].n.split(" ").pop().toLowerCase()}.webp?v=2" alt="">`;
+ let d=$("ccDress");if(!d){d=document.createElement("div");d.id="ccDress";$("ccLeft").insertBefore(d,$("ccLeft").firstChild)}
+ d.style.display=L.length>1?"":"none";$("ccLeft").classList.toggle("hasDress",L.length>1);
+ d.innerHTML=L.length>1?`<div class="ccDT">👥 Dress your unit <small>(tap an idol)</small></div><div class="ccDL">${L.map(i=>`<button class="ccDB${i==S.idol?" on":""}" data-i="${i}">${P(i)}<span>${i==lead?"★ ":""}${IDOLS[i].n.split(" ").pop()}</span><i>${(S.coords&&S.coords[i])||i==S.idol?"✓":""}</i></button>`).join("")}</div>`:"";
+ d.querySelectorAll(".ccDB").forEach(b=>b.onclick=()=>memberSwitch(+b.dataset.i));
+ if(old){[...old.querySelectorAll("button")].forEach(b=>{if(/memberSwitch/.test(b.getAttribute("onclick")||""))b.remove()});old.childNodes.forEach(n=>{if(n.nodeType==3&&/Dress members/.test(n.textContent))n.textContent=""})}
+}catch(e){console.error(e)}return r})(renderCoord);
+const css=document.createElement("style");css.textContent=`
+#ccDress{grid-column:1/-1;grid-row:1;margin:0 0 8px;padding:8px;border-radius:14px;background:#fff6fd;box-shadow:0 2px 8px #c070b022}
+.ccDT{font-weight:bold;color:#7a3a8a;font-size:14px;margin-bottom:6px}.ccDT small{font-weight:normal;color:#a080b0}
+.ccDL{display:flex;flex-wrap:wrap;gap:6px}
+.ccDB{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;border-radius:12px;border:2px solid #ead6f5;background:#fff;color:#7a3a8a;font:bold 12px sans-serif;cursor:pointer;opacity:.75;position:relative;min-width:62px}
+.ccDB img{width:56px;height:32px;object-fit:cover;border-radius:8px}.ccDB.on{opacity:1;border-color:#ff4fa3;box-shadow:0 0 0 2px #ffc2e2}.ccDB i{position:absolute;top:1px;right:4px;font-style:normal;color:#2bb36a}
+@media (max-width:760px){#ccLeft.hasDress #ccPrev{grid-row:2/4;grid-column:1}#ccLeft.hasDress #ccWho{grid-row:2;grid-column:2}#ccLeft.hasDress #ccScore{grid-row:3;grid-column:2}}
+`;document.head.appendChild(css);
+})();
 </script></body></html>
