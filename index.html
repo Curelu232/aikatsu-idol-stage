@@ -71,7 +71,7 @@ button:hover{transform:translateY(-2px)}button:active{transform:translateY(2px);
 <div class="screen" id="s-stage"><div id="stageWrap" style="position:relative;width:900px;max-width:100%;margin:auto;aspect-ratio:900/560"><div id="stage3d" class="mount3d" style="position:absolute;inset:0;border-radius:16px;overflow:hidden;background:#1a0530"></div><canvas id="stage" width="900" height="560" style="position:absolute;inset:0;width:100%;height:100%;background:transparent"></canvas></div></div>
 <div class="screen" id="s-result"><h2>✨ Results ✨</h2><div id="res3d" class="mount3d" style="height:320px;max-width:700px;margin:auto;border-radius:20px;overflow:hidden"></div><div class="panel center" id="resBox"></div><div class="row" id="reward"></div>
 <div class="center" id="resBtns"></div></div>
-<script>window.SCHOOL_CARD_FILES=["kanata.png", "lulu.png", "luna.png", "pochi.png", "ren.png", "rinne.png", "sera.png", "taiyo.png"]</script><script>window.BUILD="20261027181455"</script><script async src="assets/user/rig.js?v=20261027181455"></script><script src="assets/user/fullcoord/index.js?v=20261027181455"></script><script>
+<script>window.SCHOOL_CARD_FILES=["kanata.png", "lulu.png", "luna.png", "pochi.png", "ren.png", "rinne.png", "sera.png", "taiyo.png"]</script><script>window.BUILD="20261028054838"</script><script async src="assets/user/rig.js?v=20261028054838"></script><script src="assets/user/fullcoord/index.js?v=20261028054838"></script><script>
 "use strict";
 const TYPES={Cute:"#ff6fae",Cool:"#4fa8ff",Sexy:"#b04fff",Pop:"#ffb02e"};
 const BRANDS=[
@@ -2335,7 +2335,7 @@ function bg(g,t,beat,pulse,sec,sp){const[c1,c2]=themeCols();const gr=g.createLin
  g.strokeStyle=`hsla(${(t*40)%360},90%,75%,.8)`;g.lineWidth=4;g.beginPath();g.ellipse(450,450,430,95,0,0,7);g.stroke();g.strokeStyle=c1+"88";g.lineWidth=2;g.beginPath();g.ellipse(450,450,300,60,0,0,7);g.stroke();
  // sparkles
  if(SPK.length<70)SPK.push({x:Math.random()*900,y:Math.random()*560,v:10+Math.random()*30,s:1+Math.random()*2.5,p:Math.random()*6});
- g.fillStyle="#fff";SPK.forEach(s=>{s.y-=s.v/60;if(s.y<-5){s.y=565;s.x=Math.random()*900}g.globalAlpha=.4+.6*Math.abs(Math.sin(t*3+s.p));star(g,s.x,s.y,s.s*2,s.s*.8)});g.globalAlpha=1}
+ g.fillStyle="#fff";const frz=G&&G.hide;SPK.forEach(s=>{if(!frz)s.y-=s.v/60;if(s.y<-5){s.y=565;s.x=Math.random()*900}g.globalAlpha=.4+.6*Math.abs(Math.sin(t*3+s.p));star(g,s.x,s.y,s.s*2,s.s*.8)});g.globalAlpha=1}
 function star(g,x,y,R,r){g.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;g.lineTo(x+rr*Math.cos(a),y+rr*Math.sin(a))}g.fill()}
 const POS={};
 function frame2D(){requestAnimationFrame(frame2D);const on=$("s-stage")&&$("s-stage").classList.contains("on");if(!STAGE2D||!on||!G){if(cv2)cv2.style.display=STAGE2D&&on?"":"none";return}
@@ -3091,17 +3091,21 @@ function cutIn(){const L=team2(),i=L[0];let info={};try{info=appealInfo()||{}}ca
  const d=document.createElement("div");d.id="cutin";d.className="ci ci"+(L.length>1?"U":i);d.innerHTML=(L.length>1?UNITL(nm,L):(LAYOUT[i]||LAYOUT[0])(nm,who,i))+`<div class="ciSpk">${SPK(window.MOBILE?10:16)}</div><div class="ciGloss"></div>`;
  ($("stageWrap")||document.body).appendChild(d);requestAnimationFrame(()=>d.classList.add("on"));return d}
 // queued PERFECT pops are shown when play resumes
+// seconds a star is visible before its hit time (enters at y=-30 above the lane top, hit line at HITY)
+const APLEAD=()=>{try{return (HITY+30)/SPEED}catch(e){return 1.35}};window.APLEAD=APLEAD;
 special=function(){if(!G||!G.notes||CI||G.gauge<100||G.done)return;const now=ac().currentTime;if(G.end&&G.end-now<CUT+1.2){return}
  G.gauge=0;G.sp=0;G.nsp=(G.nsp||0)+1;const bonus=2000+((G.sc&&G.sc.total)||0);G.score+=bonus;
  // every note whose hit time falls inside the cut-in window [now, now+CUT] is hidden and counted PERFECT (combo keeps climbing)
- const up=G.notes.filter(n=>!n.hit&&n.t>=now-.12&&n.t<=now+CUT).sort((a,b)=>a.t-b.t);const n0=G.fx.length;up.forEach(n=>{n.hit=1;add("P",n.lane)});const pops=G.fx.splice(n0,6);G.fx.length=n0;G.gauge=0;G.hide=1;G.hideFrom=now;
+ // + the lead-in after it (time a star needs to fall from the top of the lane to the hit line), so the lanes are EMPTY when the cut-in ends and the next stars enter fresh from the top
+ const LEAD=APLEAD();G.clearTo=now+CUT+LEAD;
+ const up=G.notes.filter(n=>!n.hit&&n.t>=now-.12&&n.t<=G.clearTo).sort((a,b)=>a.t-b.t);const n0=G.fx.length;up.forEach(n=>{n.hit=1;add("P",n.lane)});const pops=G.fx.splice(n0,6);G.fx.length=n0;G.gauge=0;G.hide=1;G.hideFrom=now;
  G.apLog=(G.apLog||[]).concat([{at:now,cleared:up.length,lanes:up.map(n=>n.lane)}]);
  const el=cutIn(),my={el,pops,t0:performance.now()};CI=my;unlockChime();ding([0,4,7,12,16],"triangle",79);
- console.log("APPEAL fired: "+CUT+"s cut-in, "+up.length+" notes in the window counted PERFECT, bonus "+bonus);
+ console.log("APPEAL fired: "+CUT+"s cut-in (+"+LEAD.toFixed(2)+"s lead-in), "+up.length+" notes in the window counted PERFECT, bonus "+bonus);
  my.tm=setTimeout(()=>endCut(my),CUT*1000)};
 function endCut(my,quiet){if(!my||CI!==my)return;CI=null;clearTimeout(my.tm);
- // the song kept playing: any hidden note that came due while the cut-in was up (timer jitter) is PERFECT too, then notes reappear in place
- if(G&&G.hide){const t=ac().currentTime;let k=0;G.notes.forEach(n=>{if(!n.hit&&n.t>=(G.hideFrom||0)-.12&&n.t<=t+.06){n.hit=1;add("P",n.lane);k++}});if(k&&G.apLog&&G.apLog.length)G.apLog[G.apLog.length-1].cleared+=k;G.hide=0}const el=my.el;el.classList.remove("on");el.classList.add("off");setTimeout(()=>el.remove(),320);
+ // the song kept playing: any hidden note that came due while the cut-in was up (timer jitter) is PERFECT too, and so is anything that would already be mid-lane, so play resumes with empty lanes and stars falling in from the top
+ if(G&&G.hide){const t=ac().currentTime,to=Math.max(G.clearTo||0,t+APLEAD());let k=0;G.notes.forEach(n=>{if(!n.hit&&n.t>=(G.hideFrom||0)-.12&&n.t<=to){n.hit=1;add("P",n.lane);k++}});if(k&&G.apLog&&G.apLog.length)G.apLog[G.apLog.length-1].cleared+=k;G.hide=0}const el=my.el;el.classList.remove("on");el.classList.add("off");setTimeout(()=>el.remove(),320);
  const res=()=>{try{return ac().resume()}catch(e){return Promise.resolve()}};
  res().then(()=>{if(quiet||!G)return;my.pops.forEach(f=>{f.life=1;G.fx.push(f)});ding([12,7],"sine",84)});
 }
@@ -3484,12 +3488,13 @@ function menuHTML(){let p=0;try{const t=ac().currentTime;p=Math.max(0,Math.min(1
  <div class="pzBar"><b style="width:${(p*100).toFixed(1)}%"></b></div>
  <button class="pzB pri" data-a="resume">▶&nbsp; Resume</button>
  <button class="pzB" data-a="restart">↻&nbsp; Restart <small>same song &amp; coords</small></button>
+ <button class="pzB" data-a="settings">⚙&nbsp; Settings <small>keys · phone layout</small></button>
  <button class="pzB q" data-a="quit">✕&nbsp; Quit Song <small>${inStory()?"back to story":"back to song select"}</small></button>
  <div class="pzK">${window.TOUCH?"":"Esc / P to resume"}</div></div>`}
 function pause(why){if(PZ.on||!onStage()||(G&&G.done))return false;PZ.on=true;PZ.at=_pn();freezeTimers();
  try{if(AC&&AC.state=="running")AC.suspend()}catch(e){}document.body.classList.add("pz");
  ov.innerHTML=menuHTML();ov.classList.add("on");placeBtn();
- ov.querySelectorAll("[data-a]").forEach(b=>b.onclick=e=>{e.stopPropagation();const a=b.dataset.a;if(a=="resume")resume();else if(a=="restart")restart();else quit()});
+ ov.querySelectorAll("[data-a]").forEach(b=>b.onclick=e=>{e.stopPropagation();const a=b.dataset.a;if(a=="resume")resume();else if(a=="restart")restart();else if(a=="settings"){if(window.openSettings)openSettings()}else quit()});
  _st(()=>{const b=ov.querySelector(".pri");if(b&&!window.TOUCH)b.focus()},30);
  console.log("PAUSE ("+why+")");return true}
 function unfreeze(){if(PZ.at!=null){PZ.acc+=_pn()-PZ.at;PZ.at=null}PZ.on=false;PZ.cd=false;document.body.classList.remove("pz");
@@ -3508,7 +3513,7 @@ function restart(){if(!PZ.on)return;clearUI();ov.classList.remove("on");cd.class
 function quit(){if(!PZ.on)return;clearUI();ov.classList.remove("on");cd.classList.remove("on");dropTimers();unfreeze();
  try{stopStage()}catch(e){}console.log("QUIT SONG -> "+(inStory()?"story":"songs"));go(inStory()?"story":"songs")}
 window.pauseLive=pause;window.resumeLive=resume;window.restartLive=restart;window.quitLive=quit;
-addEventListener("keydown",e=>{const k=(e.key||"").toLowerCase();
+addEventListener("keydown",e=>{const k=(e.key||"").toLowerCase();if(window.SET_OPEN)return;
  if(PZ.on){e.stopImmediatePropagation();if(!e.repeat&&(k=="escape"||k=="p")&&!PZ.cd){e.preventDefault();resume()}else if(k!="tab"&&k!="enter"&&k!=" ")e.preventDefault();return}
  if(onStage()&&!e.repeat&&(k=="escape"||k=="p")){e.preventDefault();e.stopImmediatePropagation();pause("key")}},true);
 // any stray judge input while paused is swallowed by the overlay; auto-pause when the app loses focus
@@ -3579,5 +3584,132 @@ aikatsuChange=function(){go("change");try{CHG.forEach(t=>clearTimeout(t));CHG.le
  let left=imgs.length;imgs.forEach(im=>{if(im.complete)left--;else im.addEventListener("load",()=>{if(--left<=0)begin()},{once:true}),im.addEventListener("error",()=>{if(--left<=0)begin()},{once:true})});
  if(left<=0)begin();else at(1500,begin)};
 go=(o=>function(s){if(s!="change"&&DZ)dzClose(false);return o.apply(this,arguments)})(go);
+})();
+// ===== Settings: keyboard lane layouts (Classic/Left/Right/Both/Custom) · phone play orientation (Auto/Vertical/Horizontal) · Secret Code lives here now =====
+(function(){
+const LS="isc_settings";
+const LAYOUTS={
+ classic:{n:"Classic",d:"Q W E R",k:["q","w","e","r"]},
+ left:{n:"Left",d:"A S D F",k:["a","s","d","f"]},
+ right:{n:"Right",d:"L K J H",k:["l","k","j","h"]},
+ both:{n:"Both",d:"S D J K",k:["s","d","j","k"]},
+ custom:{n:"Custom",d:"your keys",k:null}};
+const RESERVED={" ":"Space is the Special Appeal key","p":"P pauses the song","escape":"Esc pauses the song","enter":"Enter is used by menus","tab":"Tab is used by menus"};
+let ST={keys:"classic",custom:["q","w","e","r"],orient:"auto"};
+try{Object.assign(ST,JSON.parse(localStorage.getItem(LS)||"{}"))}catch(e){}
+if(!LAYOUTS[ST.keys])ST.keys="classic";if(!Array.isArray(ST.custom)||ST.custom.length!=4||new Set(ST.custom).size!=4)ST.custom=["q","w","e","r"];
+if(!["auto","v","h"].includes(ST.orient))ST.orient="auto";
+const persist=()=>{try{localStorage.setItem(LS,JSON.stringify(ST))}catch(e){}};
+const keysOf=id=>id=="custom"?ST.custom.slice():LAYOUTS[id].k.slice();
+const lbl=k=>k==" "?"␣":String(k).toUpperCase();
+function applyKeys(){KEYS.splice(0,4,...keysOf(ST.keys));document.querySelectorAll("#tpad .ln").forEach((el,i)=>{if(i<4)el.textContent=lbl(KEYS[i])});
+ console.log("KEYS "+ST.keys+" = "+KEYS.slice(0,4).join(" "))}
+function applyOrient(){const b=document.body;b.classList.toggle("ori-v",ST.orient=="v");b.classList.toggle("ori-h",ST.orient=="h")}
+window.GAME_SETTINGS=()=>JSON.parse(JSON.stringify(ST));
+applyKeys();applyOrient();
+
+// ---------- UI ----------
+const css=document.createElement("style");css.textContent=`
+#setBtn{position:absolute;top:calc(10px + env(safe-area-inset-top));right:calc(12px + env(safe-area-inset-right));z-index:50;padding:10px 18px;border:0;border-radius:999px;background:linear-gradient(135deg,#ff9ad5,#b57bff);color:#fff;font:bold 16px sans-serif;box-shadow:0 3px 10px #b57bff88;cursor:pointer;touch-action:manipulation}
+#s-title #scBtn{display:none!important}
+@media (max-width:640px){#setBtn{position:static!important;display:block;margin:6px auto 0!important}}
+#setModal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:#2a0b4a99;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);box-sizing:border-box}
+#setModal.on{display:flex;animation:setIn .2s ease-out}@keyframes setIn{from{opacity:0;transform:scale(.97)}}
+#setBox{width:min(560px,94vw);max-height:92vh;overflow:auto;padding:20px 22px;border-radius:24px;background:linear-gradient(165deg,#fff,#fdeaff 60%,#efe6ff);box-shadow:0 0 0 2px #fff,0 10px 40px #b57bff99;font-family:inherit;color:#5a2a8e;box-sizing:border-box;-webkit-overflow-scrolling:touch}
+#setBox h3{margin:0 0 4px;font-size:24px;text-align:center;color:#ff4fa3}
+#setBox h4{margin:16px 0 8px;font-size:16px;color:#7a2fe8;display:flex;align-items:center;gap:8px}
+#setBox h4 small{font-weight:500;font-size:12px;color:#9a7ac0}
+.setOpts{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.setO{padding:10px 6px!important;border-radius:14px!important;border:2px solid #e2ccff!important;background:#fff!important;color:#6a3aa8!important;font:700 14px sans-serif!important;cursor:pointer;line-height:1.2;box-shadow:none!important;transform:none!important;min-height:auto}
+.setO small{display:block;font:600 12px ui-monospace,Menlo,monospace;color:#b07ad8;margin-top:3px;letter-spacing:1px}
+.setO.on{border-color:#ff4fa3!important;background:linear-gradient(135deg,#ffe0f0,#efe0ff)!important;box-shadow:0 0 0 2px #ff9ad5 inset!important}
+.setO:disabled{opacity:.45;cursor:not-allowed}
+.setLanes{display:flex;gap:8px;margin-top:10px}
+.setL{flex:1;border-radius:14px;padding:8px 4px 10px;text-align:center;color:#fff;font:900 24px sans-serif;text-shadow:0 2px 4px #0005;border:2px solid #fff;box-shadow:0 2px 8px #0002;cursor:default;position:relative}
+.setL small{display:block;font:700 10px sans-serif;opacity:.9;letter-spacing:1px;text-shadow:none}
+.setL.edit{cursor:pointer}.setL.edit::after{content:"✎";position:absolute;right:6px;top:4px;font-size:12px;opacity:.8}
+.setL.wait{animation:setW .7s ease-in-out infinite;outline:3px dashed #fff;outline-offset:-6px}@keyframes setW{50%{filter:brightness(1.25)}}
+#setMsg{min-height:20px;margin-top:8px;font-size:13px;color:#ff4fa0;text-align:center}
+.setNote{font-size:12px;color:#8a6ab0;margin-top:6px;line-height:1.4}
+.setRow{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.setRow button{padding:10px 22px;border:0;border-radius:999px;font:bold 15px sans-serif;cursor:pointer}
+#setClose{background:linear-gradient(135deg,#ff7ac4,#b57bff);color:#fff}#setCode{background:#fff;color:#7a2fe8;border:2px solid #d9b3ff!important}
+#oriWarn{position:fixed;inset:0;z-index:250;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at 50% 40%,#5a2a9aee,#140628f5);color:#fff;text-align:center;font:700 18px sans-serif;padding:24px;box-sizing:border-box}
+#oriWarn.on{display:flex}#oriWarn .ph{font-size:64px;animation:oriR 1.6s ease-in-out infinite}#oriWarn.h .ph{--r:90deg}#oriWarn.v .ph{--r:-90deg}
+@keyframes oriR{0%,25%{transform:rotate(0)}60%,100%{transform:rotate(var(--r))}}
+#oriWarn small{font:500 13px sans-serif;opacity:.85;max-width:320px}
+#oriWarn button{padding:10px 20px;border-radius:999px;border:2px solid #fff;background:#fff2;color:#fff;font:bold 14px sans-serif}
+/* Vertical play (portrait): bigger stage cropped to the lanes, taller tap pads */
+@media (orientation:portrait){
+ body.touch.ori-v #s-stage.on{overflow:hidden}
+ body.touch.ori-v #stageWrap{width:128vw!important;max-width:none!important;margin-left:-14vw!important;margin-right:-14vw!important;border-radius:0}
+ body.touch.ori-v #stageWrap>*{border-radius:0!important}
+ body.touch.ori-v #tpad{height:calc(34vh + env(safe-area-inset-bottom))!important}
+ body.touch.ori-v #tpAp{bottom:calc(34vh + 10px + env(safe-area-inset-bottom))!important}
+}
+/* Horizontal play (landscape): stage fills the height, lanes split left / right */
+@media (orientation:landscape){
+ body.touch.ori-h #s-stage.on{padding:0!important;min-height:100vh!important;display:flex!important;align-items:center;justify-content:center}
+ body.touch.ori-h #stageWrap{width:min(calc(94vh*900/560),64vw)!important;margin:auto!important}
+ body.touch.ori-h #tpad[style*="flex"]{display:grid!important;top:0;height:100%!important;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);grid-template-columns:1fr 1fr min(calc(94vh*900/560),64vw) 1fr 1fr;gap:6px;pointer-events:none;background:none}
+ body.touch.ori-h #tpad .ln{pointer-events:auto;border-radius:18px;align-items:center}
+ body.touch.ori-h #tpad .ln:nth-child(3){grid-column:4}body.touch.ori-h #tpad .ln:nth-child(4){grid-column:5}
+ body.touch.ori-h #tpAp{bottom:12px!important;right:calc(50% - 60px)!important}
+}`;document.head.appendChild(css);
+
+const t=$("s-title");const sb=document.createElement("button");sb.id="setBtn";sb.textContent="⚙️ Settings";t.appendChild(sb);sb.onclick=()=>openSettings();
+function placeSB(){try{if(innerWidth<=640){const st=[...t.querySelectorAll("button")].find(b=>b!==sb&&/START/i.test(b.textContent));if(st&&st.nextElementSibling!==sb)st.after(sb)}else if(sb.parentElement!==t)t.appendChild(sb)}catch(e){}}placeSB();setInterval(placeSB,700);addEventListener("resize",placeSB);
+const m=document.createElement("div");m.id="setModal";m.setAttribute("role","dialog");m.setAttribute("aria-label","Settings");document.body.appendChild(m);
+["touchstart","pointerdown","touchend"].forEach(ev=>m.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+let cap=-1;
+function render(){const cur=keysOf(ST.keys),isC=ST.keys=="custom";
+ m.innerHTML=`<div id="setBox"><h3>⚙️ Settings</h3>
+ <h4>⌨️ Keyboard lanes <small>lane 1 → lane 4, left to right</small></h4>
+ <div class="setOpts">${Object.entries(LAYOUTS).map(([id,L])=>`<button class="setO ${ST.keys==id?'on':''}" data-k="${id}">${L.n}<small>${id=="custom"?ST.custom.map(lbl).join(" "):L.d}</small></button>`).join("")}</div>
+ <div class="setLanes">${cur.map((k,i)=>`<div class="setL ${isC?'edit':''} ${cap==i?'wait':''}" data-l="${i}" style="background:${LANE_COLS[i]}"><small>LANE ${i+1}</small>${cap==i?"…":lbl(k)}</div>`).join("")}</div>
+ <div id="setMsg">${cap>=0?`Press a key for lane ${cap+1} (Esc to cancel)`:(isC?"Tap a lane to change its key":"")}</div>
+ <div class="setNote">Space = Special Appeal · Esc / P = Pause. Saved on this device and used right away.</div>
+ <h4>📱 Phone play <small>${window.TOUCH?"how the live is laid out on your phone":"phone &amp; tablet only"}</small></h4>
+ <div class="setOpts">${[["auto","Auto","follow phone"],["v","Vertical","portrait"],["h","Horizontal","landscape"]].map(([id,n,d])=>`<button class="setO ${ST.orient==id?'on':''}" data-o="${id}" ${window.TOUCH?"":"disabled"}>${n}<small>${d}</small></button>`).join("")}</div>
+ <div class="setNote">${window.TOUCH?"Vertical: big stage on top, tall tap lanes below. Horizontal: stage in the middle, two lanes on each side. The phone is locked to that direction when your browser allows it (Android Chrome); otherwise (iPhone Safari) you'll get a “turn your phone” reminder and the game pauses until you rotate.":"On a computer the stage always uses the keyboard layout above."}</div>
+ <div class="setRow"><button id="setCode">🔑 Secret Code</button><button id="setClose">Done ✨</button></div></div>`;
+ m.querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{ST.keys=b.dataset.k;cap=ST.keys=="custom"?-1:-1;persist();applyKeys();render()});
+ m.querySelectorAll("[data-o]").forEach(b=>b.onclick=()=>{ST.orient=b.dataset.o;persist();applyOrient();OW.dis=0;render();if(onStageNow())tryLock()});
+ m.querySelectorAll(".setL.edit").forEach(d=>d.onclick=()=>{cap=+d.dataset.l;render()});
+ $("setClose").onclick=closeSettings;$("setCode").onclick=()=>{closeSettings();const b=$("scBtn");if(b)b.click()};}
+function msg(s){const e=$("setMsg");if(e)e.textContent=s}
+window.openSettings=function(){cap=-1;render();m.classList.add("on");window.SET_OPEN=1;setTimeout(()=>{const b=$("setClose");if(b&&!window.TOUCH)b.focus()},30)};
+function closeSettings(){cap=-1;m.classList.remove("on");window.SET_OPEN=0;applyKeys()}
+window.closeSettings=closeSettings;
+m.addEventListener("click",e=>{if(e.target==m)closeSettings()});
+addEventListener("keydown",e=>{if(!window.SET_OPEN)return;const k=(e.key||"").toLowerCase();
+ if(cap<0){if(k=="escape"){e.preventDefault();e.stopImmediatePropagation();closeSettings()}else if(!["tab","enter"," "].includes(k)){e.stopImmediatePropagation()}return}
+ e.preventDefault();e.stopImmediatePropagation();if(e.repeat)return;
+ if(k=="escape"){cap=-1;render();return}
+ if(RESERVED[k]){msg("✖ "+RESERVED[k]+" — pick another key");return}
+ if(k.length!=1){msg("✖ Use a letter, number or symbol key");return}
+ const dup=ST.custom.findIndex((x,i)=>x==k&&i!=cap);if(dup>=0){msg(`✖ ${lbl(k)} is already lane ${dup+1}`);return}
+ ST.custom[cap]=k;const done=cap;cap=cap<3?cap+1:-1;persist();applyKeys();render();msg(`✔ Lane ${done+1} = ${lbl(k)}`+(cap>=0?` · now press lane ${cap+1}`:""))},true);
+
+// ---------- orientation: lock when the browser allows it, otherwise remind + pause ----------
+const OW={el:null,dis:0,fs:0,stage:0};
+const onStageNow=()=>{const s=$("s-stage");return !!(s&&s.classList.contains("on"))};
+const isPortrait=()=>innerHeight>=innerWidth;
+function tryLock(){if(!window.TOUCH||ST.orient=="auto")return;const want=ST.orient=="v"?"portrait":"landscape";const so=screen.orientation;if(!so||!so.lock)return;
+ const lock=()=>so.lock(want).then(()=>console.log("ORIENT locked "+want)).catch(e=>console.log("ORIENT lock refused: "+e.name));
+ const de=document.documentElement;if(!document.fullscreenElement&&de.requestFullscreen){de.requestFullscreen({navigationUI:"hide"}).then(()=>{OW.fs=1;lock()}).catch(()=>lock())}else lock()}
+function unlock(){try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}if(OW.fs&&document.fullscreenElement){OW.fs=0;try{document.exitFullscreen()}catch(e){}}}
+// a tap that starts or plays a live is a user gesture, so lock there
+addEventListener("pointerdown",e=>{if(!window.TOUCH||ST.orient=="auto")return;const tg=e.target;
+ const live=onStageNow()||(tg.closest&&tg.closest("#pzOv,#oriWarn,#dz,[id^=dz]"))||(tg.closest&&tg.closest("button")&&/live|start|stage|play|next|▶/i.test(tg.closest("button").textContent));
+ if(live)tryLock()},true);
+const w=document.createElement("div");w.id="oriWarn";document.body.appendChild(w);OW.el=w;
+["touchstart","pointerdown","touchend"].forEach(ev=>w.addEventListener(ev,e=>e.stopPropagation(),{passive:true}));
+function check(){const on=onStageNow();if(on&&!OW.stage){OW.stage=1;OW.dis=0}if(!on&&OW.stage){OW.stage=0;setTimeout(()=>{if(!onStageNow())unlock()},1500)}
+ const bad=on&&window.TOUCH&&ST.orient!="auto"&&!OW.dis&&!(G&&G.done)&&(ST.orient=="v"?!isPortrait():isPortrait());
+ if(bad&&!w.classList.contains("on")){w.className="on "+ST.orient;w.innerHTML=`<div class="ph">📱</div><div>Turn your phone ${ST.orient=="v"?"upright":"sideways"}</div><small>${ST.orient=="v"?"Vertical":"Horizontal"} play is set in ⚙️ Settings. The song is paused until you rotate.</small><button id="oriAny">Play this way instead</button>`;
+  $("oriAny").onclick=()=>{OW.dis=1;w.className=""};try{if(window.pauseLive)pauseLive("orientation")}catch(e){}console.log("ORIENT mismatch: want "+ST.orient)}
+ else if(!bad&&w.classList.contains("on")){w.className="";console.log("ORIENT ok")}}
+setInterval(check,300);addEventListener("resize",check);addEventListener("orientationchange",()=>setTimeout(check,250));
 })();
 </script></body></html>
