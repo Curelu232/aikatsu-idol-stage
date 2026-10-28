@@ -1,0 +1,5083 @@
+[
+ {
+  "file": "solo-lulu-rose_quartz_princess_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel"
+  },
+  "appeal_name": "Rose Quartz Petal Coronation",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-rinne-sapphire_midnight_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "sapphire_midnight_jewel"
+  },
+  "appeal_name": "Sapphire Nocturne Starfall",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-pochi-opal_prism_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "opal_prism_jewel"
+  },
+  "appeal_name": "Opal Prism Pop Burst",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-sera-ruby_passion_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "ruby_passion_jewel"
+  },
+  "appeal_name": "Ruby Flame Allure",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-taiyo-blue_topaz_storm_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "blue_topaz_storm_jewel"
+  },
+  "appeal_name": "Blue Topaz Thunder Dash",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-kanata-diamond_halo_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Diamond Halo Benediction",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-ren-citrine_sunburst_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Citrine Sunburst Cheer",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "solo-luna-amethyst_moonlight_jewel.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "amethyst_moonlight_jewel"
+  },
+  "appeal_name": "Amethyst Crescent Overture",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_luna-lavender_teacup_waltz.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "luna"
+  ],
+  "unit_name": "Lavender Teacup Waltz",
+  "coord": {
+   "lulu": "lavender_teacup_waltz_bonbon",
+   "luna": "lavender_teacup_waltz_serenade"
+  },
+  "appeal_name": "Moonlit Teacup Promise",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-luna_ren-twilight_crown_duet.png",
+  "kind": "duo",
+  "idols": [
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Twilight Crown Duet",
+  "coord": {
+   "luna": "twilight_crown_duet_serenade",
+   "ren": "twilight_crown_duet_herald"
+  },
+  "appeal_name": "Dusk-to-Dawn Royal Vow",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-sera_luna-midnight_rose_masquerade.png",
+  "kind": "duo",
+  "idols": [
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Midnight Rose Masquerade",
+  "coord": {
+   "sera": "midnight_rose_masquerade_diva",
+   "luna": "midnight_rose_masquerade_regent"
+  },
+  "appeal_name": "Crimson Moon Masque Dance",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-luna_kanata-silver_halo_sonata.png",
+  "kind": "duo",
+  "idols": [
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Silver Halo Sonata",
+  "coord": {
+   "luna": "silver_halo_sonata_regent",
+   "kanata": "silver_halo_sonata_seraph"
+  },
+  "appeal_name": "Chapel Starlight Duet",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_luna-violet_shadow_ballet.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "luna"
+  ],
+  "unit_name": "Violet Shadow Ballet",
+  "coord": {
+   "rinne": "violet_shadow_ballet_raven",
+   "luna": "violet_shadow_ballet_sonata"
+  },
+  "appeal_name": "Eclipse Pas de Deux",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-luna_taiyo-starlight_overdrive.png",
+  "kind": "duo",
+  "idols": [
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Starlight Overdrive",
+  "coord": {
+   "luna": "starlight_overdrive_duke",
+   "taiyo": "starlight_overdrive_racer"
+  },
+  "appeal_name": "Midnight Skyline Sprint",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-pochi_luna-amethyst_arcade_encore.png",
+  "kind": "duo",
+  "idols": [
+   "pochi",
+   "luna"
+  ],
+  "unit_name": "Amethyst Arcade Encore",
+  "coord": {
+   "pochi": "amethyst_arcade_encore_glitch",
+   "luna": "amethyst_arcade_encore_ballad"
+  },
+  "appeal_name": "Starlit Arcade Combo",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_ren-honey_crown_picnic.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "ren"
+  ],
+  "unit_name": "Honey Crown Picnic",
+  "coord": {
+   "lulu": "honey_crown_picnic_parfait",
+   "ren": "honey_crown_picnic_laurel"
+  },
+  "appeal_name": "Honeycomb Garden Toast",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_sera-cherry_bonbon_cabaret.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "sera"
+  ],
+  "unit_name": "Cherry Bonbon Cabaret",
+  "coord": {
+   "lulu": "cherry_bonbon_cabaret_petal",
+   "sera": "cherry_bonbon_cabaret_siren"
+  },
+  "appeal_name": "Cherry Kiss Encore",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_kanata-angel_cake_chapel.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "kanata"
+  ],
+  "unit_name": "Angel Cake Chapel",
+  "coord": {
+   "lulu": "angel_cake_chapel_petal",
+   "kanata": "angel_cake_chapel_oracle"
+  },
+  "appeal_name": "Frosted Halo Blessing",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_rinne-black_ribbon_tea_party.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "rinne"
+  ],
+  "unit_name": "Black Ribbon Tea Party",
+  "coord": {
+   "lulu": "black_ribbon_tea_party_confection",
+   "rinne": "black_ribbon_tea_party_requiem"
+  },
+  "appeal_name": "Midnight Macaron Vow",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_taiyo-candy_rocket_rally.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "taiyo"
+  ],
+  "unit_name": "Candy Rocket Rally",
+  "coord": {
+   "lulu": "candy_rocket_rally_tiara",
+   "taiyo": "candy_rocket_rally_striker"
+  },
+  "appeal_name": "Sugar Rush Liftoff",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-lulu_pochi-bubblegum_pixel_parade.png",
+  "kind": "duo",
+  "idols": [
+   "lulu",
+   "pochi"
+  ],
+  "unit_name": "Bubblegum Pixel Parade",
+  "coord": {
+   "lulu": "bubblegum_pixel_parade_sweetheart",
+   "pochi": "bubblegum_pixel_parade_remix"
+  },
+  "appeal_name": "Sugar Pixel Heartbeat",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-sera_ren-golden_flame_gala.png",
+  "kind": "duo",
+  "idols": [
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Golden Flame Gala",
+  "coord": {
+   "sera": "golden_flame_gala_countess",
+   "ren": "golden_flame_gala_paladin"
+  },
+  "appeal_name": "Gilded Inferno Waltz",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-kanata_ren-gilded_sanctum_fanfare.png",
+  "kind": "duo",
+  "idols": [
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Gilded Sanctum Fanfare",
+  "coord": {
+   "kanata": "gilded_sanctum_fanfare_archangel",
+   "ren": "gilded_sanctum_fanfare_gallant"
+  },
+  "appeal_name": "Sapphire Coronation Call",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_ren-daybreak_requiem_duel.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "ren"
+  ],
+  "unit_name": "Daybreak Requiem Duel",
+  "coord": {
+   "rinne": "daybreak_requiem_duel_phantom",
+   "ren": "daybreak_requiem_duel_gallant"
+  },
+  "appeal_name": "Dawnblade Nocturne Clash",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-taiyo_ren-laurel_lightning_cup.png",
+  "kind": "duo",
+  "idols": [
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Laurel Lightning Cup",
+  "coord": {
+   "taiyo": "laurel_lightning_cup_bolt",
+   "ren": "laurel_lightning_cup_radiance"
+  },
+  "appeal_name": "Victory Lap Thunderclap",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-pochi_ren-marigold_synth_festival.png",
+  "kind": "duo",
+  "idols": [
+   "pochi",
+   "ren"
+  ],
+  "unit_name": "Marigold Synth Festival",
+  "coord": {
+   "pochi": "marigold_synth_festival_pixel",
+   "ren": "marigold_synth_festival_radiance"
+  },
+  "appeal_name": "Summer Synthwave Blossom",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-sera_kanata-ruby_seraph_aria.png",
+  "kind": "duo",
+  "idols": [
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Ruby Seraph Aria",
+  "coord": {
+   "sera": "ruby_seraph_aria_muse",
+   "kanata": "ruby_seraph_aria_hymn"
+  },
+  "appeal_name": "Crimson Choir Ascension",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_sera-blackthorn_rose_soiree.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "sera"
+  ],
+  "unit_name": "Blackthorn Rose Soiree",
+  "coord": {
+   "rinne": "blackthorn_rose_soiree_phantom",
+   "sera": "blackthorn_rose_soiree_temptress"
+  },
+  "appeal_name": "Thornlight Rose Duel",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-sera_taiyo-redline_inferno_run.png",
+  "kind": "duo",
+  "idols": [
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Redline Inferno Run",
+  "coord": {
+   "sera": "redline_inferno_run_rose",
+   "taiyo": "redline_inferno_run_dash"
+  },
+  "appeal_name": "Scarlet Afterburner Chase",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-pochi_sera-neon_cabaret_heart.png",
+  "kind": "duo",
+  "idols": [
+   "pochi",
+   "sera"
+  ],
+  "unit_name": "Neon Cabaret Heart",
+  "coord": {
+   "pochi": "neon_cabaret_heart_idol",
+   "sera": "neon_cabaret_heart_flame"
+  },
+  "appeal_name": "Neon Ember Showtime",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_kanata-ivory_raven_covenant.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "kanata"
+  ],
+  "unit_name": "Ivory Raven Covenant",
+  "coord": {
+   "rinne": "ivory_raven_covenant_enigma",
+   "kanata": "ivory_raven_covenant_hymn"
+  },
+  "appeal_name": "Feather Oath Requiem",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-taiyo_kanata-azure_skybolt_crusade.png",
+  "kind": "duo",
+  "idols": [
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Azure Skybolt Crusade",
+  "coord": {
+   "taiyo": "azure_skybolt_crusade_charger",
+   "kanata": "azure_skybolt_crusade_regent"
+  },
+  "appeal_name": "Thunder Paladin Charge",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-pochi_kanata-hologram_halo_hymn.png",
+  "kind": "duo",
+  "idols": [
+   "pochi",
+   "kanata"
+  ],
+  "unit_name": "Hologram Halo Hymn",
+  "coord": {
+   "pochi": "hologram_halo_hymn_beat",
+   "kanata": "hologram_halo_hymn_seraph"
+  },
+  "appeal_name": "Digital Heaven Chorus",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_taiyo-obsidian_storm_drift.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "taiyo"
+  ],
+  "unit_name": "Obsidian Storm Drift",
+  "coord": {
+   "rinne": "obsidian_storm_drift_enigma",
+   "taiyo": "obsidian_storm_drift_jet"
+  },
+  "appeal_name": "Midnight Thunder Drift",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-rinne_pochi-glitch_gothic_remix.png",
+  "kind": "duo",
+  "idols": [
+   "rinne",
+   "pochi"
+  ],
+  "unit_name": "Glitch Gothic Remix",
+  "coord": {
+   "rinne": "glitch_gothic_remix_witch",
+   "pochi": "glitch_gothic_remix_arcade"
+  },
+  "appeal_name": "Gothic Glitch Starshot",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "duo-pochi_taiyo-hyper_volt_arcade.png",
+  "kind": "duo",
+  "idols": [
+   "pochi",
+   "taiyo"
+  ],
+  "unit_name": "Hyper Volt Arcade",
+  "coord": {
+   "pochi": "hyper_volt_arcade_prism",
+   "taiyo": "hyper_volt_arcade_rush"
+  },
+  "appeal_name": "Neon Volt High Score",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_luna_ren-teacup_sovereign_gavotte.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Teacup Sovereign Gavotte",
+  "coord": {
+   "lulu": "teacup_sovereign_gavotte_ribbon",
+   "luna": "teacup_sovereign_gavotte_prince",
+   "ren": "teacup_sovereign_gavotte_herald"
+  },
+  "appeal_name": "Midnight Teatime Court Dance",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_sera_luna-amethyst_garnet_parade.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Amethyst Garnet Parade",
+  "coord": {
+   "lulu": "amethyst_garnet_parade_bonbon",
+   "sera": "amethyst_garnet_parade_chanteuse",
+   "luna": "amethyst_garnet_parade_waltz"
+  },
+  "appeal_name": "Garnet Lantern Night March",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_luna_kanata-starlit_sugarbell_anthem.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Starlit Sugarbell Anthem",
+  "coord": {
+   "lulu": "starlit_sugarbell_anthem_parfait",
+   "luna": "starlit_sugarbell_anthem_serenade",
+   "kanata": "starlit_sugarbell_anthem_halo"
+  },
+  "appeal_name": "Sugarbell Cathedral Chime",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_luna-lavender_gloom_sweetshop.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "luna"
+  ],
+  "unit_name": "Lavender Gloom Sweetshop",
+  "coord": {
+   "lulu": "lavender_gloom_sweetshop_princess",
+   "rinne": "lavender_gloom_sweetshop_frost",
+   "luna": "lavender_gloom_sweetshop_masquerade"
+  },
+  "appeal_name": "Haunted Sweetshop Lullaby",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_luna_taiyo-violet_cobalt_tea_party.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Violet Cobalt Tea Party",
+  "coord": {
+   "lulu": "violet_cobalt_tea_party_petal",
+   "luna": "violet_cobalt_tea_party_regent",
+   "taiyo": "violet_cobalt_tea_party_volt"
+  },
+  "appeal_name": "Thunderbolt Teacup Toast",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_pochi_luna-bonbon_bubblegum_promenade.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "pochi",
+   "luna"
+  ],
+  "unit_name": "Bonbon Bubblegum Promenade",
+  "coord": {
+   "lulu": "bonbon_bubblegum_promenade_sweetheart",
+   "pochi": "bonbon_bubblegum_promenade_arcade",
+   "luna": "bonbon_bubblegum_promenade_sonata"
+  },
+  "appeal_name": "Bubblegum Moonwalk Stroll",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-sera_luna_ren-laurel_phoenix_minuet.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Laurel Phoenix Minuet",
+  "coord": {
+   "sera": "laurel_phoenix_minuet_diva",
+   "luna": "laurel_phoenix_minuet_duke",
+   "ren": "laurel_phoenix_minuet_paladin"
+  },
+  "appeal_name": "Rising Phoenix Courtly Dance",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-luna_kanata_ren-nightingale_ivory_coronation.png",
+  "kind": "trio",
+  "idols": [
+   "luna",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Nightingale Ivory Coronation",
+  "coord": {
+   "luna": "nightingale_ivory_coronation_ballad",
+   "kanata": "nightingale_ivory_coronation_seraph",
+   "ren": "nightingale_ivory_coronation_laurel"
+  },
+  "appeal_name": "Three Crowns Nightingale Hymn",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_luna_ren-marigold_thorn_waltz.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Marigold Thorn Waltz",
+  "coord": {
+   "rinne": "marigold_thorn_waltz_raven",
+   "luna": "marigold_thorn_waltz_masquerade",
+   "ren": "marigold_thorn_waltz_paladin"
+  },
+  "appeal_name": "Thorned Marigold Twilight Turn",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-luna_taiyo_ren-silverlace_jetstream_court.png",
+  "kind": "trio",
+  "idols": [
+   "luna",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Silverlace Jetstream Court",
+  "coord": {
+   "luna": "silverlace_jetstream_court_waltz",
+   "taiyo": "silverlace_jetstream_court_racer",
+   "ren": "silverlace_jetstream_court_fanfare"
+  },
+  "appeal_name": "Jetstream Princes' Royal Flyby",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-pochi_luna_ren-twilight_pixel_jubilee.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Twilight Pixel Jubilee",
+  "coord": {
+   "pochi": "twilight_pixel_jubilee_remix",
+   "luna": "twilight_pixel_jubilee_serenade",
+   "ren": "twilight_pixel_jubilee_gallant"
+  },
+  "appeal_name": "Dusk Arcade Jubilee Jump",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-sera_luna_kanata-ballroom_hymnal_gala.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Ballroom Hymnal Gala",
+  "coord": {
+   "sera": "ballroom_hymnal_gala_siren",
+   "luna": "ballroom_hymnal_gala_masquerade",
+   "kanata": "ballroom_hymnal_gala_oracle"
+  },
+  "appeal_name": "Velvet Hymn Grand Ballroom",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_sera_luna-crimson_onyx_serenade.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Crimson Onyx Serenade",
+  "coord": {
+   "rinne": "crimson_onyx_serenade_requiem",
+   "sera": "crimson_onyx_serenade_countess",
+   "luna": "crimson_onyx_serenade_ballad"
+  },
+  "appeal_name": "Onyx Moon Crimson Lament",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-sera_luna_taiyo-scarlet_skyline_ball.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Scarlet Skyline Ball",
+  "coord": {
+   "sera": "scarlet_skyline_ball_muse",
+   "luna": "scarlet_skyline_ball_sonata",
+   "taiyo": "scarlet_skyline_ball_striker"
+  },
+  "appeal_name": "Rooftop Firelight Ballroom",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-pochi_sera_luna-twilight_neon_tango.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Twilight Neon Tango",
+  "coord": {
+   "pochi": "twilight_neon_tango_remix",
+   "sera": "twilight_neon_tango_temptress",
+   "luna": "twilight_neon_tango_duke"
+  },
+  "appeal_name": "Neon Dusk Tango Trio",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_luna_kanata-sapphire_phantom_waltz.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Sapphire Phantom Waltz",
+  "coord": {
+   "rinne": "sapphire_phantom_waltz_elegy",
+   "luna": "sapphire_phantom_waltz_masquerade",
+   "kanata": "sapphire_phantom_waltz_archangel"
+  },
+  "appeal_name": "Phantom Sapphire Moonlit Veil",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-luna_taiyo_kanata-gloria_afterburn_serenade.png",
+  "kind": "trio",
+  "idols": [
+   "luna",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Gloria Afterburn Serenade",
+  "coord": {
+   "luna": "gloria_afterburn_serenade_regent",
+   "taiyo": "gloria_afterburn_serenade_bolt",
+   "kanata": "gloria_afterburn_serenade_aegis"
+  },
+  "appeal_name": "Triple Wing Gloria Ascent",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-pochi_luna_kanata-lavender_hologram_sanctum.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Lavender Hologram Sanctum",
+  "coord": {
+   "pochi": "lavender_hologram_sanctum_pixel",
+   "luna": "lavender_hologram_sanctum_waltz",
+   "kanata": "lavender_hologram_sanctum_hymn"
+  },
+  "appeal_name": "Lavender Neon Sanctuary Chime",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_luna_taiyo-nightingale_raven_derby.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Nightingale Raven Derby",
+  "coord": {
+   "rinne": "nightingale_raven_derby_enigma",
+   "luna": "nightingale_raven_derby_serenade",
+   "taiyo": "nightingale_raven_derby_dash"
+  },
+  "appeal_name": "Raven Comet Derby Run",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_pochi_luna-gothic_synth_promenade.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "pochi",
+   "luna"
+  ],
+  "unit_name": "Gothic Synth Promenade",
+  "coord": {
+   "rinne": "gothic_synth_promenade_elegy",
+   "pochi": "gothic_synth_promenade_idol",
+   "luna": "gothic_synth_promenade_masquerade"
+  },
+  "appeal_name": "Gothic Synth Night Parade",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-pochi_luna_taiyo-violet_turbo_arcade.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Violet Turbo Arcade",
+  "coord": {
+   "pochi": "violet_turbo_arcade_spark",
+   "luna": "violet_turbo_arcade_regent",
+   "taiyo": "violet_turbo_arcade_charger"
+  },
+  "appeal_name": "Turbo Violet Bonus Stage",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_sera_ren-gilded_cabaret_picnic.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Gilded Cabaret Picnic",
+  "coord": {
+   "lulu": "gilded_cabaret_picnic_tiara",
+   "sera": "gilded_cabaret_picnic_rose",
+   "ren": "gilded_cabaret_picnic_crown"
+  },
+  "appeal_name": "Golden Bonbon Revue",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_kanata_ren-candy_halcyon_oratorio.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Candy Halcyon Oratorio",
+  "coord": {
+   "lulu": "candy_halcyon_oratorio_sweetheart",
+   "kanata": "candy_halcyon_oratorio_regent",
+   "ren": "candy_halcyon_oratorio_radiance"
+  },
+  "appeal_name": "Halcyon Candy Choir Bells",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_ren-frosting_daybreak_masque.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "ren"
+  ],
+  "unit_name": "Frosting Daybreak Masque",
+  "coord": {
+   "lulu": "frosting_daybreak_masque_ribbon",
+   "rinne": "frosting_daybreak_masque_enigma",
+   "ren": "frosting_daybreak_masque_sovereign"
+  },
+  "appeal_name": "Frosted Dawn Masked Ball",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_taiyo_ren-radiant_thunder_bakery.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Radiant Thunder Bakery",
+  "coord": {
+   "lulu": "radiant_thunder_bakery_bonbon",
+   "taiyo": "radiant_thunder_bakery_jet",
+   "ren": "radiant_thunder_bakery_herald"
+  },
+  "appeal_name": "Thunder Oven Sunrise Bake",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_pochi_ren-strawberry_glitch_festival.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "pochi",
+   "ren"
+  ],
+  "unit_name": "Strawberry Glitch Festival",
+  "coord": {
+   "lulu": "strawberry_glitch_festival_parfait",
+   "pochi": "strawberry_glitch_festival_arcade",
+   "ren": "strawberry_glitch_festival_laurel"
+  },
+  "appeal_name": "Strawberry Glitch Fireworks",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_sera_kanata-meringue_seraph_burlesque.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Meringue Seraph Burlesque",
+  "coord": {
+   "lulu": "meringue_seraph_burlesque_princess",
+   "sera": "meringue_seraph_burlesque_flame",
+   "kanata": "meringue_seraph_burlesque_oracle"
+  },
+  "appeal_name": "Angelic Meringue Showstopper",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_sera-ruby_obsidian_parlor.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "sera"
+  ],
+  "unit_name": "Ruby Obsidian Parlor",
+  "coord": {
+   "lulu": "ruby_obsidian_parlor_petal",
+   "rinne": "ruby_obsidian_parlor_witch",
+   "sera": "ruby_obsidian_parlor_chanteuse"
+  },
+  "appeal_name": "Ruby Parlor Midnight Secret",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_sera_taiyo-macaron_rosebud_grand_prix.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Macaron Rosebud Grand Prix",
+  "coord": {
+   "lulu": "macaron_rosebud_grand_prix_confection",
+   "sera": "macaron_rosebud_grand_prix_diva",
+   "taiyo": "macaron_rosebud_grand_prix_rush"
+  },
+  "appeal_name": "Rosebud Macaron Checkered Dash",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_pochi_sera-strawberry_laser_revue.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "pochi",
+   "sera"
+  ],
+  "unit_name": "Strawberry Laser Revue",
+  "coord": {
+   "lulu": "strawberry_laser_revue_tiara",
+   "pochi": "strawberry_laser_revue_prism",
+   "sera": "strawberry_laser_revue_siren"
+  },
+  "appeal_name": "Laser Strawberry Spotlight",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_kanata-bonbon_azure_coven.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "kanata"
+  ],
+  "unit_name": "Bonbon Azure Coven",
+  "coord": {
+   "lulu": "bonbon_azure_coven_princess",
+   "rinne": "bonbon_azure_coven_frost",
+   "kanata": "bonbon_azure_coven_halo"
+  },
+  "appeal_name": "Azure Bonbon Witching Hour",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_taiyo_kanata-meringue_aegis_speedway.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Meringue Aegis Speedway",
+  "coord": {
+   "lulu": "meringue_aegis_speedway_ribbon",
+   "taiyo": "meringue_aegis_speedway_volt",
+   "kanata": "meringue_aegis_speedway_archangel"
+  },
+  "appeal_name": "Gemstone Speedway Blessing",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_pochi_kanata-frosting_cathedral_mixtape.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "pochi",
+   "kanata"
+  ],
+  "unit_name": "Frosting Cathedral Mixtape",
+  "coord": {
+   "lulu": "frosting_cathedral_mixtape_bonbon",
+   "pochi": "frosting_cathedral_mixtape_arcade",
+   "kanata": "frosting_cathedral_mixtape_oracle"
+  },
+  "appeal_name": "Serpent Star Sugar Remedy",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_taiyo-sugarbell_frostbite_slipstream.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "taiyo"
+  ],
+  "unit_name": "Sugarbell Frostbite Slipstream",
+  "coord": {
+   "lulu": "sugarbell_frostbite_slipstream_parfait",
+   "rinne": "sugarbell_frostbite_slipstream_raven",
+   "taiyo": "sugarbell_frostbite_slipstream_racer"
+  },
+  "appeal_name": "Crescent Slipstream Lullaby",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_rinne_pochi-macaron_cyber_crypt.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi"
+  ],
+  "unit_name": "Macaron Cyber Crypt",
+  "coord": {
+   "lulu": "macaron_cyber_crypt_princess",
+   "rinne": "macaron_cyber_crypt_requiem",
+   "pochi": "macaron_cyber_crypt_glitch"
+  },
+  "appeal_name": "Sunlit Crypt Candy Raid",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-lulu_pochi_taiyo-teacup_rally_encore.png",
+  "kind": "trio",
+  "idols": [
+   "lulu",
+   "pochi",
+   "taiyo"
+  ],
+  "unit_name": "Teacup Rally Encore",
+  "coord": {
+   "lulu": "teacup_rally_encore_petal",
+   "pochi": "teacup_rally_encore_remix",
+   "taiyo": "teacup_rally_encore_striker"
+  },
+  "appeal_name": "Frozen Orbit Candy Rally",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-sera_kanata_ren-golden_burgundy_chapel.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Golden Burgundy Chapel",
+  "coord": {
+   "sera": "golden_burgundy_chapel_countess",
+   "kanata": "golden_burgundy_chapel_archangel",
+   "ren": "golden_burgundy_chapel_paladin"
+  },
+  "appeal_name": "Zodiac Chapel Golden Vow",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-rinne_sera_ren-daybreak_frostbite_soiree.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Daybreak Frostbite Soiree",
+  "coord": {
+   "rinne": "daybreak_frostbite_soiree_shade",
+   "sera": "daybreak_frostbite_soiree_muse",
+   "ren": "daybreak_frostbite_soiree_fanfare"
+  },
+  "appeal_name": "Jewelled Dawn Rose Soiree",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-sera_taiyo_ren-phoenix_lightning_fanfare.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Phoenix Lightning Fanfare",
+  "coord": {
+   "sera": "phoenix_lightning_fanfare_temptress",
+   "taiyo": "phoenix_lightning_fanfare_bolt",
+   "ren": "phoenix_lightning_fanfare_sovereign"
+  },
+  "appeal_name": "Serpent Thunder Phoenix Cry",
+  "text_area": "lower-left, name not baked in"
+ },
+ {
+  "file": "trio-pochi_sera_ren-garnet_synth_pageant.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Garnet Synth Pageant",
+  "coord": {
+   "pochi": "opal_prism_jewel",
+   "sera": "ruby_passion_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Moonbeam Synth Pageant Night",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "trio-rinne_kanata_ren-halcyon_hymnal_requiem.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Halcyon Hymnal Requiem",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "kanata": "ophiuchus_celestial_healer",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Solar Halo Requiem Rite",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "trio-taiyo_kanata_ren-radiant_cathedral_overdrive.png",
+  "kind": "trio",
+  "idols": [
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Radiant Cathedral Overdrive",
+  "coord": {
+   "taiyo": "lunar_rover",
+   "kanata": "selene_moon_deity",
+   "ren": "crescent_knight"
+  },
+  "appeal_name": "Frozen Cathedral Overdrive Rush",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "trio-pochi_kanata_ren-sovereign_sapphire_rave.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Sovereign Sapphire Rave",
+  "coord": {
+   "pochi": "sunshine_glitch_pop",
+   "kanata": "radiant_sun_halo",
+   "ren": "solar_crown_prince"
+  },
+  "appeal_name": "Star Sign Sapphire Rave",
+  "text_area": "lower-left, name not baked in",
+  "series": "sun"
+ },
+ {
+  "file": "trio-rinne_taiyo_ren-golden_thunder_seance.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Golden Thunder Seance",
+  "coord": {
+   "rinne": "moonlit_witch",
+   "taiyo": "lunar_rover",
+   "ren": "crescent_knight"
+  },
+  "appeal_name": "Crystal Storm Spirit Call",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "trio-rinne_pochi_ren-laurel_phantom_remix.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "pochi",
+   "ren"
+  ],
+  "unit_name": "Laurel Phantom Remix",
+  "coord": {
+   "rinne": "cancer_moonlit_tide",
+   "pochi": "taurus_candy_charge",
+   "ren": "aries_flame_ram_king"
+  },
+  "appeal_name": "Coiled Comet Phantom Remix",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "trio-pochi_taiyo_ren-gilded_cobalt_synthwave.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Gilded Cobalt Synthwave",
+  "coord": {
+   "pochi": "uranus_star_pop",
+   "taiyo": "mercury_star_racer",
+   "ren": "jupiter_star_monarch"
+  },
+  "appeal_name": "Full Moon Cobalt Synthwave",
+  "text_area": "lower-left, name not baked in",
+  "series": "planet"
+ },
+ {
+  "file": "trio-rinne_sera_kanata-rosebud_gloom_choir.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Rosebud Gloom Choir",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Eclipse Rose Choir",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "trio-sera_taiyo_kanata-ruby_azure_speedway.png",
+  "kind": "trio",
+  "idols": [
+   "sera",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Ruby Azure Speedway",
+  "coord": {
+   "sera": "ophiuchus_scarlet_serpentress",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Ice Comet Ruby Speedway",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "trio-pochi_sera_kanata-scarlet_seraph_remix.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Scarlet Seraph Remix",
+  "coord": {
+   "pochi": "cyber_moon_bunny",
+   "sera": "blood_moon_countess",
+   "kanata": "selene_moon_deity"
+  },
+  "appeal_name": "Constellation Seraph Remix",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "trio-rinne_sera_taiyo-burgundy_lightning_elegy.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Burgundy Lightning Elegy",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "taiyo": "ophiuchus_thunder_serpent"
+  },
+  "appeal_name": "Garnet Lightning Elegy",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "trio-rinne_pochi_sera-crimson_hologram_coven.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "pochi",
+   "sera"
+  ],
+  "unit_name": "Crimson Hologram Coven",
+  "coord": {
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost"
+  },
+  "appeal_name": "Serpent Charmers' Neon Coven",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "trio-pochi_sera_taiyo-turbo_cyber_cabaret.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Turbo Cyber Cabaret",
+  "coord": {
+   "pochi": "virgo_daisy_pop",
+   "sera": "leo_crimson_lioness",
+   "taiyo": "virgo_harvest_dash"
+  },
+  "appeal_name": "Moonlight Turbo Cabaret",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "trio-rinne_taiyo_kanata-raven_rally_choir.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Raven Rally Choir",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "taiyo": "blue_topaz_storm_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Sunflare Raven Choir Dash",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "trio-rinne_pochi_kanata-thorn_glitch_anthem.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "pochi",
+   "kanata"
+  ],
+  "unit_name": "Thorn Glitch Anthem",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "pochi": "ophiuchus_neon_viper",
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Polar Glitch Hymnal",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "trio-pochi_taiyo_kanata-skyline_laser_chapel.png",
+  "kind": "trio",
+  "idols": [
+   "pochi",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Skyline Laser Chapel",
+  "coord": {
+   "pochi": "cyber_moon_bunny",
+   "taiyo": "lunar_rover",
+   "kanata": "selene_moon_deity"
+  },
+  "appeal_name": "Astral Laser Chapel Bells",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "trio-rinne_pochi_taiyo-jetstream_bubblegum_crypt.png",
+  "kind": "trio",
+  "idols": [
+   "rinne",
+   "pochi",
+   "taiyo"
+  ],
+  "unit_name": "Jetstream Bubblegum Crypt",
+  "coord": {
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "taiyo": "pluto_storm_voltage"
+  },
+  "appeal_name": "Gem Crypt Jetstream Escape",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_sera_luna_ren-silverlace_marigold_parade.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Silverlace Marigold Parade",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "sera": "pluto_crimson_frost",
+   "luna": "pluto_frostbound",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Frozen Marigold Promenade",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_luna_kanata_ren-amethyst_ivory_court.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "luna",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Amethyst Ivory Court",
+  "coord": {
+   "lulu": "aquarius_candy_wave",
+   "luna": "aquarius_galaxy_stream",
+   "kanata": "pisces_tidal_seraph",
+   "ren": "sagittarius_star_archer"
+  },
+  "appeal_name": "Tidewater Constellation Court",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_luna_ren-ballroom_candy_festival.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Ballroom Candy Festival",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Four-Gem Ballroom Waltz",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_luna_taiyo_ren-starlit_afterburn_parlor.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "luna",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Starlit Afterburn Parlor",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Serpent Star Remedy Rush",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_pochi_luna_ren-gilded_neon_bakery.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Gilded Neon Bakery",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "pochi": "pluto_neon_beat",
+   "luna": "pluto_frostbound",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Icebound Neon Bakehouse",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_sera_luna_kanata-burgundy_aegis_tea_party.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Burgundy Aegis Tea Party",
+  "coord": {
+   "lulu": "gemini_twin_star",
+   "sera": "aries_inferno_siren",
+   "luna": "gemini_starlight_duet",
+   "kanata": "cancer_moonshell_oracle"
+  },
+  "appeal_name": "Twin Flame Moonshell Tea",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_sera_luna-macaron_onyx_burlesque.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Macaron Onyx Burlesque",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "luna": "amethyst_moonlight_jewel"
+  },
+  "appeal_name": "Gemlight Velvet Burlesque",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_sera_luna_taiyo-starlit_frosting_gala.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Starlit Frosting Gala",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent"
+  },
+  "appeal_name": "Thirteenth Sign Sugar Gala",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_pochi_sera_luna-twilight_pixel_soiree.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Twilight Pixel Soiree",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "luna": "pluto_frostbound"
+  },
+  "appeal_name": "Snowdrift Pixel Soiree",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_rinne_luna_kanata-gloria_obsidian_sweetshop.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Gloria Obsidian Sweetshop",
+  "coord": {
+   "lulu": "libra_sweet_balance",
+   "rinne": "scorpio_venom_nebula",
+   "luna": "libra_scales_sovereign",
+   "kanata": "scorpio_crystal_sting"
+  },
+  "appeal_name": "Scales and Stingers Sweetshop",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_luna_taiyo_kanata-azure_afterburn_gavotte.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "luna",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Azure Afterburn Gavotte",
+  "coord": {
+   "lulu": "venus_star_blossom",
+   "luna": "neptune_star_tide",
+   "taiyo": "mercury_star_racer",
+   "kanata": "saturn_star_halo"
+  },
+  "appeal_name": "Four Orbits Gavotte",
+  "text_area": "lower-left, name not baked in",
+  "series": "planet"
+ },
+ {
+  "file": "quartet-lulu_pochi_luna_kanata-ballroom_synth_picnic.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Ballroom Synth Picnic",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "pochi": "opal_prism_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Prism Picnic Halo Hour",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_rinne_luna_taiyo-meringue_gothic_grand_prix.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Meringue Gothic Grand Prix",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "rinne": "ophiuchus_shadow_charmer",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent"
+  },
+  "appeal_name": "Coiled Comet Grand Prix",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_rinne_pochi_luna-strawberry_phantom_ball.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "luna"
+  ],
+  "unit_name": "Strawberry Phantom Ball",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "luna": "pluto_frostbound"
+  },
+  "appeal_name": "Far Frontier Phantom Ball",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_pochi_luna_taiyo-candy_lightning_arcade.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Candy Lightning Arcade",
+  "coord": {
+   "lulu": "aquarius_candy_wave",
+   "pochi": "capricorn_neon_peak",
+   "luna": "aquarius_galaxy_stream",
+   "taiyo": "capricorn_summit_striker"
+  },
+  "appeal_name": "Sea-Goat Candy Arcade",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-sera_luna_kanata_ren-marigold_cabaret_minuet.png",
+  "kind": "quartet",
+  "idols": [
+   "sera",
+   "luna",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Marigold Cabaret Minuet",
+  "coord": {
+   "sera": "mars_star_inferno",
+   "luna": "neptune_star_tide",
+   "kanata": "saturn_star_halo",
+   "ren": "jupiter_star_monarch"
+  },
+  "appeal_name": "Gas Giant Cabaret Minuet",
+  "text_area": "lower-left, name not baked in",
+  "series": "planet"
+ },
+ {
+  "file": "quartet-rinne_sera_luna_ren-amethyst_obsidian_revue.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Amethyst Obsidian Revue",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Treasure Vault Revue",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-sera_luna_taiyo_ren-radiant_scarlet_overdrive.png",
+  "kind": "quartet",
+  "idols": [
+   "sera",
+   "luna",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Radiant Scarlet Overdrive",
+  "coord": {
+   "sera": "ophiuchus_scarlet_serpentress",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Venom Spark Overdrive",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-pochi_sera_luna_ren-silverlace_phoenix_coronation.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Silverlace Phoenix Coronation",
+  "coord": {
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "luna": "pluto_frostbound",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Permafrost Phoenix Crowning",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-rinne_luna_kanata_ren-violet_gloria_jubilee.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "luna",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Violet Gloria Jubilee",
+  "coord": {
+   "rinne": "cancer_moonlit_tide",
+   "luna": "gemini_starlight_duet",
+   "kanata": "cancer_moonshell_oracle",
+   "ren": "aries_flame_ram_king"
+  },
+  "appeal_name": "Moonshell Ram Jubilee",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-luna_taiyo_kanata_ren-nightingale_jetstream_fanfare.png",
+  "kind": "quartet",
+  "idols": [
+   "luna",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Nightingale Jetstream Fanfare",
+  "coord": {
+   "luna": "neptune_star_tide",
+   "taiyo": "mercury_star_racer",
+   "kanata": "saturn_star_halo",
+   "ren": "jupiter_star_monarch"
+  },
+  "appeal_name": "Planetary Brotherhood Fanfare",
+  "text_area": "lower-left, name not baked in",
+  "series": "planet"
+ },
+ {
+  "file": "quartet-pochi_luna_kanata_ren-golden_hologram_oratorio.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "luna",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Golden Hologram Oratorio",
+  "coord": {
+   "pochi": "opal_prism_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "kanata": "diamond_halo_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Opal Halo Oratorio",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-rinne_luna_taiyo_ren-halcyon_thunder_requiem.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "luna",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Halcyon Thunder Requiem",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Serpent Physician Requiem",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-rinne_pochi_luna_ren-daybreak_laser_elegy.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "luna",
+   "ren"
+  ],
+  "unit_name": "Daybreak Laser Elegy",
+  "coord": {
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "luna": "pluto_frostbound",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Kuiper Belt Laser Elegy",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-pochi_luna_taiyo_ren-lavender_rally_pageant.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "luna",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Lavender Rally Pageant",
+  "coord": {
+   "pochi": "virgo_daisy_pop",
+   "luna": "libra_scales_sovereign",
+   "taiyo": "virgo_harvest_dash",
+   "ren": "leo_golden_lionheart"
+  },
+  "appeal_name": "Harvest Lion Rally Pageant",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_sera_luna_kanata-ruby_gloom_sanctum.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Ruby Gloom Sanctum",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Diamond Gloom Reliquary",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-sera_luna_taiyo_kanata-rosebud_sapphire_slipstream.png",
+  "kind": "quartet",
+  "idols": [
+   "sera",
+   "luna",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Rosebud Sapphire Slipstream",
+  "coord": {
+   "sera": "ophiuchus_scarlet_serpentress",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Asclepius Rose Slipstream",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-pochi_sera_luna_kanata-cathedral_bubblegum_tango.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Cathedral Bubblegum Tango",
+  "coord": {
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "luna": "pluto_frostbound",
+   "kanata": "pluto_sapphire_ice"
+  },
+  "appeal_name": "Frost Chapel Bubblegum Tango",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-rinne_sera_luna_taiyo-garnet_skyline_seance.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Garnet Skyline Seance",
+  "coord": {
+   "rinne": "pisces_midnight_mermaid",
+   "sera": "sagittarius_phoenix_huntress",
+   "luna": "aquarius_galaxy_stream",
+   "taiyo": "capricorn_summit_striker"
+  },
+  "appeal_name": "Mermaid Archer Skyline Rite",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_pochi_sera_luna-crimson_thorn_mixtape.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "sera",
+   "luna"
+  ],
+  "unit_name": "Crimson Thorn Mixtape",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "pochi": "opal_prism_jewel",
+   "sera": "ruby_passion_jewel",
+   "luna": "amethyst_moonlight_jewel"
+  },
+  "appeal_name": "Gemcut Thorn Mixtape",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-pochi_sera_luna_taiyo-garnet_pixel_derby.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Garnet Pixel Derby",
+  "coord": {
+   "pochi": "ophiuchus_neon_viper",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent"
+  },
+  "appeal_name": "Viper Derby Dash",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-rinne_luna_taiyo_kanata-hymnal_cobalt_masque.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "luna",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Hymnal Cobalt Masque",
+  "coord": {
+   "rinne": "moonlit_witch",
+   "luna": "full_moon_serenade",
+   "taiyo": "lunar_rover",
+   "kanata": "selene_moon_deity"
+  },
+  "appeal_name": "Selene Masquerade Hymn",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "quartet-rinne_pochi_luna_kanata-aegis_gothic_synthwave.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "luna",
+   "kanata"
+  ],
+  "unit_name": "Aegis Gothic Synthwave",
+  "coord": {
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "luna": "pluto_frostbound",
+   "kanata": "pluto_sapphire_ice"
+  },
+  "appeal_name": "Dwarf Planet Synthwave",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-pochi_luna_taiyo_kanata-ivory_turbo_rave.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "luna",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Ivory Turbo Rave",
+  "coord": {
+   "pochi": "taurus_candy_charge",
+   "luna": "gemini_starlight_duet",
+   "taiyo": "taurus_golden_stampede",
+   "kanata": "cancer_moonshell_oracle"
+  },
+  "appeal_name": "Golden Bull Turbo Rave",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_pochi_luna_taiyo-silverlace_onyx_encore.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "luna",
+   "taiyo"
+  ],
+  "unit_name": "Silverlace Onyx Encore",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "pochi": "opal_prism_jewel",
+   "luna": "amethyst_moonlight_jewel",
+   "taiyo": "blue_topaz_storm_jewel"
+  },
+  "appeal_name": "Blue Topaz Encore Storm",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_sera_kanata_ren-bonbon_laurel_gala.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Bonbon Laurel Gala",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "kanata": "ophiuchus_celestial_healer",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Healing Laurel Serpent Gala",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_rinne_sera_ren-sugarbell_raven_festival.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Sugarbell Raven Festival",
+  "coord": {
+   "lulu": "tsukimi_moon_rabbit",
+   "rinne": "moonlit_witch",
+   "sera": "blood_moon_countess",
+   "ren": "crescent_knight"
+  },
+  "appeal_name": "Blood Moon Bell Festival",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "quartet-lulu_sera_taiyo_ren-teacup_sovereign_slipstream.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Teacup Sovereign Slipstream",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "sera": "pluto_crimson_frost",
+   "taiyo": "pluto_storm_voltage",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Frost Sovereign Teacup Race",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_pochi_sera_ren-strawberry_cyber_tango.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Strawberry Cyber Tango",
+  "coord": {
+   "lulu": "libra_sweet_balance",
+   "pochi": "virgo_daisy_pop",
+   "sera": "leo_crimson_lioness",
+   "ren": "leo_golden_lionheart"
+  },
+  "appeal_name": "Twin Lions Strawberry Tango",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_kanata_ren-seraph_frostbite_parade.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Seraph Frostbite Parade",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "kanata": "diamond_halo_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Diamond Dust Parade",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_taiyo_kanata_ren-frosting_thunder_coronation.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Frosting Thunder Coronation",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "kanata": "ophiuchus_celestial_healer",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Staff of Asclepius Coronation",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_pochi_kanata_ren-meringue_glitch_sanctum.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Meringue Glitch Sanctum",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "pochi": "pluto_neon_beat",
+   "kanata": "pluto_sapphire_ice",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Sapphire Ice Glitch Sanctum",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_rinne_taiyo_ren-marigold_jetstream_parlor.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Marigold Jetstream Parlor",
+  "coord": {
+   "lulu": "aquarius_candy_wave",
+   "rinne": "pisces_midnight_mermaid",
+   "taiyo": "capricorn_summit_striker",
+   "ren": "sagittarius_star_archer"
+  },
+  "appeal_name": "Winter Signs Jetstream Parlor",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_pochi_ren-teacup_neon_masque.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "ren"
+  ],
+  "unit_name": "Teacup Neon Masque",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "pochi": "opal_prism_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Rose Quartz Neon Masque",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_pochi_taiyo_ren-turbo_cyber_picnic.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Turbo Cyber Picnic",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "pochi": "ophiuchus_neon_viper",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Neon Viper Picnic Run",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_rinne_sera_kanata-macaron_crimson_choir.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Macaron Crimson Choir",
+  "coord": {
+   "lulu": "tsukimi_moon_rabbit",
+   "rinne": "moonlit_witch",
+   "sera": "blood_moon_countess",
+   "kanata": "selene_moon_deity"
+  },
+  "appeal_name": "Moon Rabbit Crimson Choir",
+  "text_area": "lower-left, name not baked in",
+  "series": "moon"
+ },
+ {
+  "file": "quartet-lulu_sera_taiyo_kanata-sugarbell_lightning_burlesque.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "sera",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Sugarbell Lightning Burlesque",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "sera": "pluto_crimson_frost",
+   "taiyo": "pluto_storm_voltage",
+   "kanata": "pluto_sapphire_ice"
+  },
+  "appeal_name": "Glacier Lightning Showstopper",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_pochi_sera_kanata-rosebud_pixel_sweetshop.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Rosebud Pixel Sweetshop",
+  "coord": {
+   "lulu": "gemini_twin_star",
+   "pochi": "taurus_candy_charge",
+   "sera": "aries_inferno_siren",
+   "kanata": "cancer_moonshell_oracle"
+  },
+  "appeal_name": "Spring Signs Rosebud Shop",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_sera_taiyo-burgundy_raven_tea_party.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Burgundy Raven Tea Party",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "taiyo": "blue_topaz_storm_jewel"
+  },
+  "appeal_name": "Storm Topaz Raven Tea",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_rinne_pochi_sera-ruby_neon_crypt.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "sera"
+  ],
+  "unit_name": "Ruby Neon Crypt",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "rinne": "ophiuchus_shadow_charmer",
+   "pochi": "ophiuchus_neon_viper",
+   "sera": "ophiuchus_scarlet_serpentress"
+  },
+  "appeal_name": "Four Charmers Serpent Crypt",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_pochi_sera_taiyo-cabaret_synth_speedway.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Cabaret Synth Speedway",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "taiyo": "pluto_storm_voltage"
+  },
+  "appeal_name": "Ice Ring Cabaret Speedway",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-lulu_rinne_taiyo_kanata-azure_gothic_overdrive.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Azure Gothic Overdrive",
+  "coord": {
+   "lulu": "libra_sweet_balance",
+   "rinne": "scorpio_venom_nebula",
+   "taiyo": "virgo_harvest_dash",
+   "kanata": "scorpio_crystal_sting"
+  },
+  "appeal_name": "Scorpion Scales Overdrive",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-lulu_rinne_pochi_kanata-bonbon_aegis_seance.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "kanata"
+  ],
+  "unit_name": "Bonbon Aegis Seance",
+  "coord": {
+   "lulu": "rose_quartz_princess_jewel",
+   "rinne": "sapphire_midnight_jewel",
+   "pochi": "opal_prism_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Gemstone Bonbon Seance",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-lulu_pochi_taiyo_kanata-sapphire_cobalt_bakery.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "pochi",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Sapphire Cobalt Bakery",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "pochi": "ophiuchus_neon_viper",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Celestial Healer Bakery",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-lulu_rinne_pochi_taiyo-candy_obsidian_rave.png",
+  "kind": "quartet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "taiyo"
+  ],
+  "unit_name": "Candy Obsidian Rave",
+  "coord": {
+   "lulu": "pluto_candy_dream",
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "taiyo": "pluto_storm_voltage"
+  },
+  "appeal_name": "Outer Rim Candy Rave",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-rinne_sera_kanata_ren-scarlet_thorn_anthem.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Scarlet Thorn Anthem",
+  "coord": {
+   "rinne": "pisces_midnight_mermaid",
+   "sera": "sagittarius_phoenix_huntress",
+   "kanata": "pisces_tidal_seraph",
+   "ren": "sagittarius_star_archer"
+  },
+  "appeal_name": "Archer and Mermaid Anthem",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-sera_taiyo_kanata_ren-golden_skyline_soiree.png",
+  "kind": "quartet",
+  "idols": [
+   "sera",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Golden Skyline Soiree",
+  "coord": {
+   "sera": "mars_star_inferno",
+   "taiyo": "mercury_star_racer",
+   "kanata": "saturn_star_halo",
+   "ren": "jupiter_star_monarch"
+  },
+  "appeal_name": "Mars to Saturn Skyline Soiree",
+  "text_area": "lower-left, name not baked in",
+  "series": "planet"
+ },
+ {
+  "file": "quartet-pochi_sera_kanata_ren-halcyon_seraph_remix.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Halcyon Seraph Remix",
+  "coord": {
+   "pochi": "opal_prism_jewel",
+   "sera": "ruby_passion_jewel",
+   "kanata": "diamond_halo_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Kaleidogem Seraph Remix",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-rinne_sera_taiyo_ren-frostbite_rally_revue.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Frostbite Rally Revue",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Coiled Thunder Revue",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-rinne_pochi_sera_ren-gloom_laser_jubilee.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "sera",
+   "ren"
+  ],
+  "unit_name": "Gloom Laser Jubilee",
+  "coord": {
+   "rinne": "pluto_distant_nebula",
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Crimson Frost Laser Jubilee",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-pochi_sera_taiyo_ren-gilded_phoenix_grand_prix.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Gilded Phoenix Grand Prix",
+  "coord": {
+   "pochi": "taurus_candy_charge",
+   "sera": "aries_inferno_siren",
+   "taiyo": "taurus_golden_stampede",
+   "ren": "aries_flame_ram_king"
+  },
+  "appeal_name": "Ram and Bull Grand Prix",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_taiyo_kanata_ren-gloria_phantom_derby.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Gloria Phantom Derby",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "taiyo": "blue_topaz_storm_jewel",
+   "kanata": "diamond_halo_jewel",
+   "ren": "citrine_sunburst_jewel"
+  },
+  "appeal_name": "Four Facets Phantom Derby",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-rinne_pochi_kanata_ren-ivory_glitch_coven.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Ivory Glitch Coven",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "pochi": "ophiuchus_neon_viper",
+   "kanata": "ophiuchus_celestial_healer",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Serpent Charmer Glitch Coven",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-pochi_taiyo_kanata_ren-hymnal_hologram_fanfare.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Hymnal Hologram Fanfare",
+  "coord": {
+   "pochi": "pluto_neon_beat",
+   "taiyo": "pluto_storm_voltage",
+   "kanata": "pluto_sapphire_ice",
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Polar Night Hologram Fanfare",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-rinne_pochi_taiyo_ren-radiant_afterburn_encore.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "taiyo",
+   "ren"
+  ],
+  "unit_name": "Radiant Afterburn Encore",
+  "coord": {
+   "rinne": "scorpio_venom_nebula",
+   "pochi": "virgo_daisy_pop",
+   "taiyo": "virgo_harvest_dash",
+   "ren": "leo_golden_lionheart"
+  },
+  "appeal_name": "Stinger Daisy Lion Encore",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_sera_taiyo_kanata-cathedral_thunder_requiem.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "sera",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Cathedral Thunder Requiem",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "sera": "ruby_passion_jewel",
+   "taiyo": "blue_topaz_storm_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Crown Jewel Thunder Rite",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "quartet-rinne_pochi_sera_kanata-onyx_bubblegum_oratorio.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "sera",
+   "kanata"
+  ],
+  "unit_name": "Onyx Bubblegum Oratorio",
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer",
+   "pochi": "ophiuchus_neon_viper",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Antidote Starlight Oratorio",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "quartet-pochi_sera_taiyo_kanata-crimson_rally_arcade.png",
+  "kind": "quartet",
+  "idols": [
+   "pochi",
+   "sera",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Crimson Rally Arcade",
+  "coord": {
+   "pochi": "pluto_neon_beat",
+   "sera": "pluto_crimson_frost",
+   "taiyo": "pluto_storm_voltage",
+   "kanata": "pluto_sapphire_ice"
+  },
+  "appeal_name": "Frozen Heart Rally Arcade",
+  "text_area": "lower-left, name not baked in",
+  "series": "pluto"
+ },
+ {
+  "file": "quartet-rinne_pochi_sera_taiyo-scarlet_onyx_mixtape.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "sera",
+   "taiyo"
+  ],
+  "unit_name": "Scarlet Onyx Mixtape",
+  "coord": {
+   "rinne": "pisces_midnight_mermaid",
+   "pochi": "capricorn_neon_peak",
+   "sera": "sagittarius_phoenix_huntress",
+   "taiyo": "capricorn_summit_striker"
+  },
+  "appeal_name": "Deep Sea Summit Mixtape",
+  "text_area": "lower-left, name not baked in",
+  "series": "zodiac"
+ },
+ {
+  "file": "quartet-rinne_pochi_taiyo_kanata-hymnal_cobalt_synthwave.png",
+  "kind": "quartet",
+  "idols": [
+   "rinne",
+   "pochi",
+   "taiyo",
+   "kanata"
+  ],
+  "unit_name": "Hymnal Cobalt Synthwave",
+  "coord": {
+   "rinne": "sapphire_midnight_jewel",
+   "pochi": "opal_prism_jewel",
+   "taiyo": "blue_topaz_storm_jewel",
+   "kanata": "diamond_halo_jewel"
+  },
+  "appeal_name": "Cobalt Gemstorm Synthwave",
+  "text_area": "lower-left, name not baked in",
+  "series": "jewel"
+ },
+ {
+  "file": "octet-octave_wings_grand_finale.png",
+  "kind": "octet",
+  "idols": [
+   "lulu",
+   "rinne",
+   "pochi",
+   "sera",
+   "luna",
+   "taiyo",
+   "kanata",
+   "ren"
+  ],
+  "unit_name": "Octave Wings Grand Finale",
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer",
+   "rinne": "ophiuchus_shadow_charmer",
+   "pochi": "ophiuchus_neon_viper",
+   "sera": "ophiuchus_scarlet_serpentress",
+   "luna": "ophiuchus_serpent_sovereign",
+   "taiyo": "ophiuchus_thunder_serpent",
+   "kanata": "ophiuchus_celestial_healer",
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Eightfold Serpent Star Finale",
+  "text_area": "lower-left, name not baked in",
+  "series": "ophiuchus"
+ },
+ {
+  "file": "solo-lulu-strawberry_parfait.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "strawberry_parfait"
+  },
+  "appeal_name": "Strawberry Spoonful Wish",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-cherry_blossom_mochi.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "cherry_blossom_mochi"
+  },
+  "appeal_name": "Sakura Mochi Moonrise",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-lavender_macaron.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "lavender_macaron"
+  },
+  "appeal_name": "Lavender Patisserie Pirouette",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-rose_candy_waltz.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "rose_candy_waltz"
+  },
+  "appeal_name": "Rosebud Candy Ballroom",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-lemon_meringue_picnic.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "lemon_meringue_picnic"
+  },
+  "appeal_name": "Sunny Meringue Daydream",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-peony_cream_puff.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "peony_cream_puff"
+  },
+  "appeal_name": "Peony Puff Lullaby",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-lulu-royal_macaron_princess.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "royal_macaron_princess"
+  },
+  "appeal_name": "Macaron Crown Proclamation",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-sakura_blossom_empress.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "sakura_blossom_empress"
+  },
+  "appeal_name": "Thousand Petal Empress Dance",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-candy_crystal_fairy.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "candy_crystal_fairy"
+  },
+  "appeal_name": "Rock Candy Fairy Ring",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-gemini_twin_star.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "gemini_twin_star"
+  },
+  "appeal_name": "Twin Star Sugar Mirror",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-libra_sweet_balance.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "libra_sweet_balance"
+  },
+  "appeal_name": "Scales of Sweetness",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-aquarius_candy_wave.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "aquarius_candy_wave"
+  },
+  "appeal_name": "Candy Tide Water Bearer",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-ophiuchus_sweet_healer.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "ophiuchus_sweet_healer"
+  },
+  "appeal_name": "Sugar Serpent Remedy",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-venus_star_blossom.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "venus_star_blossom"
+  },
+  "appeal_name": "Venus Morning Bouquet",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-sunny_sweetheart.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "sunny_sweetheart"
+  },
+  "appeal_name": "Honeyed Sunbeam Sweetheart",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-tsukimi_moon_rabbit.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "tsukimi_moon_rabbit"
+  },
+  "appeal_name": "Moon-Viewing Dango Wish",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-pluto_candy_dream.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": null,
+  "coord": {
+   "lulu": "pluto_candy_dream"
+  },
+  "appeal_name": "Frosted Candy Starlight",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-midnight_constellation.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "midnight_constellation"
+  },
+  "appeal_name": "Star Chart Midnight Vigil",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-raven_eclipse.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "raven_eclipse"
+  },
+  "appeal_name": "Raven Wing Eclipse Waltz",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-frozen_stardust.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "frozen_stardust"
+  },
+  "appeal_name": "Frostfall Stardust Hush",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-gothic_nebula_rose.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "gothic_nebula_rose"
+  },
+  "appeal_name": "Nebula Rose Requiem",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-silver_comet_knight.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "silver_comet_knight"
+  },
+  "appeal_name": "Silver Comet Oath",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-obsidian_starfall.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "obsidian_starfall"
+  },
+  "appeal_name": "Obsidian Meteor Rain",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-rinne-eclipse_sovereign.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "eclipse_sovereign"
+  },
+  "appeal_name": "Throne of the Black Sun",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-nebula_raven_queen.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "nebula_raven_queen"
+  },
+  "appeal_name": "Raven Queen's Nebula Decree",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-frozen_starlight_requiem.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "frozen_starlight_requiem"
+  },
+  "appeal_name": "Glacial Starlight Elegy",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-cancer_moonlit_tide.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "cancer_moonlit_tide"
+  },
+  "appeal_name": "Moonlit Tidepool Ballad",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-scorpio_venom_nebula.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "scorpio_venom_nebula"
+  },
+  "appeal_name": "Scorpion Star Venom Glare",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-pisces_midnight_mermaid.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "pisces_midnight_mermaid"
+  },
+  "appeal_name": "Midnight Mermaid Undertow",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-ophiuchus_shadow_charmer.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "ophiuchus_shadow_charmer"
+  },
+  "appeal_name": "Shadow Serpent Lullaby",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-earth_star_nocturne.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "earth_star_nocturne"
+  },
+  "appeal_name": "Blue Planet Nocturne",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-eclipse_noir.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "eclipse_noir"
+  },
+  "appeal_name": "Noir Corona Midnight",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-moonlit_witch.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "moonlit_witch"
+  },
+  "appeal_name": "Witching Hour Moonspell",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-rinne-pluto_distant_nebula.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": null,
+  "coord": {
+   "rinne": "pluto_distant_nebula"
+  },
+  "appeal_name": "Edge of the Distant Sky",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-heart_arcade.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "heart_arcade"
+  },
+  "appeal_name": "Heart Coin Jackpot",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-bubblegum_graffiti.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "bubblegum_graffiti"
+  },
+  "appeal_name": "Spray-Paint Bubble Pop",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-cyber_lemonade.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "cyber_lemonade"
+  },
+  "appeal_name": "Fizzy Circuit Lemonade",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-electric_candy.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "electric_candy"
+  },
+  "appeal_name": "Sparkcandy Sugar Shock",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-retro_boombox.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "retro_boombox"
+  },
+  "appeal_name": "Boombox Block Party",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-neon_pop_star.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "neon_pop_star"
+  },
+  "appeal_name": "Neon Marquee Megastar",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-pochi-hyper_prism_superstar.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "hyper_prism_superstar"
+  },
+  "appeal_name": "Hyper Prism Headliner",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-arcade_galaxy_queen.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "arcade_galaxy_queen"
+  },
+  "appeal_name": "Galaxy High Score Queen",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-bubblegum_rocket_diva.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "bubblegum_rocket_diva"
+  },
+  "appeal_name": "Bubblegum Blastoff Diva",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-taurus_candy_charge.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "taurus_candy_charge"
+  },
+  "appeal_name": "Candy Stampede Charge",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-virgo_daisy_pop.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "virgo_daisy_pop"
+  },
+  "appeal_name": "Daisy Field Pop Parade",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-capricorn_neon_peak.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "capricorn_neon_peak"
+  },
+  "appeal_name": "Neon Summit Leap",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-ophiuchus_neon_viper.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "ophiuchus_neon_viper"
+  },
+  "appeal_name": "Neon Viper Remix",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-uranus_star_pop.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "uranus_star_pop"
+  },
+  "appeal_name": "Sideways Planet Pop Spin",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-sunshine_glitch_pop.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "sunshine_glitch_pop"
+  },
+  "appeal_name": "Sunshine Glitch Groove",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-cyber_moon_bunny.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "cyber_moon_bunny"
+  },
+  "appeal_name": "Digital Moon Hop",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-pochi-pluto_neon_beat.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": null,
+  "coord": {
+   "pochi": "pluto_neon_beat"
+  },
+  "appeal_name": "Frozen Neon Bassline",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-crimson_velvet_rose.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "crimson_velvet_rose"
+  },
+  "appeal_name": "Velvet Rose Midnight Kiss",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-black_pearl_noir.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "black_pearl_noir"
+  },
+  "appeal_name": "Black Pearl Noir Allure",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-golden_champagne.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "golden_champagne"
+  },
+  "appeal_name": "Champagne Toast Shimmer",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-wine_red_masquerade.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "wine_red_masquerade"
+  },
+  "appeal_name": "Burgundy Masquerade Reveal",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-ruby_diamond_diva.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "ruby_diamond_diva"
+  },
+  "appeal_name": "Ruby Diamond Limelight",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-scarlet_silk_peony.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "scarlet_silk_peony"
+  },
+  "appeal_name": "Scarlet Peony Silk Dance",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-sera-crimson_rose_empress.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "crimson_rose_empress"
+  },
+  "appeal_name": "Empress of a Thousand Roses",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-black_diamond_diva.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "black_diamond_diva"
+  },
+  "appeal_name": "Black Diamond Spotlight",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-golden_phoenix_siren.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "golden_phoenix_siren"
+  },
+  "appeal_name": "Phoenix Siren Rebirth",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-aries_inferno_siren.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "aries_inferno_siren"
+  },
+  "appeal_name": "Ram Star Wildfire",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-leo_crimson_lioness.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "leo_crimson_lioness"
+  },
+  "appeal_name": "Crimson Lioness Roar",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-sagittarius_phoenix_huntress.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "sagittarius_phoenix_huntress"
+  },
+  "appeal_name": "Phoenix Arrow Huntress",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-ophiuchus_scarlet_serpentress.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "ophiuchus_scarlet_serpentress"
+  },
+  "appeal_name": "Scarlet Serpent Seduction",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-mars_star_inferno.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "mars_star_inferno"
+  },
+  "appeal_name": "Red Planet Inferno",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-solar_flare_diva.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "solar_flare_diva"
+  },
+  "appeal_name": "Solar Flare Showstopper",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-blood_moon_countess.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "blood_moon_countess"
+  },
+  "appeal_name": "Countess of the Blood Moon",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-sera-pluto_crimson_frost.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": null,
+  "coord": {
+   "sera": "pluto_crimson_frost"
+  },
+  "appeal_name": "Crimson Frost Embrace",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-amethyst_midnight.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "amethyst_midnight"
+  },
+  "appeal_name": "Amethyst Midnight Prowl",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-violet_moonlit_waltz.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "violet_moonlit_waltz"
+  },
+  "appeal_name": "Violet Moonlight Waltz",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-crystal_eclipse.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "crystal_eclipse"
+  },
+  "appeal_name": "Crystal Eclipse Purr",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-starlit_masquerade.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "starlit_masquerade"
+  },
+  "appeal_name": "Cat's-Eye Masquerade",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-amethyst_cat_prince.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "amethyst_cat_prince"
+  },
+  "appeal_name": "Prince of the Amethyst Alley",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-galaxy_serenade.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "galaxy_serenade"
+  },
+  "appeal_name": "Galaxy Serenade for One",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-luna-starlight_bow_prince.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "starlight_bow_prince"
+  },
+  "appeal_name": "Starlight Ribbon Prince",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-cosmic_moon_monarch.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "cosmic_moon_monarch"
+  },
+  "appeal_name": "Monarch of the Cosmic Moon",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-amethyst_eclipse_emperor.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "amethyst_eclipse_emperor"
+  },
+  "appeal_name": "Amethyst Eclipse Dominion",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-gemini_starlight_duet.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "gemini_starlight_duet"
+  },
+  "appeal_name": "Twin Starlight Mirror Duet",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-libra_scales_sovereign.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "libra_scales_sovereign"
+  },
+  "appeal_name": "Sovereign of Balanced Stars",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-aquarius_galaxy_stream.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "aquarius_galaxy_stream"
+  },
+  "appeal_name": "Galaxy Stream Pour",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-ophiuchus_serpent_sovereign.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "ophiuchus_serpent_sovereign"
+  },
+  "appeal_name": "Serpent Star Sovereign",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-neptune_star_tide.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "neptune_star_tide"
+  },
+  "appeal_name": "Neptune's Starlit Tide",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-midnight_sun_waltz.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "midnight_sun_waltz"
+  },
+  "appeal_name": "Waltz Beneath the Midnight Sun",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-full_moon_serenade.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "full_moon_serenade"
+  },
+  "appeal_name": "Full Moon Cat Serenade",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-luna-pluto_frostbound.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": null,
+  "coord": {
+   "luna": "pluto_frostbound"
+  },
+  "appeal_name": "Frostbound Night Prowler",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-turbo_spark.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "turbo_spark"
+  },
+  "appeal_name": "Turbo Spark Ignition",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-neon_drift.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "neon_drift"
+  },
+  "appeal_name": "Neon Drift Corner",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-red_rush_rider.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "red_rush_rider"
+  },
+  "appeal_name": "Red Rush Breakaway",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-sky_kick_breaker.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "sky_kick_breaker"
+  },
+  "appeal_name": "Sky Kick Breakthrough",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-midnight_beat.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "midnight_beat"
+  },
+  "appeal_name": "Midnight Bass Drop",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-golden_velocity.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "golden_velocity"
+  },
+  "appeal_name": "Golden Velocity Finish",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-taiyo-thunderbolt_racer_king.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "thunderbolt_racer_king"
+  },
+  "appeal_name": "Thunderbolt Grand Prix",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-turbo_jet_skyrider.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "turbo_jet_skyrider"
+  },
+  "appeal_name": "Jetstream Sky Rider",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-blazing_comet_breaker.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "blazing_comet_breaker"
+  },
+  "appeal_name": "Blazing Comet Smash",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-taurus_golden_stampede.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "taurus_golden_stampede"
+  },
+  "appeal_name": "Golden Bull Rush",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-virgo_harvest_dash.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "virgo_harvest_dash"
+  },
+  "appeal_name": "Harvest Field Dash",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-capricorn_summit_striker.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "capricorn_summit_striker"
+  },
+  "appeal_name": "Summit Strike Glory",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-ophiuchus_thunder_serpent.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "ophiuchus_thunder_serpent"
+  },
+  "appeal_name": "Thunder Serpent Surge",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-mercury_star_racer.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "mercury_star_racer"
+  },
+  "appeal_name": "Quicksilver Orbit Run",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-sunrise_rush.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "sunrise_rush"
+  },
+  "appeal_name": "First Light Sprint",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-lunar_rover.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "lunar_rover"
+  },
+  "appeal_name": "Moon Rover Joyride",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-taiyo-pluto_storm_voltage.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": null,
+  "coord": {
+   "taiyo": "pluto_storm_voltage"
+  },
+  "appeal_name": "Ice Storm Voltage",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-seraph_dawn.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "seraph_dawn"
+  },
+  "appeal_name": "Seraph of First Dawn",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-holy_starlight.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "holy_starlight"
+  },
+  "appeal_name": "Holy Starlight Benediction",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-eden_garden.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "eden_garden"
+  },
+  "appeal_name": "Garden of Eden Morning",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-archangel_aegis.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "archangel_aegis"
+  },
+  "appeal_name": "Aegis of the Archangel",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-aurora_halo.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "aurora_halo"
+  },
+  "appeal_name": "Aurora Halo Reverie",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-celestial_throne.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "celestial_throne"
+  },
+  "appeal_name": "Celestial Throne Audience",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-kanata-seraphim_archangel.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "seraphim_archangel"
+  },
+  "appeal_name": "Six-Winged Seraph Hymn",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-crystal_sanctum_oracle.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "crystal_sanctum_oracle"
+  },
+  "appeal_name": "Oracle of the Crystal Sanctum",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-aurora_throne_emperor.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "aurora_throne_emperor"
+  },
+  "appeal_name": "Emperor of the Aurora Throne",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-cancer_moonshell_oracle.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "cancer_moonshell_oracle"
+  },
+  "appeal_name": "Moonshell Tide Prophecy",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-scorpio_crystal_sting.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "scorpio_crystal_sting"
+  },
+  "appeal_name": "Crystal Scorpion Verdict",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-pisces_tidal_seraph.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "pisces_tidal_seraph"
+  },
+  "appeal_name": "Tidal Seraph Grace",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-ophiuchus_celestial_healer.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "ophiuchus_celestial_healer"
+  },
+  "appeal_name": "Celestial Healer's Mercy",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-saturn_star_halo.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "saturn_star_halo"
+  },
+  "appeal_name": "Ringed Halo Ascension",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-radiant_sun_halo.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "radiant_sun_halo"
+  },
+  "appeal_name": "Sunlit Halo Radiance",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-selene_moon_deity.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "selene_moon_deity"
+  },
+  "appeal_name": "Selene's Silver Grace",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-kanata-pluto_sapphire_ice.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": null,
+  "coord": {
+   "kanata": "pluto_sapphire_ice"
+  },
+  "appeal_name": "Sapphire Ice Sanctuary",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-golden_sunrise_prince.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "golden_sunrise_prince"
+  },
+  "appeal_name": "Prince of Golden Sunrise",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-sunflower_knight.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "sunflower_knight"
+  },
+  "appeal_name": "Sunflower Knight's Vow",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-citrus_summer_royal.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "citrus_summer_royal"
+  },
+  "appeal_name": "Citrus Summer Breeze",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-radiant_noon_parade.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "radiant_noon_parade"
+  },
+  "appeal_name": "High Noon Parade March",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-amber_sunset_waltz.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "amber_sunset_waltz"
+  },
+  "appeal_name": "Amber Twilight Promenade",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-sky_festival_prince.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "sky_festival_prince"
+  },
+  "appeal_name": "Sky Lantern Festival",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Rare"
+ },
+ {
+  "file": "solo-ren-radiant_sun_king.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "radiant_sun_king"
+  },
+  "appeal_name": "Sovereign of the Radiant Sun",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-sunflower_festival_prince.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "sunflower_festival_prince"
+  },
+  "appeal_name": "Sunflower Festival Encore",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-golden_dawn_paladin.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "golden_dawn_paladin"
+  },
+  "appeal_name": "Paladin of Golden Dawn",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-aries_flame_ram_king.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "aries_flame_ram_king"
+  },
+  "appeal_name": "Flame Ram King's March",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-leo_golden_lionheart.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "leo_golden_lionheart"
+  },
+  "appeal_name": "Golden Lionheart Pride",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-sagittarius_star_archer.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "sagittarius_star_archer"
+  },
+  "appeal_name": "Star Archer's True Aim",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-ophiuchus_golden_physician.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "ophiuchus_golden_physician"
+  },
+  "appeal_name": "Golden Physician's Remedy",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-jupiter_star_monarch.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "jupiter_star_monarch"
+  },
+  "appeal_name": "Jupiter Storm Monarch",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-solar_crown_prince.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "solar_crown_prince"
+  },
+  "appeal_name": "Solar Crown Coronation",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-crescent_knight.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "crescent_knight"
+  },
+  "appeal_name": "Crescent Moon Knight",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-ren-pluto_crystal_sovereign.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": null,
+  "coord": {
+   "ren": "pluto_crystal_sovereign"
+  },
+  "appeal_name": "Crystal Frost Sovereign",
+  "text_area": "lower-left, name not baked in",
+  "series": "solo_extra",
+  "tier": "Premium Rare"
+ },
+ {
+  "file": "solo-lulu-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "lulu"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "lulu": "school_uniform"
+  },
+  "type": "cute",
+  "appeal_name": "Homeroom Ribbon Daydream",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-rinne-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "rinne"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "rinne": "school_uniform"
+  },
+  "type": "cool",
+  "appeal_name": "Moonlit Library Serenade",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-pochi-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "pochi"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "pochi": "school_uniform"
+  },
+  "type": "pop",
+  "appeal_name": "Recess Confetti Rocket",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-sera-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "sera"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "sera": "school_uniform"
+  },
+  "type": "sexy",
+  "appeal_name": "Crimson Corridor Rendezvous",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-luna-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "luna"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "luna": "school_uniform"
+  },
+  "type": "dreamy",
+  "appeal_name": "Observatory Club Reverie",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-taiyo-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "taiyo"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "taiyo": "school_uniform"
+  },
+  "type": "energetic",
+  "appeal_name": "Track Meet Comet Dash",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-ren-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "ren"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "ren": "school_uniform"
+  },
+  "type": "cheerful",
+  "appeal_name": "Clover Courtyard Encore",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ },
+ {
+  "file": "solo-kanata-school_uniform.png",
+  "kind": "solo",
+  "idols": [
+   "kanata"
+  ],
+  "unit_name": "Yukio Idol School",
+  "coord": {
+   "kanata": "school_uniform"
+  },
+  "type": "divine",
+  "appeal_name": "Morning Assembly Grace",
+  "text_area": "lower-left, name not baked in",
+  "series": "school"
+ }
+]
